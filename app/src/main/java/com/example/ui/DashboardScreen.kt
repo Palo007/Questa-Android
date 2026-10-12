@@ -1328,6 +1328,7 @@ private fun LazyItemScope.GroupDragSlot(
 ) {
     ReorderableItem(
         state, key = id,
+        defaultDraggingModifier = Modifier.animateItem(fadeInSpec = null, fadeOutSpec = null),
         modifier = Modifier.groupCollapse(id in group.riders, active = group.dragged != null).cardGapAbove(gapAbove),
     ) { isDragging ->
         val extra = if (isDragging && group.dragged == id) group.riders.size else 0
@@ -2118,7 +2119,7 @@ fun RewardsTabContent(
             }
         } else {
             items(localData, key = { it.id }) { reward ->
-                ReorderableItem(state, key = reward.id) { isDragging ->
+                ReorderableItem(state, key = reward.id, defaultDraggingModifier = Modifier.animateItem(fadeInSpec = null, fadeOutSpec = null)) { isDragging ->
                     RewardCardItem(
                         modifier = Modifier
                             .dragGhost(isDragging)
@@ -2837,7 +2838,7 @@ fun TaskEditSheet(
                             .reorderable(checklistReorderState)
                     ) {
                         itemsIndexed(checklistItems, key = { _, item -> item.id }) { index, item ->
-                            ReorderableItem(checklistReorderState, key = item.id) { isDragging ->
+                            ReorderableItem(checklistReorderState, key = item.id, defaultDraggingModifier = Modifier.animateItem(fadeInSpec = null, fadeOutSpec = null)) { isDragging ->
                                 Row(
                                     modifier = Modifier
                                         .fillMaxWidth()
