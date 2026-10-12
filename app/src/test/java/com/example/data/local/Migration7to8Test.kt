@@ -30,10 +30,13 @@ class Migration7to8Test {
 
     private fun context(): Context = ApplicationProvider.getApplicationContext()
 
+    // Room 2.8 MigrationTestHelper wants the absolute path of the db file (same file as testDb).
+    private fun dbPath(): String = context().getDatabasePath(testDb).absolutePath
+
     @After fun tearDown() { context().deleteDatabase(testDb) }
 
     @Test fun tasksSurvive_withEmptyAttachments_andUploadTableExists() = runBlocking {
-        helper.createDatabase(testDb, 7).apply {
+        helper.createDatabase(dbPath(), 7).apply {
             execSQL(
                 "INSERT INTO tasks (id, type, title, notes, difficulty, value, done, checklist, tags, history, " +
                     "createdAt, updatedAt, cUp, cDown, extraJson, orderIndex) VALUES " +
@@ -41,7 +44,7 @@ class Migration7to8Test {
             )
             close()
         }
-        helper.runMigrationsAndValidate(testDb, 8, true, AppDatabase.MIGRATION_7_8).close()
+        helper.runMigrationsAndValidate(dbPath(), 8, true, AppDatabase.MIGRATION_7_8).close()
         val db = Room.databaseBuilder(context(), AppDatabase::class.java, testDb)
             .addMigrations(AppDatabase.MIGRATION_7_8).allowMainThreadQueries().build()
         try {

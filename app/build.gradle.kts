@@ -125,7 +125,13 @@ android {
     buildConfig = true
     resValues = true
   }
-  testOptions { unitTests { isIncludeAndroidResources = true } }
+  testOptions {
+    unitTests {
+      isIncludeAndroidResources = true
+      // Robolectric loads a full Android framework per sandbox; the 512 MB default runs out.
+      all { it.maxHeapSize = "2g" }
+    }
+  }
   // 8.B CR-1 follow-up: Robolectric's MigrationTestHelper reads assets via
   // com.android.tools.test_config.properties' `android_merged_assets`, which AGP always points at
   // the DEBUG variant's merged assets (build/intermediates/assets/debug/...), not a test-specific
