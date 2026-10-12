@@ -49,6 +49,9 @@ class Migration6to7Test {
 
     private fun context(): Context = ApplicationProvider.getApplicationContext()
 
+    // Room 2.8 MigrationTestHelper wants the absolute path of the db file (same file as TEST_DB).
+    private fun dbPath(): String = context().getDatabasePath(TEST_DB).absolutePath
+
     @After
     fun tearDown() {
         context().deleteDatabase(TEST_DB)
@@ -72,7 +75,7 @@ class Migration6to7Test {
 
     @Test
     fun `0 rows lost, 100 percent backfilled, streak null exactly where absent`() = kotlinx.coroutines.runBlocking {
-        val dbV6 = helper.createDatabase(TEST_DB, 6)
+        val dbV6 = helper.createDatabase(dbPath(), 6)
 
         // --- Fixture-seeded rows (fixtures/opti/G1/pause_abs_cAbs_doneDay_cResetOn/state.json,
         // WP-8.0): each task object's own verbatim JSON becomes that row's extraJson, exactly as
@@ -156,7 +159,7 @@ class Migration6to7Test {
         dbV6.close()
 
         // --- Act: run the real production migration, validated against the committed 7.json ---
-        helper.runMigrationsAndValidate(TEST_DB, 7, true, AppDatabase.MIGRATION_6_7)
+        helper.runMigrationsAndValidate(dbPath(), 7, true, AppDatabase.MIGRATION_6_7)
 
         val migratedDb = Room.databaseBuilder(context(), AppDatabase::class.java, TEST_DB)
             .addMigrations(AppDatabase.MIGRATION_6_7, AppDatabase.MIGRATION_7_8)
@@ -246,7 +249,7 @@ class Migration6to7Test {
 
     @Test
     fun `character abs malformed scalar shape backfills to null, not a guess`() = kotlinx.coroutines.runBlocking {
-        val dbV6 = helper.createDatabase(TEST_DB, 6)
+        val dbV6 = helper.createDatabase(dbPath(), 6)
         dbV6.execSQL(
             "INSERT INTO character (id, name, face, cls, lvl, xp, hp, maxHp, mp, gold, " +
                 "needsDeathAcknowledge, lastCron, dayStart, updatedAt, extraJson) VALUES " +
@@ -255,7 +258,7 @@ class Migration6to7Test {
         )
         dbV6.close()
 
-        helper.runMigrationsAndValidate(TEST_DB, 7, true, AppDatabase.MIGRATION_6_7)
+        helper.runMigrationsAndValidate(dbPath(), 7, true, AppDatabase.MIGRATION_6_7)
         val migratedDb = Room.databaseBuilder(context(), AppDatabase::class.java, TEST_DB)
             .addMigrations(AppDatabase.MIGRATION_6_7, AppDatabase.MIGRATION_7_8)
             .allowMainThreadQueries()
@@ -270,7 +273,7 @@ class Migration6to7Test {
     // value after a reload: JSON.stringify(Infinity) is null, `_num(null)` is 0).
     @Test
     fun `character abs Infinity migrates, and the next char write stores 0 without throwing`() = kotlinx.coroutines.runBlocking {
-        val dbV6 = helper.createDatabase(TEST_DB, 6)
+        val dbV6 = helper.createDatabase(dbPath(), 6)
         dbV6.execSQL(
             "INSERT INTO character (id, name, face, cls, lvl, xp, hp, maxHp, mp, gold, " +
                 "needsDeathAcknowledge, lastCron, dayStart, updatedAt, extraJson) VALUES " +
@@ -279,7 +282,7 @@ class Migration6to7Test {
         )
         dbV6.close()
 
-        helper.runMigrationsAndValidate(TEST_DB, 7, true, AppDatabase.MIGRATION_6_7)
+        helper.runMigrationsAndValidate(dbPath(), 7, true, AppDatabase.MIGRATION_6_7)
         val migratedDb = Room.databaseBuilder(context(), AppDatabase::class.java, TEST_DB)
             .addMigrations(AppDatabase.MIGRATION_6_7, AppDatabase.MIGRATION_7_8)
             .allowMainThreadQueries()
@@ -296,10 +299,10 @@ class Migration6to7Test {
 
     @Test
     fun `sync_base and sync_prefs tables exist and start empty after migration`() {
-        val dbV6 = helper.createDatabase(TEST_DB, 6)
+        val dbV6 = helper.createDatabase(dbPath(), 6)
         dbV6.close()
 
-        val migratedRaw = helper.runMigrationsAndValidate(TEST_DB, 7, true, AppDatabase.MIGRATION_6_7)
+        val migratedRaw = helper.runMigrationsAndValidate(dbPath(), 7, true, AppDatabase.MIGRATION_6_7)
         val cursor = migratedRaw.query("SELECT COUNT(*) FROM sync_base")
         cursor.use {
             it.moveToFirst()

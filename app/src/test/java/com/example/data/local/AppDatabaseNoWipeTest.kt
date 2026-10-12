@@ -51,6 +51,9 @@ class AppDatabaseNoWipeTest {
 
     private fun context(): Context = ApplicationProvider.getApplicationContext()
 
+    // Room 2.8 MigrationTestHelper wants the absolute path of the db file.
+    private fun dbPath(name: String): String = context().getDatabasePath(name).absolutePath
+
     private fun resetSingleton() {
         val field = AppDatabase::class.java.getDeclaredField("INSTANCE")
         field.isAccessible = true
@@ -154,7 +157,7 @@ class AppDatabaseNoWipeTest {
     /** Guard: a real v6 file (6.json) opened by the production builder keeps its rows. */
     @Test
     fun openV6FileWithProductionBuilder_keepsRows() {
-        helper.createDatabase(PROD_DB, 6).apply {
+        helper.createDatabase(dbPath(PROD_DB), 6).apply {
             execSQL(
                 "INSERT INTO tasks (id, type, title, notes, difficulty, value, done, streak, " +
                     "checklist, tags, history, createdAt, updatedAt, cUp, cDown, extraJson, orderIndex) " +
@@ -185,9 +188,9 @@ class AppDatabaseNoWipeTest {
         assertFalse("at least one older schema to check", older.isEmpty())
         for (v in older) {
             context().deleteDatabase(CHAIN_DB)
-            helper.createDatabase(CHAIN_DB, v).close()
+            helper.createDatabase(dbPath(CHAIN_DB), v).close()
             helper.runMigrationsAndValidate(
-                CHAIN_DB, CURRENT_VERSION, true, *AppDatabase.QUESTA_MIGRATIONS
+                dbPath(CHAIN_DB), CURRENT_VERSION, true, *AppDatabase.QUESTA_MIGRATIONS
             ).close()
         }
     }
