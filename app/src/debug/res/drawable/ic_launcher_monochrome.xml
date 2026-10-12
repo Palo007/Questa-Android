@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Dev build themed icon: shield outline and check with the DEV letters below. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group
+        android:scaleX="0.15"
+        android:scaleY="0.15"
+        android:translateX="14.1"
+        android:translateY="5.8">
+        <path
+            android:strokeColor="#FFFFFFFF"
+            android:strokeWidth="26"
+            android:strokeLineJoin="round"
+            android:pathData="M256,120 L372,158 V270 C372,348 318,392 256,416 C194,392 140,348 140,270 V158 Z" />
+        <path
+            android:strokeColor="#FFFFFFFF"
+            android:strokeWidth="30"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round"
+            android:pathData="M206,264 L242,302 L318,214" />
+    </group>
+    <path
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="2.4"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M40,72.5 V81.5 H43.5 Q47.5,81.5 47.5,77 Q47.5,72.5 43.5,72.5 Z M57,72.5 H50.5 V81.5 H57 M50.5,77 H55.5 M60,72.5 L64,81.5 L68,72.5" />
+</vector>

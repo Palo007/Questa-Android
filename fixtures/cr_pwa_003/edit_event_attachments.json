@@ -1,0 +1,31 @@
+{
+  "_note": "CR-PWA-003 golden fixture. Hand-written against Opti 2296612. Never edit after ACCEPTED (P4).",
+  "events": [
+    {
+      "ts": 1791460200000, "uid": "fx-evt-1", "dev": "dev-pwa", "kind": "edit",
+      "taskType": "todo", "taskId": "task-att-1", "taskTitle": "Fix the bike",
+      "changes": [ { "field": "attachments", "added": 1, "removed": 0 } ]
+    },
+    {
+      "ts": 1791460260000, "uid": "fx-evt-2", "dev": "dev-pwa", "kind": "edit",
+      "taskType": "todo", "taskId": "task-att-1", "taskTitle": "Fix the bike!",
+      "changes": [
+        { "field": "title", "from": "Fix the bike", "to": "Fix the bike!" },
+        { "field": "attachments", "added": 2, "removed": 1 }
+      ]
+    }
+  ],
+  "expected_feed_summary": ["images +1", "title: Fix the bike→Fix the bike!, images +2 −1"],
+  "delta_cases": [
+    { "name": "add one", "base_ids": ["A"], "edit_ids": ["A", "B"], "expected": { "added": 1, "removed": 0 } },
+    { "name": "remove one", "base_ids": ["A", "B"], "edit_ids": ["B"], "expected": { "added": 0, "removed": 1 } },
+    { "name": "add two, remove one", "base_ids": ["A"], "edit_ids": ["B", "C"], "expected": { "added": 2, "removed": 1 } },
+    { "name": "no change = no attachments item", "base_ids": ["A"], "edit_ids": ["A"], "expected": { "added": 0, "removed": 0 } }
+  ],
+  "rules": [
+    "Item order in changes: after title/notes/difficulty/checklist/schedule/reminders, before counter.",
+    "Write the item only when added > 0 or removed > 0.",
+    "Counts are by attachment id. The PWA counts the user's own change in the sheet (open -> save), not images a sync merged in meanwhile.",
+    "Order of feed summary parts follows changes order, joined by ', '."
+  ]
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+   Sample backup rules file; uncomment and customize as necessary.
+   See https://developer.android.com/guide/topics/data/autobackup
+   for details.
+   Note: This file is ignored for devices older than API 31
+   See https://developer.android.com/about/versions/12/backup-restore
+-->
+<full-backup-content>
+    <!-- WP-8.1 (PX-09): the encrypted Dropbox tokens never leave the device. -->
+    <exclude domain="sharedpref" path="questa_secure_tokens.xml" />
+    <!-- CR-KT-014: device-only prune-warning state (pruneWarnedAt) never leaves the device. -->
+    <exclude domain="file" path="datastore/questa_device_maintenance.preferences_pb" />
+    <!-- WP-8.1 review: the DataStore file questa_sync_preferences is NOT excluded on purpose.
+         It holds non-secret sync state that a restore must keep (device id, base, local
+         deletions, HLC, APP_KEY_OF_DATA, UI prefs). Until WP-8.21 runs TokenMigration it can
+         also hold the legacy plaintext tokens; see WP-8.1_NOTES.md (note for WP-8.21). -->
+    <!--
+   <include domain="sharedpref" path="."/>
+   <exclude domain="sharedpref" path="device.xml"/>
+-->
+</full-backup-content>

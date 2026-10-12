@@ -1,0 +1,97 @@
+{
+  "_source": "Opti app.js eventImportSummary/eventImportSummaryText/getEventCategory, run in Node from the live file",
+  "events": [
+    {
+      "ts": 1759900000000,
+      "kind": "habitTap",
+      "taskType": "habit",
+      "taskId": "h1",
+      "dir": 1
+    },
+    {
+      "ts": 1759900000001,
+      "kind": "habitReps",
+      "taskId": "h1",
+      "reps": 3
+    },
+    {
+      "ts": 1759900000002,
+      "kind": "complete",
+      "taskType": "daily",
+      "taskId": "d1"
+    },
+    {
+      "ts": 1759900000003,
+      "kind": "miss",
+      "taskId": "d2"
+    },
+    {
+      "ts": 1759900000004,
+      "kind": "complete",
+      "taskType": "todo",
+      "taskId": "t1"
+    },
+    {
+      "ts": 1759900000005,
+      "kind": "create",
+      "taskType": "todo",
+      "taskId": "t2"
+    },
+    {
+      "ts": 1759900000006,
+      "kind": "import",
+      "taskTitle": "Import Data",
+      "notes": "x"
+    },
+    {
+      "ts": 1759900000007,
+      "kind": "lifecycle"
+    },
+    {
+      "ts": 1759900000008,
+      "kind": "clockSkew"
+    },
+    {
+      "ts": 1759900000009,
+      "kind": "conflictResolved"
+    },
+    {
+      "ts": 1759900000010,
+      "kind": "subtask",
+      "taskType": "todo",
+      "taskId": "t1"
+    },
+    {
+      "ts": 1759900000011,
+      "kind": "subtask",
+      "taskType": "daily",
+      "taskId": "d1"
+    }
+  ],
+  "expected_summary": {
+    "total": 12,
+    "diagnostic": 2,
+    "visible": 10,
+    "byCat": {
+      "habit": 2,
+      "daily": 3,
+      "todo": 3,
+      "system": 2
+    }
+  },
+  "expected_text": "12 stored total · 10 visible in feed · 2 system/diagnostic hidden · Habits 2, Dailies 3, To-dos 3, System 2",
+  "expected_note_merge_char_events_added9_skipped3": "Restored 9 events (12 stored total · 10 visible in feed · 2 system/diagnostic hidden · Habits 2, Dailies 3, To-dos 3, System 2; 3 already present, skipped) [char+events; merge]",
+  "expected_note_full_replace_added12_skipped0": "Restored 12 events (12 stored total · 10 visible in feed · 2 system/diagnostic hidden · Habits 2, Dailies 3, To-dos 3, System 2; 0 already present, skipped) [all sections; replace]",
+  "empty_summary": {
+    "total": 0,
+    "diagnostic": 0,
+    "visible": 0,
+    "byCat": {
+      "habit": 0,
+      "daily": 0,
+      "todo": 0,
+      "system": 0
+    }
+  },
+  "empty_text": "0 stored total · 0 visible in feed · 0 system/diagnostic hidden · Habits 0, Dailies 0, To-dos 0, System 0"
+}

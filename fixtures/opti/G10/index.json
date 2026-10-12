@@ -1,0 +1,21 @@
+{
+  "capturedAtMs": 1790295734928,
+  "package": "com.example.dev",
+  "source": "G10CaptureTest (WP-8.1), live Dropbox, real account in isolation (D30)",
+  "files": {
+    "download_missing.json": "664b40583091ca9d4844d8608bc28ade063a95e9eb2fe0eaa911356cc1858eef",
+    "list_missing.json": "5a9e18202491c76201afabeffe4b439ece51a8954daa724369118ff477a6799c",
+    "upload_add.json": "0092601b5853338fbdbcd2b80d7de305dfc9fdb332ea718c95550b4326bf7621",
+    "upload_add_existing.json": "6f400273e9bc9d799dd2f80f123296de9ae5e109edc12ba68f9ec5787d4535b1",
+    "upload_update_current.json": "689c0ca8feba851d41f4c1fbc45e018bd7f245edf4b4fa08bfb9d7e58be3721b",
+    "upload_update_stale.json": "c70617bd8c57fb857090404f4fc20ce6633d7c497d90c1b7c0ae3f775f2b6d57",
+    "download_present.json": "f51b18088075a4cef5cfbe2eebae1db675a2e520e5160e78aa5ad3a43c622a42",
+    "list_present.json": "e8d4f0bffec06299d86d03b0b66a112cff13c3f1efbf815f8097c2accbf93753",
+    "move_from_missing.json": "8ab57f12bc1377df6a3de9ebc9ef2f628953000b43403653e983ad48263b469e",
+    "move_onto_existing.json": "123a416a55b4302094e410172721c2c864ef3acaa4d25b0c326a4b2d67cb2b3e",
+    "move_ok.json": "c7f79c00ce8998d3605908cf3d0a5788393f26e71a4ca74b6416031353c38dd3",
+    "delete_missing.json": "85baae7394be11c85071afff2ba03137008b45bb8b23a5ede31151b932449edd",
+    "delete_ok.json": "18d63ac37aa255562535ac09f1b26f63ce38b8cb45992a648d3f8a6a47c64028",
+    "unauthorized.json": "41e9984d29b8786de1fcdbb369129cfcbdfa99a34e5c3bfa39c9cbc546139a52"
+  }
+}

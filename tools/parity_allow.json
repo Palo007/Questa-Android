@@ -1,0 +1,4 @@
+{
+  "_comment": "P12 (KT-05) parity_check allow-list. Each entry: {\"path\": <repo-relative path as git status prints it>, \"reason\": <one line>, \"sha256\": <optional pin of the drifted content>}. Fill from the day-one baseline (fix-plans/kotlin/runs/parity_baseline.md) with KNOWN drift only, e.g. fixtures/opti/G6/parse_table.json if it drifts (STAGE8_CHECKLIST.md:139). Empty = no drift allowed.",
+  "allow": []
+}

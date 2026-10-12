@@ -1,0 +1,60 @@
+# local.properties — build configuration template
+#
+# Copy this file to `local.properties` (which is gitignored and never committed)
+# and fill in what you need. Everything here is optional: without any of it the
+# project still builds, still runs the full unit-test suite, and still runs the
+# app — Dropbox sync is the only feature that needs configuration.
+#
+#     cp local.properties.example local.properties
+#
+# ------------------------------------------------------------------------------
+# Required for the build
+# ------------------------------------------------------------------------------
+# Where your Android SDK is. The Android Studio wizard writes this automatically,
+# so you only need it for a command-line build. Windows: escape the backslashes.
+#
+# sdk.dir=C\:\\Users\\you\\AppData\\Local\\Android\\Sdk
+#
+# ------------------------------------------------------------------------------
+# Optional: Dropbox sync
+# ------------------------------------------------------------------------------
+# The app keys are a public PKCE client_id, not a secret in the usual sense — but
+# they name a real app in a real Dropbox console, so they belong to whoever
+# builds the app rather than being written into the source.
+#
+# Without a key the build still compiles; the app asks for the key in Settings.
+#
+# To enable sync, create your own app at https://www.dropbox.com/developers/apps
+# (Scoped access, App folder), register the redirect URI shown under Settings —
+# `questa://oauth` for a release build, `questa-dev://oauth` for the `.dev`
+# debug build — then either enter the key in the app, or:
+#
+# optional: seeds your own install once; the app asks for the key otherwise
+# dropboxAppKey=<your app key>
+#
+# The environment variable DROPBOX_APP_KEY overrides this.
+#
+# The key is written into the app once, on first start, when no key is stored.
+# After that only the key in Settings counts. To build an APK without it, run
+# `build.bat release nokey` (or Gradle with -PnoKeySeed).
+#
+# ------------------------------------------------------------------------------
+# Optional: development-only account safety
+# ------------------------------------------------------------------------------
+# REAL_ACCOUNT_UNLOCKED defaults to false and blocks all real Dropbox traffic.
+# Set it to true only on a machine you control, when you intend to sync a real
+# account. Do not ship it enabled.
+#
+# realAccountUnlocked=false
+#
+# Comma-separated account ids excluded from the interlock's refuse-list.
+#
+# scratchAccountIds=
+#
+# ------------------------------------------------------------------------------
+# Tests
+# ------------------------------------------------------------------------------
+# Unit tests need sdk.dir (or ANDROID_HOME). They never use your Dropbox key:
+# the test app always starts with no key and sets its own fake test key, and
+# the tests talk to a fake Dropbox server, never the real one. Keep
+# realAccountUnlocked unset (false) when you run the tests.

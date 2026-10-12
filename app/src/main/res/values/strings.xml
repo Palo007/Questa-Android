@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Questa</string>
+
+    <!-- CR-KT-015: image attachments -->
+    <string name="attach_images">Images</string>
+    <string name="attach_add">Add image</string>
+    <string name="attach_choose_gallery">Choose from gallery</string>
+    <string name="attach_take_photo">Take photo</string>
+    <string name="attach_save_first">Save the task first</string>
+    <string name="attach_limit_reached">Up to 5 images per task</string>
+    <string name="attach_failed">Could not add the image</string>
+    <string name="attach_no_camera">No camera app found</string>
+    <string name="attach_remove_title">Remove image?</string>
+    <string name="attach_remove">Remove</string>
+    <string name="attach_cancel">Cancel</string>
+    <string name="attach_open">Open image %1$d of %2$d</string>
+    <string name="attach_thumb_more">Task image, %1$d more</string>
+    <string name="attach_thumb">Task image</string>
+    <string name="attach_missing">Image not available</string>
+    <string name="attach_loading">Image loading</string>
+    <string name="attach_adding">Adding image</string>
+    <string name="attach_close">Close</string>
+    <string name="attach_viewer_image">Image %1$d of %2$d</string>
+</resources>

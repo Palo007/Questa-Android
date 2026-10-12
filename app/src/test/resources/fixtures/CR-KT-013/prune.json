@@ -1,0 +1,260 @@
+{
+  "_source": "CR-KT-013 rule (RE-PWA-011, Opti app.js pruneEvents :2043-2074) simulated in Node by gen_prune.js; NOT run against real IndexedDB. PWA must verify.",
+  "now": 1790000000000,
+  "ageLimitMs": 46656000000,
+  "cutoff": 1743344000000,
+  "productionCap": 200000,
+  "_keptOrder": "expectedKeptIds / expectedKeptUids are ordered by id (insert order) ascending",
+  "scenarios": [
+    {
+      "name": "age_only_production_cap",
+      "note": "Production cap (200000) is never reached; only the age pass deletes. Covers ts == cutoff (kept), ts == cutoff-1 (pruned), synthetic and diagnostic kinds, a future ts.",
+      "cap": 200000,
+      "events": [
+        {
+          "id": 1,
+          "uid": "a-old",
+          "ts": 1743257600000,
+          "kind": "habitTap",
+          "synthetic": false
+        },
+        {
+          "id": 2,
+          "uid": "a-cut-minus-1",
+          "ts": 1743343999999,
+          "kind": "complete",
+          "synthetic": false
+        },
+        {
+          "id": 3,
+          "uid": "a-cut",
+          "ts": 1743344000000,
+          "kind": "habitTap",
+          "synthetic": false
+        },
+        {
+          "id": 4,
+          "uid": "a-syn-old",
+          "ts": 1743343995000,
+          "kind": "syncCompleted",
+          "synthetic": true
+        },
+        {
+          "id": 5,
+          "uid": "a-life-old",
+          "ts": 1743343999990,
+          "kind": "lifecycle",
+          "synthetic": false
+        },
+        {
+          "id": 6,
+          "uid": "a-new",
+          "ts": 1789999999000,
+          "kind": "complete",
+          "synthetic": false
+        },
+        {
+          "id": 7,
+          "uid": "a-future",
+          "ts": 1790000005000,
+          "kind": "edit",
+          "synthetic": false
+        },
+        {
+          "id": 8,
+          "uid": "a-syn-new",
+          "ts": 1789999998000,
+          "kind": "clockSkew",
+          "synthetic": true
+        },
+        {
+          "id": 9,
+          "uid": "a-cut-plus-1",
+          "ts": 1743344000001,
+          "kind": "lifecycle",
+          "synthetic": false
+        }
+      ],
+      "expectedPrunedByAgeIds": [
+        1,
+        4,
+        5,
+        2
+      ],
+      "expectedPrunedByCapIds": [],
+      "expectedKeptIds": [
+        3,
+        6,
+        7,
+        8,
+        9
+      ],
+      "expectedKeptUids": [
+        "a-cut",
+        "a-new",
+        "a-future",
+        "a-syn-new",
+        "a-cut-plus-1"
+      ]
+    },
+    {
+      "name": "cap_after_age_small_cap",
+      "note": "Test cap 5 (production is 200000). 9 rows, age pass removes 2, count after = 7, over = 2 (a pre-age count would give 4: the bug fixed 2026-09-18). Cap deletes the oldest by ts; id 3 is older than id 2 although inserted later. ids 2 and 5 share a ts at the cap edge: the lower id (2) is deleted, 5 is kept.",
+      "cap": 5,
+      "events": [
+        {
+          "id": 1,
+          "uid": "b-old1",
+          "ts": 1743343999999,
+          "kind": "complete",
+          "synthetic": false
+        },
+        {
+          "id": 2,
+          "uid": "b-pair-lo",
+          "ts": 1743344002000,
+          "kind": "habitTap",
+          "synthetic": false
+        },
+        {
+          "id": 3,
+          "uid": "b-first",
+          "ts": 1743344001000,
+          "kind": "lifecycle",
+          "synthetic": false
+        },
+        {
+          "id": 4,
+          "uid": "b-syn",
+          "ts": 1789999999500,
+          "kind": "syncCompleted",
+          "synthetic": true
+        },
+        {
+          "id": 5,
+          "uid": "b-pair-hi",
+          "ts": 1743344002000,
+          "kind": "habitTap",
+          "synthetic": false
+        },
+        {
+          "id": 6,
+          "uid": "b-old2",
+          "ts": 1743343000001,
+          "kind": "clockSkew",
+          "synthetic": true
+        },
+        {
+          "id": 7,
+          "uid": "b-k1",
+          "ts": 1789999999900,
+          "kind": "complete",
+          "synthetic": false
+        },
+        {
+          "id": 8,
+          "uid": "b-k2",
+          "ts": 1789999999800,
+          "kind": "edit",
+          "synthetic": false
+        },
+        {
+          "id": 9,
+          "uid": "b-k3",
+          "ts": 1789999999700,
+          "kind": "purchase",
+          "synthetic": false
+        }
+      ],
+      "expectedPrunedByAgeIds": [
+        6,
+        1
+      ],
+      "expectedPrunedByCapIds": [
+        3,
+        2
+      ],
+      "expectedKeptIds": [
+        4,
+        5,
+        7,
+        8,
+        9
+      ],
+      "expectedKeptUids": [
+        "b-syn",
+        "b-pair-hi",
+        "b-k1",
+        "b-k2",
+        "b-k3"
+      ]
+    },
+    {
+      "name": "count_equals_cap_small_cap",
+      "note": "Test cap 5. After the age pass exactly 5 rows remain: over = 0, nothing more is deleted.",
+      "cap": 5,
+      "events": [
+        {
+          "id": 1,
+          "uid": "c-old",
+          "ts": 1743343999999,
+          "kind": "complete",
+          "synthetic": false
+        },
+        {
+          "id": 2,
+          "uid": "c-1",
+          "ts": 1743344000000,
+          "kind": "habitTap",
+          "synthetic": false
+        },
+        {
+          "id": 3,
+          "uid": "c-2",
+          "ts": 1743344000000,
+          "kind": "habitTap",
+          "synthetic": false
+        },
+        {
+          "id": 4,
+          "uid": "c-3",
+          "ts": 1789999999997,
+          "kind": "lifecycle",
+          "synthetic": false
+        },
+        {
+          "id": 5,
+          "uid": "c-4",
+          "ts": 1789999999998,
+          "kind": "syncCompleted",
+          "synthetic": true
+        },
+        {
+          "id": 6,
+          "uid": "c-5",
+          "ts": 1789999999999,
+          "kind": "complete",
+          "synthetic": false
+        }
+      ],
+      "expectedPrunedByAgeIds": [
+        1
+      ],
+      "expectedPrunedByCapIds": [],
+      "expectedKeptIds": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "expectedKeptUids": [
+        "c-1",
+        "c-2",
+        "c-3",
+        "c-4",
+        "c-5"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "tags": [
+    { "id": "mg99c0e8k3f7q", "name": "health", "color": "#bda8ff", "createdAt": 1759400000000, "updatedAt": 1759400000000 },
+    { "id": "mg99ennkx2b9d", "name": "work", "color": "#50b5e9", "createdAt": 1759400123456, "updatedAt": 1759400123456 }
+  ],
+  "pwaTask": {
+    "id": "mg99gapsa1c4e",
+    "type": "todo",
+    "title": "Run 5k",
+    "notes": "",
+    "difficulty": "easy",
+    "value": 0,
+    "done": false,
+    "checklist": [],
+    "tags": ["mg99c0e8k3f7q"],
+    "createdAt": 1759400200000,
+    "updatedAt": 1759400200000
+  },
+  "legacyNameTask": {
+    "id": "kt-legacy-1",
+    "type": "todo",
+    "title": "Write report",
+    "notes": "",
+    "difficulty": "easy",
+    "value": 0,
+    "done": false,
+    "checklist": [],
+    "tags": ["work", "orphan-name"],
+    "createdAt": 1759400200000,
+    "updatedAt": 1759400200000
+  },
+  "expected_legacyNameTask_tags_after_editor_save": ["mg99ennkx2b9d", "orphan-name"],
+  "expected_pwaTask_tags_after_bulk_remove_health": [],
+  "expected_legacyNameTask_tags_after_bulk_remove_work": ["orphan-name"],
+  "expected_tags_after_bulk_add_work_to_both": {
+    "mg99gapsa1c4e": ["mg99c0e8k3f7q", "mg99ennkx2b9d"],
+    "kt-legacy-1": ["work", "orphan-name"]
+  }
+}

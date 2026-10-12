@@ -1,0 +1,91 @@
+Questa (Native Android)
+Copyright 2026 palo007
+
+This product includes software developed at Google LLC, the Kotlin Foundation,
+the Android Open Source Project, Square, Inc., Calvin Liang, and other
+contributors, each licensed under the Apache License, Version 2.0.
+
+================================================================================
+THIRD-PARTY SOFTWARE NOTICES
+================================================================================
+
+The following components are distributed as part of this project, either
+compiled into the application (APK) or used to build and test it. All are
+licensed under the Apache License, Version 2.0, with the exceptions noted.
+
+--------------------------------------------------------------------------------
+AndroidX / Jetpack  (Google LLC)
+  core-ktx, activity-compose, lifecycle-*, datastore-preferences, room-*, work-*,
+  browser, test-*, uiautomator, compose-bom
+  https://developer.android.com/jetpack
+--------------------------------------------------------------------------------
+Jetpack Compose  (Google LLC)
+  ui, ui-graphics, ui-tooling, material3, material-icons-core, material-icons-extended,
+  ui-test-junit4, ui-test-manifest
+  https://developer.android.com/jetpack/compose
+--------------------------------------------------------------------------------
+Android Gradle Plugin, KSP, Espresso  (Google LLC)
+  com.android.application:9.1.1, com.google.devtools.ksp:2.3.5,
+  androidx.test.espresso:espresso-core:3.7.0
+  https://developers.google.com/android/build
+--------------------------------------------------------------------------------
+Kotlin and kotlinx libraries  (JetBrains s.r.o. / Kotlin Foundation)
+  Kotlin 2.2.10, kotlinx-serialization-json 1.8.0,
+  kotlinx-coroutines-core / -android 1.10.2
+  https://github.com/JetBrains/kotlin
+--------------------------------------------------------------------------------
+OkHttp  (Square, Inc.)  -- runtime, the Dropbox HTTP client
+  okhttp 4.12.0, logging-interceptor 4.12.0
+  https://square.github.io/okhttp/
+  Copyright 2019 Square, Inc.
+--------------------------------------------------------------------------------
+Reorderable  (Calvin Liang / BurnoutCrew)  -- drag-and-drop reordering
+  org.burnoutcrew.composereorderable:reorderable:0.9.6
+  https://github.com/aclassen/ComposeReorderable
+  Licensed under the Apache License, Version 2.0. Upstream is archived; the
+  library is pinned intentionally and is scheduled for replacement by the
+  Compose BOM (see app/build.gradle.kts).
+--------------------------------------------------------------------------------
+Roborazzi  (Takahiro Yamashita)  -- screenshot testing, test scope only
+  io.github.takahirom.roborazzi 1.59.0
+  https://github.com/takahirom/roborazzi
+  Licensed under the Apache License, Version 2.0.
+--------------------------------------------------------------------------------
+Robolectric  (The Robolectric Project)  -- test scope only
+  org.robolectric:robolectric:4.16.1
+  https://github.com/robolectric/robolectric
+  Licensed under the Apache License, Version 2.0.
+--------------------------------------------------------------------------------
+MockK  (MockK contributors)  -- test scope only
+  io.mockk:mockk:1.13.13
+  https://github.com/mockk/mockk
+  Licensed under the Apache License, Version 2.0.
+--------------------------------------------------------------------------------
+JUnit 4  (JUnit Team)  -- test scope only
+  junit:junit:4.13.2
+  https://junit.org/junit4/
+  Licensed under the Eclipse Public License, Version 1.0. This is the one
+  weak-copyleft (file-level) dependency in the project. It is used exclusively
+  in test sources and is NOT distributed in the released APK, so no copyleft
+  obligation attaches to this project's own source or to the application.
+--------------------------------------------------------------------------------
+Playwright  (Microsoft Corporation)  -- developer tooling only, never shipped
+  playwright 1.63.0 (tools/package.json, devDependency)
+  https://github.com/microsoft/playwright
+  Licensed under the Apache License, Version 2.0.
+--------------------------------------------------------------------------------
+
+================================================================================
+NOTES
+================================================================================
+
+1. The full text of the Apache License, Version 2.0 is in the LICENSE file at
+   the root of this repository.
+
+2. "Test scope only" and "developer tooling only" components are linked at
+   build/test time and are not redistributed in the APK, so the user of a
+   released build does not receive them.
+
+3. The application icon and other bundled images in app/src/main/res were
+   created for this project and are covered by the LICENSE above. No third
+   party icon packs or stock artwork are bundled.

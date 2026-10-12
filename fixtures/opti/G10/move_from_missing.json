@@ -1,0 +1,1 @@
+{"name":"move_from_missing","kind":"move","expect":"NotFound","request":{"endpoint":"move_v2","from":"/g10-probe/missing.json"},"status":409,"headers":{"dropbox-api-result":null,"content-type":"application/json","retry-after":null},"body":"{\"error\":{\".tag\":\"from_lookup\",\"from_lookup\":{\".tag\":\"not_found\"}},\"error_summary\":\"from_lookup/not_found/\"}"}

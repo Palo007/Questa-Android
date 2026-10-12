@@ -1,0 +1,516 @@
+{
+  "source": "Opti 7d5d4f3:sync.js:2405-2426 _maxOrderingTs (Number(x)||0)",
+  "note": "`opti` is String(mx). Kotlin returns Long: fractional -> truncated, Infinity -> Long.MAX_VALUE [DEFERRED_OPEN_QUESTION].",
+  "vectors": [
+    {
+      "name": "hex_string",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": "0x10"
+          }
+        ]
+      },
+      "opti": "16"
+    },
+    {
+      "name": "hex_upper_string",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": "0X1F"
+          }
+        ]
+      },
+      "opti": "31"
+    },
+    {
+      "name": "binary_string",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": "0b101"
+          }
+        ]
+      },
+      "opti": "5"
+    },
+    {
+      "name": "octal_string",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": "0o17"
+          }
+        ]
+      },
+      "opti": "15"
+    },
+    {
+      "name": "float_suffix_f",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": "5f"
+          }
+        ]
+      },
+      "opti": "0"
+    },
+    {
+      "name": "double_suffix_d",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": "5d"
+          }
+        ]
+      },
+      "opti": "0"
+    },
+    {
+      "name": "array_one_number",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": [
+              5
+            ]
+          }
+        ]
+      },
+      "opti": "5"
+    },
+    {
+      "name": "array_one_string",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": [
+              "7"
+            ]
+          }
+        ]
+      },
+      "opti": "7"
+    },
+    {
+      "name": "bom_prefixed",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": "﻿42"
+          }
+        ]
+      },
+      "opti": "42"
+    },
+    {
+      "name": "padded_string",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": " 12 "
+          }
+        ]
+      },
+      "opti": "12"
+    },
+    {
+      "name": "whitespace_mix",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": "\t\n 42\n"
+          }
+        ]
+      },
+      "opti": "42"
+    },
+    {
+      "name": "nbsp_prefixed",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": " 42"
+          }
+        ]
+      },
+      "opti": "42"
+    },
+    {
+      "name": "empty_string",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": ""
+          }
+        ]
+      },
+      "opti": "0"
+    },
+    {
+      "name": "exp_string",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": "1e3"
+          }
+        ]
+      },
+      "opti": "1000"
+    },
+    {
+      "name": "plain_number",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": 1790000000000
+          }
+        ]
+      },
+      "opti": "1790000000000"
+    },
+    {
+      "name": "numeric_string",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": "1790000000001"
+          }
+        ]
+      },
+      "opti": "1790000000001"
+    },
+    {
+      "name": "fraction_number",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": 1.9
+          }
+        ]
+      },
+      "opti": "1.9"
+    },
+    {
+      "name": "negative_hex",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": "-0x10"
+          }
+        ]
+      },
+      "opti": "0"
+    },
+    {
+      "name": "garbage_suffix",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": "12abc"
+          }
+        ]
+      },
+      "opti": "0"
+    },
+    {
+      "name": "nan_string",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": "NaN"
+          }
+        ]
+      },
+      "opti": "0"
+    },
+    {
+      "name": "infinity_string",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": "Infinity"
+          }
+        ]
+      },
+      "opti": "Infinity"
+    },
+    {
+      "name": "bool_true",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": true
+          }
+        ]
+      },
+      "opti": "1"
+    },
+    {
+      "name": "bool_false",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": false
+          }
+        ]
+      },
+      "opti": "0"
+    },
+    {
+      "name": "null_value",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": null
+          }
+        ]
+      },
+      "opti": "0"
+    },
+    {
+      "name": "array_empty",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": []
+          }
+        ]
+      },
+      "opti": "0"
+    },
+    {
+      "name": "array_two",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": [
+              1,
+              2
+            ]
+          }
+        ]
+      },
+      "opti": "0"
+    },
+    {
+      "name": "object_value",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": {
+              "a": 1
+            }
+          }
+        ]
+      },
+      "opti": "0"
+    },
+    {
+      "name": "missing_value",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1"
+          }
+        ]
+      },
+      "opti": "0"
+    },
+    {
+      "name": "site_checklist",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": 1,
+            "checklist": [
+              {
+                "id": "c1",
+                "touchedAt": "0x20"
+              }
+            ]
+          }
+        ]
+      },
+      "opti": "32"
+    },
+    {
+      "name": "site_char",
+      "state": {
+        "char": {
+          "updatedAt": "0x21"
+        }
+      },
+      "opti": "33"
+    },
+    {
+      "name": "site_devices",
+      "state": {
+        "devices": [
+          {
+            "id": "d1",
+            "updatedAt": "0x22"
+          }
+        ]
+      },
+      "opti": "34"
+    },
+    {
+      "name": "site_deletions",
+      "state": {
+        "deletions": [
+          {
+            "id": "x",
+            "at": "0x23"
+          }
+        ]
+      },
+      "opti": "35"
+    },
+    {
+      "name": "site_tags",
+      "state": {
+        "tags": [
+          {
+            "id": "g1",
+            "updatedAt": "0x24"
+          }
+        ]
+      },
+      "opti": "36"
+    },
+    {
+      "name": "site_rewards",
+      "state": {
+        "rewards": [
+          {
+            "id": "r1",
+            "updatedAt": "0x25"
+          }
+        ]
+      },
+      "opti": "37"
+    },
+    {
+      "name": "site_an_views",
+      "state": {
+        "an": {
+          "views": [
+            {
+              "id": "v1",
+              "updatedAt": "0x26"
+            }
+          ]
+        }
+      },
+      "opti": "38"
+    },
+    {
+      "name": "site_an_metrics",
+      "state": {
+        "an": {
+          "metrics": [
+            {
+              "id": "m1",
+              "updatedAt": "0x27"
+            }
+          ]
+        }
+      },
+      "opti": "39"
+    },
+    {
+      "name": "site_prefs_an_views",
+      "state": {
+        "prefs": {
+          "an": {
+            "views": [
+              {
+                "id": "v1",
+                "updatedAt": "0x28"
+              }
+            ]
+          }
+        }
+      },
+      "opti": "40"
+    },
+    {
+      "name": "site_an_wins_over_prefs_an",
+      "state": {
+        "an": {
+          "views": [
+            {
+              "id": "v1",
+              "updatedAt": 3
+            }
+          ]
+        },
+        "prefs": {
+          "an": {
+            "views": [
+              {
+                "id": "v2",
+                "updatedAt": 99
+              }
+            ]
+          }
+        }
+      },
+      "opti": "3"
+    },
+    {
+      "name": "max_across_sites",
+      "state": {
+        "tasks": [
+          {
+            "id": "t1",
+            "updatedAt": "5f"
+          }
+        ],
+        "tags": [
+          {
+            "id": "g1",
+            "updatedAt": [
+              9
+            ]
+          }
+        ],
+        "char": {
+          "updatedAt": " 8 "
+        }
+      },
+      "opti": "9"
+    }
+  ]
+}

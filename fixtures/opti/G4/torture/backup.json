@@ -1,0 +1,115 @@
+{
+  "_backup": {
+    "schema": 2,
+    "exportedAt": "2026-09-24T12:00:00.000Z",
+    "appVersion": "v2026.09.24-1915",
+    "eventCount": 1,
+    "items": {
+      "tasks": 2,
+      "rewards": 0,
+      "tags": 0,
+      "views": 0,
+      "lastActivityAt": "2026-09-24T12:00:00.000Z"
+    },
+    "hashAlgo": "sha256",
+    "hash": "5947e707bf2902fa21ecabd9eae079f8e6dedbc1f2ff7ca423cdcd0227c2a9d3"
+  },
+  "K": [
+    "complete"
+  ],
+  "SRC": [],
+  "TID": [
+    "123"
+  ],
+  "TT": [],
+  "FM": {
+    "updatedAt": "a",
+    "id": "b",
+    "type": "c",
+    "title": "d",
+    "value": "e",
+    "createdAt": "f",
+    "char": "g",
+    "name": "h",
+    "gold": "i",
+    "xp": "j",
+    "hp": "k",
+    "maxHp": "l",
+    "lvl": "m",
+    "tasks": "n",
+    "notes": "o",
+    "done": "p",
+    "checklist": "q",
+    "cUp": "r",
+    "rewards": "s",
+    "tags": "t",
+    "devices": "u",
+    "lastCron": "v",
+    "history": "w",
+    "charHistory": "x",
+    "prefs": "y",
+    "an": "z",
+    "views": "ba",
+    "metrics": "bb",
+    "monthlyBackups": "bc",
+    "deletions": "bd"
+  },
+  "S": {
+    "g": {
+      "h": "菮 émigré line",
+      "i": 0.30000000000000004,
+      "j": 1e+21,
+      "k": 5e-7,
+      "l": 1.7976931348623157e+308,
+      "m": 9007199254740991,
+      "a": 1790251200000
+    },
+    "n": [
+      {
+        "b": "123",
+        "c": "todo",
+        "d": "lone-surrogate:\ud800",
+        "o": null,
+        "e": -1,
+        "p": false,
+        "q": [],
+        "f": 1,
+        "a": 1790251200000
+      },
+      {
+        "b": "456",
+        "c": "habit",
+        "d": "int-like-key",
+        "e": 0.30000000000000004,
+        "r": 0,
+        "f": 1,
+        "a": 1790251200000
+      }
+    ],
+    "s": [],
+    "t": [],
+    "u": [],
+    "v": 20260924,
+    "w": [],
+    "x": [],
+    "y": {
+      "z": {
+        "ba": [],
+        "bb": []
+      }
+    },
+    "bc": [],
+    "bd": []
+  },
+  "E": [
+    {
+      "t": 1790251199000,
+      "uid": "fx-device-0001-abc-1",
+      "dev": "fx-device-0001",
+      "k": 0,
+      "ti": 0,
+      "ss": 9007199254740992,
+      "id": 1
+    }
+  ]
+}

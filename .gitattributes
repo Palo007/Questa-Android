@@ -1,0 +1,15 @@
+# Do not touch fixture line endings.
+#
+# The golden fixtures are byte-sensitive: tests compare the exact JSON bytes,
+# and the sync engine's canonical serialisation depends on exact numeric
+# formatting. Git's CRLF conversion on checkout would silently break them on
+# Windows, which is where most contributors will clone.
+fixtures/** -text
+
+# Everything else: normalise to LF, both in the repository and on checkout.
+# `text=auto` alone only normalises the repository copy; adding `eol=lf` also
+# checks out LF, so source stays byte-identical on Windows and on POSIX.
+* text=auto eol=lf
+# Windows batch files must keep CRLF, or cmd.exe misreads blocks and labels.
+*.bat text eol=crlf
+*.cmd text eol=crlf

@@ -1,0 +1,75 @@
+# 1. Ignore everything by default
+*
+
+# 2. Allow directories so Git can traverse them
+!*/
+
+# 3. Allow specific root files
+!.gitignore
+!.gitattributes
+!LICENSE
+!NOTICE
+!README.md
+!CONTRIBUTING.md
+!local.properties.example
+!gradlew
+!gradlew.bat
+!build.bat
+!build.gradle.kts
+!settings.gradle.kts
+!gradle.properties
+
+# 4. Allow the Gradle folder
+!gradle/**
+
+# 5. Allow the app module
+!app/**
+
+# 6. Allow Test Fixtures and Verification Tools
+!fixtures/**
+!tools/**
+
+# 7. GitHub community files
+!.github/**
+
+# 8. Re-ignore standard build artifacts and local configs (these take precedence)
+app/build/
+build/
+.gradle/
+.idea/
+.artifacts/
+.omo/
+.codegraph/
+.kotlin/
+*.iml
+/local.properties
+# KT-13 / DEC-7: release signing secrets, never commit
+keystore.properties
+.DS_Store
+*.log
+/legacy_pwa/
+
+# Agent worktrees
+.claude/
+.build/
+fixtures/legacy/*.apk
+
+# WP-8.12 live gate: npm deps, and anything a live run pulls (real data, never commit)
+tools/node_modules/
+fixtures/legacy/*.tar
+
+# build.bat: release signing key (never commit) and the copied APKs
+*.jks
+*.keystore
+/out/
+
+# build.bat: saved release password (DPAPI-encrypted, this PC only)
+signing.pwd
+
+# Real device data must never be committed, even by accident.
+# fixtures/real_backup.json IS tracked, but it is an anonymised copy; any raw
+# export is personal data. Keep these patterns out of the repo forever.
+questa-backup-*.json
+questa-partial-*.json
+questa-RECOVERED-*.json
+*.env

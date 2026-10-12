@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.MyApplication" parent="android:Theme.DeviceDefault.NoActionBar">
+        <!-- WP-8.17: windowBackground == 0xFF1D1233, Opti html,body background (index.html:22 @ 7d5d4f3). -->
+        <item name="android:windowBackground">@color/opti_page_bg</item>
+    </style>
+</resources>

@@ -1,0 +1,7138 @@
+{
+ "opti": "7d5d4f3",
+ "now": 1790251200000,
+ "myDev": "dev-me",
+ "ageLimitMs": 46656000000,
+ "helpers": {
+  "sig": [
+   {
+    "r": {
+     "ts": 1,
+     "kind": "a"
+    },
+    "sig": "1|a||0|0|||"
+   },
+   {
+    "r": {
+     "ts": 1.5,
+     "kind": "a",
+     "taskId": "t",
+     "dir": -1,
+     "reps": 3
+    },
+    "sig": "1.5|a|t|-1|3|||"
+   },
+   {
+    "r": {
+     "ts": 2,
+     "kind": "k",
+     "detail": 5,
+     "subId": "s",
+     "done": false
+    },
+    "sig": "2|k||0|0|5|s|0"
+   },
+   {
+    "r": {
+     "ts": 2,
+     "kind": "k",
+     "done": null
+    },
+    "sig": "2|k||0|0|||0"
+   },
+   {
+    "r": {
+     "ts": 2,
+     "kind": "k",
+     "done": "yes"
+    },
+    "sig": "2|k||0|0|||1"
+   },
+   {
+    "r": {
+     "ts": 1e+21,
+     "kind": "k",
+     "dir": 0,
+     "reps": 0
+    },
+    "sig": "1e+21|k||0|0|||"
+   },
+   {
+    "r": {
+     "ts": 3,
+     "kind": "k",
+     "detail": "",
+     "taskId": ""
+    },
+    "sig": "3|k||0|0|||"
+   },
+   {
+    "r": {
+     "ts": 3,
+     "kind": null,
+     "dir": "2"
+    },
+    "sig": "3|||2|0|||"
+   },
+   {
+    "r": {
+     "ts": 3,
+     "kind": "k",
+     "detail": true
+    },
+    "sig": "3|k||0|0|true||"
+   },
+   {
+    "r": {
+     "ts": 3,
+     "kind": "k",
+     "detail": [
+      1,
+      2
+     ]
+    },
+    "sig": "3|k||0|0|1,2||"
+   },
+   {
+    "r": {
+     "ts": 3,
+     "kind": "k",
+     "detail": {
+      "a": 1
+     }
+    },
+    "sig": "3|k||0|0|[object Object]||"
+   },
+   {
+    "r": {
+     "ts": 3,
+     "kind": "ž€😀",
+     "taskId": "ü"
+    },
+    "sig": "3|ž€😀|ü|0|0|||"
+   }
+  ],
+  "disambiguate": [
+   {
+    "uid": "u",
+    "sig": "a|b",
+    "out": "u~294c7dd6"
+   },
+   {
+    "uid": "rep-1",
+    "sig": "",
+    "out": "rep-1~811c9dc5"
+   },
+   {
+    "uid": "x",
+    "sig": "ž€😀",
+    "out": "x~4f41be9a"
+   },
+   {
+    "uid": "dev-1-abc",
+    "sig": "1788220800000|habitTap||0|0|||",
+    "out": "dev-1-abc~a92889da"
+   }
+  ],
+  "uidHash": [
+   {
+    "uids": [],
+    "hash": "e3b0c44298fc1c14"
+   },
+   {
+    "uids": [
+     "a"
+    ],
+    "hash": "ca978112ca1bbdca"
+   },
+   {
+    "uids": [
+     "b",
+     "a",
+     "c"
+    ],
+    "hash": "205830ca5b23bbe3"
+   },
+   {
+    "uids": [
+     "a",
+     "a"
+    ],
+    "hash": "0f503d4b719c917f"
+   },
+   {
+    "uids": [
+     "Z",
+     "a",
+     "_",
+     "ž",
+     "😀"
+    ],
+    "hash": "dac67167b7bed0c1"
+   },
+   {
+    "uids": [
+     null,
+     "x",
+     ""
+    ],
+    "hash": "2d711642b726b044"
+   }
+  ],
+  "superset": [
+   {
+    "local": [
+     "a",
+     "b"
+    ],
+    "knownHash": "x",
+    "knownUids": [
+     "a"
+    ],
+    "localHash": "1eb7c54d52831bbf",
+    "out": true
+   },
+   {
+    "local": [
+     "a"
+    ],
+    "knownHash": "x",
+    "knownUids": [
+     "a",
+     "b"
+    ],
+    "localHash": "y",
+    "out": false
+   },
+   {
+    "local": [
+     "a",
+     "b"
+    ],
+    "knownHash": "1eb7c54d52831bbf",
+    "knownUids": [],
+    "localHash": "1eb7c54d52831bbf",
+    "out": true
+   },
+   {
+    "local": [
+     "a",
+     "b"
+    ],
+    "knownHash": "1eb7c54d52831bbf",
+    "knownUids": null,
+    "localHash": null,
+    "out": false
+   },
+   {
+    "local": [
+     "a"
+    ],
+    "knownHash": "fallback-1",
+    "knownUids": null,
+    "localHash": "fallback-1",
+    "out": false
+   },
+   {
+    "local": [
+     "a"
+    ],
+    "knownHash": null,
+    "knownUids": null,
+    "localHash": "q",
+    "out": false
+   }
+  ],
+  "filterSet": [
+   {
+    "records": [
+     {
+      "ts": 1790251199999,
+      "uid": "u1",
+      "dev": "d",
+      "kind": "habitTap"
+     },
+     {
+      "ts": 1790251199998,
+      "uid": "u1",
+      "dev": "d",
+      "kind": "habitTap"
+     },
+     {
+      "ts": 1790251199997,
+      "uid": "u2",
+      "dev": "d",
+      "kind": "habitTap"
+     }
+    ],
+    "existing": [
+     "u2"
+    ],
+    "out": [
+     {
+      "ts": 1790251199999,
+      "uid": "u1",
+      "dev": "d",
+      "kind": "habitTap"
+     }
+    ]
+   }
+  ],
+  "monthOlder": [
+   {
+    "month": "202609",
+    "now": 1790251200000,
+    "out": false
+   },
+   {
+    "month": "202502",
+    "now": 1790251200000,
+    "out": true
+   },
+   {
+    "month": "202504",
+    "now": 1790251200000,
+    "out": false
+   }
+  ]
+ },
+ "scenarios": [
+  {
+   "name": "push_basic_two_months",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1786795200000,
+     "uid": "dev-me-a",
+     "dev": "dev-me",
+     "kind": "habitTap",
+     "taskId": "t1",
+     "dir": 1
+    },
+    {
+     "ts": 1790251199000,
+     "uid": "dev-me-b",
+     "dev": "dev-me",
+     "kind": "habitTap",
+     "taskId": "t1",
+     "dir": -1,
+     "reps": 2
+    },
+    {
+     "ts": 1790251199500,
+     "uid": "dev-me-c",
+     "dev": "dev-me",
+     "kind": "complete",
+     "taskId": "t2",
+     "detail": "x"
+    }
+   ],
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 1790251199500,
+     "evtFullPushAt": 1790251200000,
+     "evtFileCounts": {
+      "dev-me-202608.json": {
+       "count": 1,
+       "hash": "d5935a374b3c6410",
+       "uids": [
+        "dev-me-a"
+       ]
+      },
+      "dev-me-202609.json": {
+       "count": 2,
+       "hash": "dd71c69ee687bea4",
+       "uids": [
+        "dev-me-b",
+        "dev-me-c"
+       ]
+      }
+     },
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [
+     {
+      "path": "/events/dev-me-202608.json",
+      "records": [
+       {
+        "ts": 1786795200000,
+        "uid": "dev-me-a",
+        "dev": "dev-me",
+        "kind": "habitTap",
+        "taskId": "t1",
+        "dir": 1
+       }
+      ]
+     },
+     {
+      "path": "/events/dev-me-202609.json",
+      "records": [
+       {
+        "ts": 1790251199000,
+        "uid": "dev-me-b",
+        "dev": "dev-me",
+        "kind": "habitTap",
+        "taskId": "t1",
+        "dir": -1,
+        "reps": 2
+       },
+       {
+        "ts": 1790251199500,
+        "uid": "dev-me-c",
+        "dev": "dev-me",
+        "kind": "complete",
+        "taskId": "t2",
+        "detail": "x"
+       }
+      ]
+     }
+    ],
+    "deletes": [],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 2,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_future_event_clamps_watermark",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1790337600000,
+     "uid": "dev-me-f",
+     "dev": "dev-me",
+     "kind": "habitTap"
+    }
+   ],
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 1790251200000,
+     "evtFullPushAt": 1790251200000,
+     "evtFileCounts": {
+      "dev-me-202609.json": {
+       "count": 1,
+       "hash": "ce789aaf8fa7ace7",
+       "uids": [
+        "dev-me-f"
+       ]
+      }
+     },
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [
+     {
+      "path": "/events/dev-me-202609.json",
+      "records": [
+       {
+        "ts": 1790337600000,
+        "uid": "dev-me-f",
+        "dev": "dev-me",
+        "kind": "habitTap"
+       }
+      ]
+     }
+    ],
+    "deletes": [],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 1,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_future_event_120s",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1790251260000,
+     "uid": "dev-me-f",
+     "dev": "dev-me",
+     "kind": "habitTap"
+    }
+   ],
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 1790251200000,
+     "evtFullPushAt": 1790251200000,
+     "evtFileCounts": {
+      "dev-me-202609.json": {
+       "count": 1,
+       "hash": "ce789aaf8fa7ace7",
+       "uids": [
+        "dev-me-f"
+       ]
+      }
+     },
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [
+     {
+      "path": "/events/dev-me-202609.json",
+      "records": [
+       {
+        "ts": 1790251260000,
+        "uid": "dev-me-f",
+        "dev": "dev-me",
+        "kind": "habitTap"
+       }
+      ]
+     }
+    ],
+    "deletes": [],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 1,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_eligibility_gate",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1790251199900,
+     "uid": "e-own",
+     "dev": "dev-me",
+     "kind": "habitTap"
+    },
+    {
+     "ts": 1790251199910,
+     "uid": "e-syn",
+     "dev": "dev-me",
+     "kind": "habitTap",
+     "synthetic": true
+    },
+    {
+     "ts": 1790251199920,
+     "uid": "e-imp",
+     "dev": "dev-me",
+     "kind": "habitTap",
+     "imported": true
+    },
+    {
+     "ts": 1790251199930,
+     "uid": "e-rep",
+     "dev": "dev-me",
+     "kind": "habitTap",
+     "imported": true,
+     "republish": true
+    },
+    {
+     "ts": 1790251199940,
+     "uid": "e-life",
+     "dev": "dev-me",
+     "kind": "lifecycle",
+     "detail": "reload:newDay"
+    },
+    {
+     "ts": 1790251199945,
+     "uid": "e-diag",
+     "dev": "dev-me",
+     "kind": "clockSkew",
+     "remoteTs": 1790252199999,
+     "localTs": 1790251199945
+    },
+    {
+     "ts": 1790251199950,
+     "uid": "e-foreign",
+     "dev": "dev-x",
+     "kind": "habitTap"
+    },
+    {
+     "ts": 1790251199960,
+     "dev": "dev-me",
+     "kind": "habitTap"
+    }
+   ],
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 1790251199945,
+     "evtFullPushAt": 1790251200000,
+     "evtFileCounts": {
+      "dev-me-202609.json": {
+       "count": 3,
+       "hash": "4643c690be0f8c62",
+       "uids": [
+        "e-own",
+        "e-rep",
+        "e-diag"
+       ]
+      }
+     },
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [
+     {
+      "path": "/events/dev-me-202609.json",
+      "records": [
+       {
+        "ts": 1790251199900,
+        "uid": "e-own",
+        "dev": "dev-me",
+        "kind": "habitTap"
+       },
+       {
+        "ts": 1790251199930,
+        "uid": "e-rep",
+        "dev": "dev-me",
+        "kind": "habitTap",
+        "imported": true,
+        "republish": true
+       },
+       {
+        "ts": 1790251199945,
+        "uid": "e-diag",
+        "dev": "dev-me",
+        "kind": "clockSkew",
+        "remoteTs": 1790252199999,
+        "localTs": 1790251199945
+       }
+      ]
+     }
+    ],
+    "deletes": [],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 1,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_watermark_filters_old",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1786795200000,
+     "uid": "dev-me-a",
+     "dev": "dev-me",
+     "kind": "habitTap",
+     "taskId": "t1",
+     "dir": 1
+    },
+    {
+     "ts": 1790251199000,
+     "uid": "dev-me-b",
+     "dev": "dev-me",
+     "kind": "habitTap",
+     "taskId": "t1",
+     "dir": -1,
+     "reps": 2
+    },
+    {
+     "ts": 1790251199500,
+     "uid": "dev-me-c",
+     "dev": "dev-me",
+     "kind": "complete",
+     "taskId": "t2",
+     "detail": "x"
+    }
+   ],
+   "cfg": {
+    "evtLastUploadTs": 1790251198000,
+    "evtFullPushAt": 1790247600000
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 1790251199500,
+     "evtFullPushAt": 1790247600000,
+     "evtFileCounts": {
+      "dev-me-202609.json": {
+       "count": 2,
+       "hash": "dd71c69ee687bea4",
+       "uids": [
+        "dev-me-b",
+        "dev-me-c"
+       ]
+      }
+     },
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [
+     {
+      "path": "/events/dev-me-202609.json",
+      "records": [
+       {
+        "ts": 1790251199000,
+        "uid": "dev-me-b",
+        "dev": "dev-me",
+        "kind": "habitTap",
+        "taskId": "t1",
+        "dir": -1,
+        "reps": 2
+       },
+       {
+        "ts": 1790251199500,
+        "uid": "dev-me-c",
+        "dev": "dev-me",
+        "kind": "complete",
+        "taskId": "t2",
+        "detail": "x"
+       }
+      ]
+     }
+    ],
+    "deletes": [],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 1,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_nothing_fresh_bootstraps_fullpush",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1786795200000,
+     "uid": "dev-me-a",
+     "dev": "dev-me",
+     "kind": "habitTap",
+     "taskId": "t1",
+     "dir": 1
+    },
+    {
+     "ts": 1790251199000,
+     "uid": "dev-me-b",
+     "dev": "dev-me",
+     "kind": "habitTap",
+     "taskId": "t1",
+     "dir": -1,
+     "reps": 2
+    },
+    {
+     "ts": 1790251199500,
+     "uid": "dev-me-c",
+     "dev": "dev-me",
+     "kind": "complete",
+     "taskId": "t2",
+     "detail": "x"
+    }
+   ],
+   "cfg": {
+    "evtLastUploadTs": 1790251200000
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 1790251200000,
+     "evtFullPushAt": 1790251200000,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_nothing_fresh_keeps_fullpush",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1786795200000,
+     "uid": "dev-me-a",
+     "dev": "dev-me",
+     "kind": "habitTap",
+     "taskId": "t1",
+     "dir": 1
+    },
+    {
+     "ts": 1790251199000,
+     "uid": "dev-me-b",
+     "dev": "dev-me",
+     "kind": "habitTap",
+     "taskId": "t1",
+     "dir": -1,
+     "reps": 2
+    },
+    {
+     "ts": 1790251199500,
+     "uid": "dev-me-c",
+     "dev": "dev-me",
+     "kind": "complete",
+     "taskId": "t2",
+     "detail": "x"
+    }
+   ],
+   "cfg": {
+    "evtLastUploadTs": 1790251200000,
+    "evtFullPushAt": 1790247600000
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 1790251200000,
+     "evtFullPushAt": 1790247600000,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_full_repush_after_24h",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1786795200000,
+     "uid": "dev-me-a",
+     "dev": "dev-me",
+     "kind": "habitTap",
+     "taskId": "t1",
+     "dir": 1
+    },
+    {
+     "ts": 1790251199000,
+     "uid": "dev-me-b",
+     "dev": "dev-me",
+     "kind": "habitTap",
+     "taskId": "t1",
+     "dir": -1,
+     "reps": 2
+    },
+    {
+     "ts": 1790251199500,
+     "uid": "dev-me-c",
+     "dev": "dev-me",
+     "kind": "complete",
+     "taskId": "t2",
+     "detail": "x"
+    }
+   ],
+   "cfg": {
+    "evtLastUploadTs": 1790251200000,
+    "evtFullPushAt": 1790164799999
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 1790251200000,
+     "evtFullPushAt": 1790251200000,
+     "evtFileCounts": {
+      "dev-me-202608.json": {
+       "count": 1,
+       "hash": "d5935a374b3c6410",
+       "uids": [
+        "dev-me-a"
+       ]
+      },
+      "dev-me-202609.json": {
+       "count": 2,
+       "hash": "dd71c69ee687bea4",
+       "uids": [
+        "dev-me-b",
+        "dev-me-c"
+       ]
+      }
+     },
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [
+     {
+      "path": "/events/dev-me-202608.json",
+      "records": [
+       {
+        "ts": 1786795200000,
+        "uid": "dev-me-a",
+        "dev": "dev-me",
+        "kind": "habitTap",
+        "taskId": "t1",
+        "dir": 1
+       }
+      ]
+     },
+     {
+      "path": "/events/dev-me-202609.json",
+      "records": [
+       {
+        "ts": 1790251199000,
+        "uid": "dev-me-b",
+        "dev": "dev-me",
+        "kind": "habitTap",
+        "taskId": "t1",
+        "dir": -1,
+        "reps": 2
+       },
+       {
+        "ts": 1790251199500,
+        "uid": "dev-me-c",
+        "dev": "dev-me",
+        "kind": "complete",
+        "taskId": "t2",
+        "detail": "x"
+       }
+      ]
+     }
+    ],
+    "deletes": [],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 2,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_full_repush_exactly_24h_not_due",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1786795200000,
+     "uid": "dev-me-a",
+     "dev": "dev-me",
+     "kind": "habitTap",
+     "taskId": "t1",
+     "dir": 1
+    },
+    {
+     "ts": 1790251199000,
+     "uid": "dev-me-b",
+     "dev": "dev-me",
+     "kind": "habitTap",
+     "taskId": "t1",
+     "dir": -1,
+     "reps": 2
+    },
+    {
+     "ts": 1790251199500,
+     "uid": "dev-me-c",
+     "dev": "dev-me",
+     "kind": "complete",
+     "taskId": "t2",
+     "detail": "x"
+    }
+   ],
+   "cfg": {
+    "evtLastUploadTs": 1790251200000,
+    "evtFullPushAt": 1790164800000
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 1790251200000,
+     "evtFullPushAt": 1790164800000,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_forceFullPush",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1786795200000,
+     "uid": "dev-me-a",
+     "dev": "dev-me",
+     "kind": "habitTap",
+     "taskId": "t1",
+     "dir": 1
+    },
+    {
+     "ts": 1790251199000,
+     "uid": "dev-me-b",
+     "dev": "dev-me",
+     "kind": "habitTap",
+     "taskId": "t1",
+     "dir": -1,
+     "reps": 2
+    },
+    {
+     "ts": 1790251199500,
+     "uid": "dev-me-c",
+     "dev": "dev-me",
+     "kind": "complete",
+     "taskId": "t2",
+     "detail": "x"
+    }
+   ],
+   "cfg": {
+    "evtLastUploadTs": 1790251200000,
+    "evtFullPushAt": 1790247600000
+   },
+   "opts": {
+    "forceFullPush": true
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 1790251200000,
+     "evtFullPushAt": 1790251200000,
+     "evtFileCounts": {
+      "dev-me-202608.json": {
+       "count": 1,
+       "hash": "d5935a374b3c6410",
+       "uids": [
+        "dev-me-a"
+       ]
+      },
+      "dev-me-202609.json": {
+       "count": 2,
+       "hash": "dd71c69ee687bea4",
+       "uids": [
+        "dev-me-b",
+        "dev-me-c"
+       ]
+      }
+     },
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [
+     {
+      "path": "/events/dev-me-202608.json",
+      "records": [
+       {
+        "ts": 1786795200000,
+        "uid": "dev-me-a",
+        "dev": "dev-me",
+        "kind": "habitTap",
+        "taskId": "t1",
+        "dir": 1
+       }
+      ]
+     },
+     {
+      "path": "/events/dev-me-202609.json",
+      "records": [
+       {
+        "ts": 1790251199000,
+        "uid": "dev-me-b",
+        "dev": "dev-me",
+        "kind": "habitTap",
+        "taskId": "t1",
+        "dir": -1,
+        "reps": 2
+       },
+       {
+        "ts": 1790251199500,
+        "uid": "dev-me-c",
+        "dev": "dev-me",
+        "kind": "complete",
+        "taskId": "t2",
+        "detail": "x"
+       }
+      ]
+     }
+    ],
+    "deletes": [],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 2,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_shrink_blocked_uids",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1790251199900,
+     "uid": "s-1",
+     "dev": "dev-me",
+     "kind": "habitTap"
+    },
+    {
+     "ts": 1790251199910,
+     "uid": "s-2",
+     "dev": "dev-me",
+     "kind": "habitTap"
+    }
+   ],
+   "cfg": {
+    "evtFileCounts": {
+     "dev-me-202609.json": {
+      "count": 3,
+      "hash": "h",
+      "uids": [
+       "s-1",
+       "s-2",
+       "s-3"
+      ]
+     }
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 1790251200000,
+     "evtFileCounts": {
+      "dev-me-202609.json": {
+       "count": 3,
+       "hash": "h",
+       "uids": [
+        "s-1",
+        "s-2",
+        "s-3"
+       ]
+      }
+     },
+     "evtPushBlocked": {
+      "dev-me-202609.json": {
+       "at": 1790251200000,
+       "local": 2,
+       "known": 3
+      }
+     },
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPushShrinkBlocked",
+      "file": "dev-me-202609.json",
+      "local": 2,
+      "known": 3,
+      "localHash": "41d856cc6ef0239b",
+      "knownHash": "h"
+     }
+    ],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_shrink_superset_uids",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1790251199900,
+     "uid": "s-1",
+     "dev": "dev-me",
+     "kind": "habitTap"
+    },
+    {
+     "ts": 1790251199910,
+     "uid": "s-2",
+     "dev": "dev-me",
+     "kind": "habitTap"
+    }
+   ],
+   "cfg": {
+    "evtFileCounts": {
+     "dev-me-202609.json": {
+      "count": 3,
+      "hash": "h",
+      "uids": [
+       "s-1",
+       "s-2",
+       "s-1"
+      ]
+     }
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 1790251199910,
+     "evtFullPushAt": 1790251200000,
+     "evtFileCounts": {
+      "dev-me-202609.json": {
+       "count": 2,
+       "hash": "41d856cc6ef0239b",
+       "uids": [
+        "s-1",
+        "s-2"
+       ]
+      }
+     },
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [
+     {
+      "path": "/events/dev-me-202609.json",
+      "records": [
+       {
+        "ts": 1790251199900,
+        "uid": "s-1",
+        "dev": "dev-me",
+        "kind": "habitTap"
+       },
+       {
+        "ts": 1790251199910,
+        "uid": "s-2",
+        "dev": "dev-me",
+        "kind": "habitTap"
+       }
+      ]
+     }
+    ],
+    "deletes": [],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 1,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_shrink_hash_mismatch_no_uids",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1790251199900,
+     "uid": "s-1",
+     "dev": "dev-me",
+     "kind": "habitTap"
+    },
+    {
+     "ts": 1790251199910,
+     "uid": "s-2",
+     "dev": "dev-me",
+     "kind": "habitTap"
+    }
+   ],
+   "cfg": {
+    "evtFileCounts": {
+     "dev-me-202609.json": {
+      "count": 3,
+      "hash": "nope"
+     }
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 1790251200000,
+     "evtFileCounts": {
+      "dev-me-202609.json": {
+       "count": 3,
+       "hash": "nope"
+      }
+     },
+     "evtPushBlocked": {
+      "dev-me-202609.json": {
+       "at": 1790251200000,
+       "local": 2,
+       "known": 3
+      }
+     },
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPushShrinkBlocked",
+      "file": "dev-me-202609.json",
+      "local": 2,
+      "known": 3,
+      "localHash": "41d856cc6ef0239b",
+      "knownHash": "nope"
+     }
+    ],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_shrink_fallback_hash_refused",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1790251199900,
+     "uid": "s-1",
+     "dev": "dev-me",
+     "kind": "habitTap"
+    }
+   ],
+   "cfg": {
+    "evtFileCounts": {
+     "dev-me-202609.json": {
+      "count": 2,
+      "hash": "fallback-00000001"
+     }
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 1790251200000,
+     "evtFileCounts": {
+      "dev-me-202609.json": {
+       "count": 2,
+       "hash": "fallback-00000001"
+      }
+     },
+     "evtPushBlocked": {
+      "dev-me-202609.json": {
+       "at": 1790251200000,
+       "local": 1,
+       "known": 2
+      }
+     },
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPushShrinkBlocked",
+      "file": "dev-me-202609.json",
+      "local": 1,
+      "known": 2,
+      "localHash": "6a840baf5d8c3ff2",
+      "knownHash": "fallback-00000001"
+     }
+    ],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_grow_with_known",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1790251199900,
+     "uid": "s-1",
+     "dev": "dev-me",
+     "kind": "habitTap"
+    },
+    {
+     "ts": 1790251199910,
+     "uid": "s-2",
+     "dev": "dev-me",
+     "kind": "habitTap"
+    }
+   ],
+   "cfg": {
+    "evtFileCounts": {
+     "dev-me-202609.json": {
+      "count": 1,
+      "hash": "h",
+      "uids": [
+       "s-9"
+      ]
+     }
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 1790251199910,
+     "evtFullPushAt": 1790251200000,
+     "evtFileCounts": {
+      "dev-me-202609.json": {
+       "count": 2,
+       "hash": "41d856cc6ef0239b",
+       "uids": [
+        "s-1",
+        "s-2"
+       ]
+      }
+     },
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [
+     {
+      "path": "/events/dev-me-202609.json",
+      "records": [
+       {
+        "ts": 1790251199900,
+        "uid": "s-1",
+        "dev": "dev-me",
+        "kind": "habitTap"
+       },
+       {
+        "ts": 1790251199910,
+        "uid": "s-2",
+        "dev": "dev-me",
+        "kind": "habitTap"
+       }
+      ]
+     }
+    ],
+    "deletes": [],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 1,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_shrink_blocked_force",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1790251199900,
+     "uid": "s-1",
+     "dev": "dev-me",
+     "kind": "habitTap"
+    }
+   ],
+   "cfg": {
+    "evtFileCounts": {
+     "dev-me-202609.json": {
+      "count": 3,
+      "hash": "h",
+      "uids": [
+       "s-1",
+       "s-2",
+       "s-3"
+      ]
+     }
+    }
+   },
+   "opts": {
+    "force": true,
+    "forceFullPush": true
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 1790251199900,
+     "evtFullPushAt": 1790251200000,
+     "evtFileCounts": {
+      "dev-me-202609.json": {
+       "count": 1,
+       "hash": "6a840baf5d8c3ff2",
+       "uids": [
+        "s-1"
+       ]
+      }
+     },
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [
+     {
+      "path": "/events/dev-me-202609.json",
+      "records": [
+       {
+        "ts": 1790251199900,
+        "uid": "s-1",
+        "dev": "dev-me",
+        "kind": "habitTap"
+       }
+      ]
+     }
+    ],
+    "deletes": [],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 1,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_blocked_one_of_two_months",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1786795200000,
+     "uid": "dev-me-a",
+     "dev": "dev-me",
+     "kind": "habitTap",
+     "taskId": "t1",
+     "dir": 1
+    },
+    {
+     "ts": 1790251199000,
+     "uid": "dev-me-b",
+     "dev": "dev-me",
+     "kind": "habitTap",
+     "taskId": "t1",
+     "dir": -1,
+     "reps": 2
+    },
+    {
+     "ts": 1790251199500,
+     "uid": "dev-me-c",
+     "dev": "dev-me",
+     "kind": "complete",
+     "taskId": "t2",
+     "detail": "x"
+    }
+   ],
+   "cfg": {
+    "evtFileCounts": {
+     "dev-me-202609.json": {
+      "count": 9,
+      "hash": "h",
+      "uids": [
+       "zz"
+      ]
+     }
+    },
+    "evtPushBlocked": {
+     "dev-me-202608.json": {
+      "at": 1,
+      "local": 1,
+      "known": 2
+     }
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 1790251200000,
+     "evtFileCounts": {
+      "dev-me-202609.json": {
+       "count": 9,
+       "hash": "h",
+       "uids": [
+        "zz"
+       ]
+      },
+      "dev-me-202608.json": {
+       "count": 1,
+       "hash": "d5935a374b3c6410",
+       "uids": [
+        "dev-me-a"
+       ]
+      }
+     },
+     "evtPushBlocked": {
+      "dev-me-202609.json": {
+       "at": 1790251200000,
+       "local": 2,
+       "known": 9
+      }
+     },
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [
+     {
+      "path": "/events/dev-me-202608.json",
+      "records": [
+       {
+        "ts": 1786795200000,
+        "uid": "dev-me-a",
+        "dev": "dev-me",
+        "kind": "habitTap",
+        "taskId": "t1",
+        "dir": 1
+       }
+      ]
+     }
+    ],
+    "deletes": [],
+    "inserted": [],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPushShrinkBlocked",
+      "file": "dev-me-202609.json",
+      "local": 2,
+      "known": 9,
+      "localHash": "dd71c69ee687bea4",
+      "knownHash": "h"
+     }
+    ],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 1,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_legit_shrink_straddle_T1",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1746057599999,
+     "uid": "u-t1",
+     "dev": "dev-me",
+     "kind": "habitTap"
+    }
+   ],
+   "cfg": {
+    "evtFileCounts": {
+     "dev-me-202504.json": {
+      "count": 3,
+      "hash": "x"
+     }
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 1746057599999,
+     "evtFullPushAt": 1790251200000,
+     "evtFileCounts": {
+      "dev-me-202504.json": {
+       "count": 1,
+       "hash": "55399537733d5172",
+       "uids": [
+        "u-t1"
+       ]
+      }
+     },
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [
+     {
+      "path": "/events/dev-me-202504.json",
+      "records": [
+       {
+        "ts": 1746057599999,
+        "uid": "u-t1",
+        "dev": "dev-me",
+        "kind": "habitTap"
+       }
+      ]
+     }
+    ],
+    "deletes": [],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 1,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_straddle_stale_T2",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1743465601000,
+     "uid": "u-t2a",
+     "dev": "dev-me",
+     "kind": "habitTap"
+    },
+    {
+     "ts": 1746057599999,
+     "uid": "u-t2b",
+     "dev": "dev-me",
+     "kind": "habitTap"
+    }
+   ],
+   "cfg": {
+    "evtFileCounts": {
+     "dev-me-202504.json": {
+      "count": 5,
+      "hash": "x"
+     }
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 1790251200000,
+     "evtFileCounts": {
+      "dev-me-202504.json": {
+       "count": 5,
+       "hash": "x"
+      }
+     },
+     "evtPushBlocked": {
+      "dev-me-202504.json": {
+       "at": 1790251200000,
+       "local": 2,
+       "known": 5
+      }
+     },
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPushShrinkBlocked",
+      "file": "dev-me-202504.json",
+      "local": 2,
+      "known": 5,
+      "localHash": "0ce558b237524299",
+      "knownHash": "x"
+     }
+    ],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_postcutoff_T3",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1790251199000,
+     "uid": "u-t3",
+     "dev": "dev-me",
+     "kind": "habitTap"
+    }
+   ],
+   "cfg": {
+    "evtFileCounts": {
+     "dev-me-202609.json": {
+      "count": 4,
+      "hash": "x"
+     }
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 1790251200000,
+     "evtFileCounts": {
+      "dev-me-202609.json": {
+       "count": 4,
+       "hash": "x"
+      }
+     },
+     "evtPushBlocked": {
+      "dev-me-202609.json": {
+       "at": 1790251200000,
+       "local": 1,
+       "known": 4
+      }
+     },
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPushShrinkBlocked",
+      "file": "dev-me-202609.json",
+      "local": 1,
+      "known": 4,
+      "localHash": "bd5995202db1bf2b",
+      "knownHash": "x"
+     }
+    ],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_filecounts_bounding",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1790251199900,
+     "uid": "b-1",
+     "dev": "dev-me",
+     "kind": "habitTap"
+    }
+   ],
+   "cfg": {
+    "evtFileCounts": {
+     "dev-me-202502.json": {
+      "count": 1,
+      "hash": "o"
+     },
+     "dev-me-202710.json": {
+      "count": 1,
+      "hash": "f"
+     },
+     "junk.txt": {
+      "count": 1
+     },
+     "dev-z-202608.json": {
+      "count": 2,
+      "hash": "k",
+      "uids": [
+       "q"
+      ]
+     }
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 1790251199900,
+     "evtFullPushAt": 1790251200000,
+     "evtFileCounts": {
+      "dev-z-202608.json": {
+       "count": 2,
+       "hash": "k",
+       "uids": [
+        "q"
+       ]
+      },
+      "dev-me-202609.json": {
+       "count": 1,
+       "hash": "3e499e752620c6a9",
+       "uids": [
+        "b-1"
+       ]
+      }
+     },
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [
+     {
+      "path": "/events/dev-me-202609.json",
+      "records": [
+       {
+        "ts": 1790251199900,
+        "uid": "b-1",
+        "dev": "dev-me",
+        "kind": "habitTap"
+       }
+      ]
+     }
+    ],
+    "deletes": [],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 1,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_filecounts_cap_240",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1790251199900,
+     "uid": "c-1",
+     "dev": "dev-me",
+     "kind": "habitTap"
+    }
+   ],
+   "cfg": {
+    "evtFileCounts": {
+     "d000-202608.json": {
+      "count": 1,
+      "hash": "h0"
+     },
+     "d001-202609.json": {
+      "count": 1,
+      "hash": "h1"
+     },
+     "d002-202608.json": {
+      "count": 1,
+      "hash": "h2"
+     },
+     "d003-202609.json": {
+      "count": 1,
+      "hash": "h3"
+     },
+     "d004-202608.json": {
+      "count": 1,
+      "hash": "h4"
+     },
+     "d005-202609.json": {
+      "count": 1,
+      "hash": "h5"
+     },
+     "d006-202608.json": {
+      "count": 1,
+      "hash": "h6"
+     },
+     "d007-202609.json": {
+      "count": 1,
+      "hash": "h7"
+     },
+     "d008-202608.json": {
+      "count": 1,
+      "hash": "h8"
+     },
+     "d009-202609.json": {
+      "count": 1,
+      "hash": "h9"
+     },
+     "d010-202608.json": {
+      "count": 1,
+      "hash": "h10"
+     },
+     "d011-202609.json": {
+      "count": 1,
+      "hash": "h11"
+     },
+     "d012-202608.json": {
+      "count": 1,
+      "hash": "h12"
+     },
+     "d013-202609.json": {
+      "count": 1,
+      "hash": "h13"
+     },
+     "d014-202608.json": {
+      "count": 1,
+      "hash": "h14"
+     },
+     "d015-202609.json": {
+      "count": 1,
+      "hash": "h15"
+     },
+     "d016-202608.json": {
+      "count": 1,
+      "hash": "h16"
+     },
+     "d017-202609.json": {
+      "count": 1,
+      "hash": "h17"
+     },
+     "d018-202608.json": {
+      "count": 1,
+      "hash": "h18"
+     },
+     "d019-202609.json": {
+      "count": 1,
+      "hash": "h19"
+     },
+     "d020-202608.json": {
+      "count": 1,
+      "hash": "h20"
+     },
+     "d021-202609.json": {
+      "count": 1,
+      "hash": "h21"
+     },
+     "d022-202608.json": {
+      "count": 1,
+      "hash": "h22"
+     },
+     "d023-202609.json": {
+      "count": 1,
+      "hash": "h23"
+     },
+     "d024-202608.json": {
+      "count": 1,
+      "hash": "h24"
+     },
+     "d025-202609.json": {
+      "count": 1,
+      "hash": "h25"
+     },
+     "d026-202608.json": {
+      "count": 1,
+      "hash": "h26"
+     },
+     "d027-202609.json": {
+      "count": 1,
+      "hash": "h27"
+     },
+     "d028-202608.json": {
+      "count": 1,
+      "hash": "h28"
+     },
+     "d029-202609.json": {
+      "count": 1,
+      "hash": "h29"
+     },
+     "d030-202608.json": {
+      "count": 1,
+      "hash": "h30"
+     },
+     "d031-202609.json": {
+      "count": 1,
+      "hash": "h31"
+     },
+     "d032-202608.json": {
+      "count": 1,
+      "hash": "h32"
+     },
+     "d033-202609.json": {
+      "count": 1,
+      "hash": "h33"
+     },
+     "d034-202608.json": {
+      "count": 1,
+      "hash": "h34"
+     },
+     "d035-202609.json": {
+      "count": 1,
+      "hash": "h35"
+     },
+     "d036-202608.json": {
+      "count": 1,
+      "hash": "h36"
+     },
+     "d037-202609.json": {
+      "count": 1,
+      "hash": "h37"
+     },
+     "d038-202608.json": {
+      "count": 1,
+      "hash": "h38"
+     },
+     "d039-202609.json": {
+      "count": 1,
+      "hash": "h39"
+     },
+     "d040-202608.json": {
+      "count": 1,
+      "hash": "h40"
+     },
+     "d041-202609.json": {
+      "count": 1,
+      "hash": "h41"
+     },
+     "d042-202608.json": {
+      "count": 1,
+      "hash": "h42"
+     },
+     "d043-202609.json": {
+      "count": 1,
+      "hash": "h43"
+     },
+     "d044-202608.json": {
+      "count": 1,
+      "hash": "h44"
+     },
+     "d045-202609.json": {
+      "count": 1,
+      "hash": "h45"
+     },
+     "d046-202608.json": {
+      "count": 1,
+      "hash": "h46"
+     },
+     "d047-202609.json": {
+      "count": 1,
+      "hash": "h47"
+     },
+     "d048-202608.json": {
+      "count": 1,
+      "hash": "h48"
+     },
+     "d049-202609.json": {
+      "count": 1,
+      "hash": "h49"
+     },
+     "d050-202608.json": {
+      "count": 1,
+      "hash": "h50"
+     },
+     "d051-202609.json": {
+      "count": 1,
+      "hash": "h51"
+     },
+     "d052-202608.json": {
+      "count": 1,
+      "hash": "h52"
+     },
+     "d053-202609.json": {
+      "count": 1,
+      "hash": "h53"
+     },
+     "d054-202608.json": {
+      "count": 1,
+      "hash": "h54"
+     },
+     "d055-202609.json": {
+      "count": 1,
+      "hash": "h55"
+     },
+     "d056-202608.json": {
+      "count": 1,
+      "hash": "h56"
+     },
+     "d057-202609.json": {
+      "count": 1,
+      "hash": "h57"
+     },
+     "d058-202608.json": {
+      "count": 1,
+      "hash": "h58"
+     },
+     "d059-202609.json": {
+      "count": 1,
+      "hash": "h59"
+     },
+     "d060-202608.json": {
+      "count": 1,
+      "hash": "h60"
+     },
+     "d061-202609.json": {
+      "count": 1,
+      "hash": "h61"
+     },
+     "d062-202608.json": {
+      "count": 1,
+      "hash": "h62"
+     },
+     "d063-202609.json": {
+      "count": 1,
+      "hash": "h63"
+     },
+     "d064-202608.json": {
+      "count": 1,
+      "hash": "h64"
+     },
+     "d065-202609.json": {
+      "count": 1,
+      "hash": "h65"
+     },
+     "d066-202608.json": {
+      "count": 1,
+      "hash": "h66"
+     },
+     "d067-202609.json": {
+      "count": 1,
+      "hash": "h67"
+     },
+     "d068-202608.json": {
+      "count": 1,
+      "hash": "h68"
+     },
+     "d069-202609.json": {
+      "count": 1,
+      "hash": "h69"
+     },
+     "d070-202608.json": {
+      "count": 1,
+      "hash": "h70"
+     },
+     "d071-202609.json": {
+      "count": 1,
+      "hash": "h71"
+     },
+     "d072-202608.json": {
+      "count": 1,
+      "hash": "h72"
+     },
+     "d073-202609.json": {
+      "count": 1,
+      "hash": "h73"
+     },
+     "d074-202608.json": {
+      "count": 1,
+      "hash": "h74"
+     },
+     "d075-202609.json": {
+      "count": 1,
+      "hash": "h75"
+     },
+     "d076-202608.json": {
+      "count": 1,
+      "hash": "h76"
+     },
+     "d077-202609.json": {
+      "count": 1,
+      "hash": "h77"
+     },
+     "d078-202608.json": {
+      "count": 1,
+      "hash": "h78"
+     },
+     "d079-202609.json": {
+      "count": 1,
+      "hash": "h79"
+     },
+     "d080-202608.json": {
+      "count": 1,
+      "hash": "h80"
+     },
+     "d081-202609.json": {
+      "count": 1,
+      "hash": "h81"
+     },
+     "d082-202608.json": {
+      "count": 1,
+      "hash": "h82"
+     },
+     "d083-202609.json": {
+      "count": 1,
+      "hash": "h83"
+     },
+     "d084-202608.json": {
+      "count": 1,
+      "hash": "h84"
+     },
+     "d085-202609.json": {
+      "count": 1,
+      "hash": "h85"
+     },
+     "d086-202608.json": {
+      "count": 1,
+      "hash": "h86"
+     },
+     "d087-202609.json": {
+      "count": 1,
+      "hash": "h87"
+     },
+     "d088-202608.json": {
+      "count": 1,
+      "hash": "h88"
+     },
+     "d089-202609.json": {
+      "count": 1,
+      "hash": "h89"
+     },
+     "d090-202608.json": {
+      "count": 1,
+      "hash": "h90"
+     },
+     "d091-202609.json": {
+      "count": 1,
+      "hash": "h91"
+     },
+     "d092-202608.json": {
+      "count": 1,
+      "hash": "h92"
+     },
+     "d093-202609.json": {
+      "count": 1,
+      "hash": "h93"
+     },
+     "d094-202608.json": {
+      "count": 1,
+      "hash": "h94"
+     },
+     "d095-202609.json": {
+      "count": 1,
+      "hash": "h95"
+     },
+     "d096-202608.json": {
+      "count": 1,
+      "hash": "h96"
+     },
+     "d097-202609.json": {
+      "count": 1,
+      "hash": "h97"
+     },
+     "d098-202608.json": {
+      "count": 1,
+      "hash": "h98"
+     },
+     "d099-202609.json": {
+      "count": 1,
+      "hash": "h99"
+     },
+     "d100-202608.json": {
+      "count": 1,
+      "hash": "h100"
+     },
+     "d101-202609.json": {
+      "count": 1,
+      "hash": "h101"
+     },
+     "d102-202608.json": {
+      "count": 1,
+      "hash": "h102"
+     },
+     "d103-202609.json": {
+      "count": 1,
+      "hash": "h103"
+     },
+     "d104-202608.json": {
+      "count": 1,
+      "hash": "h104"
+     },
+     "d105-202609.json": {
+      "count": 1,
+      "hash": "h105"
+     },
+     "d106-202608.json": {
+      "count": 1,
+      "hash": "h106"
+     },
+     "d107-202609.json": {
+      "count": 1,
+      "hash": "h107"
+     },
+     "d108-202608.json": {
+      "count": 1,
+      "hash": "h108"
+     },
+     "d109-202609.json": {
+      "count": 1,
+      "hash": "h109"
+     },
+     "d110-202608.json": {
+      "count": 1,
+      "hash": "h110"
+     },
+     "d111-202609.json": {
+      "count": 1,
+      "hash": "h111"
+     },
+     "d112-202608.json": {
+      "count": 1,
+      "hash": "h112"
+     },
+     "d113-202609.json": {
+      "count": 1,
+      "hash": "h113"
+     },
+     "d114-202608.json": {
+      "count": 1,
+      "hash": "h114"
+     },
+     "d115-202609.json": {
+      "count": 1,
+      "hash": "h115"
+     },
+     "d116-202608.json": {
+      "count": 1,
+      "hash": "h116"
+     },
+     "d117-202609.json": {
+      "count": 1,
+      "hash": "h117"
+     },
+     "d118-202608.json": {
+      "count": 1,
+      "hash": "h118"
+     },
+     "d119-202609.json": {
+      "count": 1,
+      "hash": "h119"
+     },
+     "d120-202608.json": {
+      "count": 1,
+      "hash": "h120"
+     },
+     "d121-202609.json": {
+      "count": 1,
+      "hash": "h121"
+     },
+     "d122-202608.json": {
+      "count": 1,
+      "hash": "h122"
+     },
+     "d123-202609.json": {
+      "count": 1,
+      "hash": "h123"
+     },
+     "d124-202608.json": {
+      "count": 1,
+      "hash": "h124"
+     },
+     "d125-202609.json": {
+      "count": 1,
+      "hash": "h125"
+     },
+     "d126-202608.json": {
+      "count": 1,
+      "hash": "h126"
+     },
+     "d127-202609.json": {
+      "count": 1,
+      "hash": "h127"
+     },
+     "d128-202608.json": {
+      "count": 1,
+      "hash": "h128"
+     },
+     "d129-202609.json": {
+      "count": 1,
+      "hash": "h129"
+     },
+     "d130-202608.json": {
+      "count": 1,
+      "hash": "h130"
+     },
+     "d131-202609.json": {
+      "count": 1,
+      "hash": "h131"
+     },
+     "d132-202608.json": {
+      "count": 1,
+      "hash": "h132"
+     },
+     "d133-202609.json": {
+      "count": 1,
+      "hash": "h133"
+     },
+     "d134-202608.json": {
+      "count": 1,
+      "hash": "h134"
+     },
+     "d135-202609.json": {
+      "count": 1,
+      "hash": "h135"
+     },
+     "d136-202608.json": {
+      "count": 1,
+      "hash": "h136"
+     },
+     "d137-202609.json": {
+      "count": 1,
+      "hash": "h137"
+     },
+     "d138-202608.json": {
+      "count": 1,
+      "hash": "h138"
+     },
+     "d139-202609.json": {
+      "count": 1,
+      "hash": "h139"
+     },
+     "d140-202608.json": {
+      "count": 1,
+      "hash": "h140"
+     },
+     "d141-202609.json": {
+      "count": 1,
+      "hash": "h141"
+     },
+     "d142-202608.json": {
+      "count": 1,
+      "hash": "h142"
+     },
+     "d143-202609.json": {
+      "count": 1,
+      "hash": "h143"
+     },
+     "d144-202608.json": {
+      "count": 1,
+      "hash": "h144"
+     },
+     "d145-202609.json": {
+      "count": 1,
+      "hash": "h145"
+     },
+     "d146-202608.json": {
+      "count": 1,
+      "hash": "h146"
+     },
+     "d147-202609.json": {
+      "count": 1,
+      "hash": "h147"
+     },
+     "d148-202608.json": {
+      "count": 1,
+      "hash": "h148"
+     },
+     "d149-202609.json": {
+      "count": 1,
+      "hash": "h149"
+     },
+     "d150-202608.json": {
+      "count": 1,
+      "hash": "h150"
+     },
+     "d151-202609.json": {
+      "count": 1,
+      "hash": "h151"
+     },
+     "d152-202608.json": {
+      "count": 1,
+      "hash": "h152"
+     },
+     "d153-202609.json": {
+      "count": 1,
+      "hash": "h153"
+     },
+     "d154-202608.json": {
+      "count": 1,
+      "hash": "h154"
+     },
+     "d155-202609.json": {
+      "count": 1,
+      "hash": "h155"
+     },
+     "d156-202608.json": {
+      "count": 1,
+      "hash": "h156"
+     },
+     "d157-202609.json": {
+      "count": 1,
+      "hash": "h157"
+     },
+     "d158-202608.json": {
+      "count": 1,
+      "hash": "h158"
+     },
+     "d159-202609.json": {
+      "count": 1,
+      "hash": "h159"
+     },
+     "d160-202608.json": {
+      "count": 1,
+      "hash": "h160"
+     },
+     "d161-202609.json": {
+      "count": 1,
+      "hash": "h161"
+     },
+     "d162-202608.json": {
+      "count": 1,
+      "hash": "h162"
+     },
+     "d163-202609.json": {
+      "count": 1,
+      "hash": "h163"
+     },
+     "d164-202608.json": {
+      "count": 1,
+      "hash": "h164"
+     },
+     "d165-202609.json": {
+      "count": 1,
+      "hash": "h165"
+     },
+     "d166-202608.json": {
+      "count": 1,
+      "hash": "h166"
+     },
+     "d167-202609.json": {
+      "count": 1,
+      "hash": "h167"
+     },
+     "d168-202608.json": {
+      "count": 1,
+      "hash": "h168"
+     },
+     "d169-202609.json": {
+      "count": 1,
+      "hash": "h169"
+     },
+     "d170-202608.json": {
+      "count": 1,
+      "hash": "h170"
+     },
+     "d171-202609.json": {
+      "count": 1,
+      "hash": "h171"
+     },
+     "d172-202608.json": {
+      "count": 1,
+      "hash": "h172"
+     },
+     "d173-202609.json": {
+      "count": 1,
+      "hash": "h173"
+     },
+     "d174-202608.json": {
+      "count": 1,
+      "hash": "h174"
+     },
+     "d175-202609.json": {
+      "count": 1,
+      "hash": "h175"
+     },
+     "d176-202608.json": {
+      "count": 1,
+      "hash": "h176"
+     },
+     "d177-202609.json": {
+      "count": 1,
+      "hash": "h177"
+     },
+     "d178-202608.json": {
+      "count": 1,
+      "hash": "h178"
+     },
+     "d179-202609.json": {
+      "count": 1,
+      "hash": "h179"
+     },
+     "d180-202608.json": {
+      "count": 1,
+      "hash": "h180"
+     },
+     "d181-202609.json": {
+      "count": 1,
+      "hash": "h181"
+     },
+     "d182-202608.json": {
+      "count": 1,
+      "hash": "h182"
+     },
+     "d183-202609.json": {
+      "count": 1,
+      "hash": "h183"
+     },
+     "d184-202608.json": {
+      "count": 1,
+      "hash": "h184"
+     },
+     "d185-202609.json": {
+      "count": 1,
+      "hash": "h185"
+     },
+     "d186-202608.json": {
+      "count": 1,
+      "hash": "h186"
+     },
+     "d187-202609.json": {
+      "count": 1,
+      "hash": "h187"
+     },
+     "d188-202608.json": {
+      "count": 1,
+      "hash": "h188"
+     },
+     "d189-202609.json": {
+      "count": 1,
+      "hash": "h189"
+     },
+     "d190-202608.json": {
+      "count": 1,
+      "hash": "h190"
+     },
+     "d191-202609.json": {
+      "count": 1,
+      "hash": "h191"
+     },
+     "d192-202608.json": {
+      "count": 1,
+      "hash": "h192"
+     },
+     "d193-202609.json": {
+      "count": 1,
+      "hash": "h193"
+     },
+     "d194-202608.json": {
+      "count": 1,
+      "hash": "h194"
+     },
+     "d195-202609.json": {
+      "count": 1,
+      "hash": "h195"
+     },
+     "d196-202608.json": {
+      "count": 1,
+      "hash": "h196"
+     },
+     "d197-202609.json": {
+      "count": 1,
+      "hash": "h197"
+     },
+     "d198-202608.json": {
+      "count": 1,
+      "hash": "h198"
+     },
+     "d199-202609.json": {
+      "count": 1,
+      "hash": "h199"
+     },
+     "d200-202608.json": {
+      "count": 1,
+      "hash": "h200"
+     },
+     "d201-202609.json": {
+      "count": 1,
+      "hash": "h201"
+     },
+     "d202-202608.json": {
+      "count": 1,
+      "hash": "h202"
+     },
+     "d203-202609.json": {
+      "count": 1,
+      "hash": "h203"
+     },
+     "d204-202608.json": {
+      "count": 1,
+      "hash": "h204"
+     },
+     "d205-202609.json": {
+      "count": 1,
+      "hash": "h205"
+     },
+     "d206-202608.json": {
+      "count": 1,
+      "hash": "h206"
+     },
+     "d207-202609.json": {
+      "count": 1,
+      "hash": "h207"
+     },
+     "d208-202608.json": {
+      "count": 1,
+      "hash": "h208"
+     },
+     "d209-202609.json": {
+      "count": 1,
+      "hash": "h209"
+     },
+     "d210-202608.json": {
+      "count": 1,
+      "hash": "h210"
+     },
+     "d211-202609.json": {
+      "count": 1,
+      "hash": "h211"
+     },
+     "d212-202608.json": {
+      "count": 1,
+      "hash": "h212"
+     },
+     "d213-202609.json": {
+      "count": 1,
+      "hash": "h213"
+     },
+     "d214-202608.json": {
+      "count": 1,
+      "hash": "h214"
+     },
+     "d215-202609.json": {
+      "count": 1,
+      "hash": "h215"
+     },
+     "d216-202608.json": {
+      "count": 1,
+      "hash": "h216"
+     },
+     "d217-202609.json": {
+      "count": 1,
+      "hash": "h217"
+     },
+     "d218-202608.json": {
+      "count": 1,
+      "hash": "h218"
+     },
+     "d219-202609.json": {
+      "count": 1,
+      "hash": "h219"
+     },
+     "d220-202608.json": {
+      "count": 1,
+      "hash": "h220"
+     },
+     "d221-202609.json": {
+      "count": 1,
+      "hash": "h221"
+     },
+     "d222-202608.json": {
+      "count": 1,
+      "hash": "h222"
+     },
+     "d223-202609.json": {
+      "count": 1,
+      "hash": "h223"
+     },
+     "d224-202608.json": {
+      "count": 1,
+      "hash": "h224"
+     },
+     "d225-202609.json": {
+      "count": 1,
+      "hash": "h225"
+     },
+     "d226-202608.json": {
+      "count": 1,
+      "hash": "h226"
+     },
+     "d227-202609.json": {
+      "count": 1,
+      "hash": "h227"
+     },
+     "d228-202608.json": {
+      "count": 1,
+      "hash": "h228"
+     },
+     "d229-202609.json": {
+      "count": 1,
+      "hash": "h229"
+     },
+     "d230-202608.json": {
+      "count": 1,
+      "hash": "h230"
+     },
+     "d231-202609.json": {
+      "count": 1,
+      "hash": "h231"
+     },
+     "d232-202608.json": {
+      "count": 1,
+      "hash": "h232"
+     },
+     "d233-202609.json": {
+      "count": 1,
+      "hash": "h233"
+     },
+     "d234-202608.json": {
+      "count": 1,
+      "hash": "h234"
+     },
+     "d235-202609.json": {
+      "count": 1,
+      "hash": "h235"
+     },
+     "d236-202608.json": {
+      "count": 1,
+      "hash": "h236"
+     },
+     "d237-202609.json": {
+      "count": 1,
+      "hash": "h237"
+     },
+     "d238-202608.json": {
+      "count": 1,
+      "hash": "h238"
+     },
+     "d239-202609.json": {
+      "count": 1,
+      "hash": "h239"
+     },
+     "d240-202608.json": {
+      "count": 1,
+      "hash": "h240"
+     },
+     "d241-202609.json": {
+      "count": 1,
+      "hash": "h241"
+     },
+     "d242-202608.json": {
+      "count": 1,
+      "hash": "h242"
+     },
+     "d243-202609.json": {
+      "count": 1,
+      "hash": "h243"
+     },
+     "d244-202608.json": {
+      "count": 1,
+      "hash": "h244"
+     },
+     "d245-202609.json": {
+      "count": 1,
+      "hash": "h245"
+     },
+     "d246-202608.json": {
+      "count": 1,
+      "hash": "h246"
+     },
+     "d247-202609.json": {
+      "count": 1,
+      "hash": "h247"
+     },
+     "d248-202608.json": {
+      "count": 1,
+      "hash": "h248"
+     },
+     "d249-202609.json": {
+      "count": 1,
+      "hash": "h249"
+     }
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 1790251199900,
+     "evtFullPushAt": 1790251200000,
+     "evtFileCounts": {
+      "d001-202609.json": {
+       "count": 1,
+       "hash": "h1"
+      },
+      "d003-202609.json": {
+       "count": 1,
+       "hash": "h3"
+      },
+      "d005-202609.json": {
+       "count": 1,
+       "hash": "h5"
+      },
+      "d007-202609.json": {
+       "count": 1,
+       "hash": "h7"
+      },
+      "d009-202609.json": {
+       "count": 1,
+       "hash": "h9"
+      },
+      "d011-202609.json": {
+       "count": 1,
+       "hash": "h11"
+      },
+      "d013-202609.json": {
+       "count": 1,
+       "hash": "h13"
+      },
+      "d015-202609.json": {
+       "count": 1,
+       "hash": "h15"
+      },
+      "d017-202609.json": {
+       "count": 1,
+       "hash": "h17"
+      },
+      "d019-202609.json": {
+       "count": 1,
+       "hash": "h19"
+      },
+      "d021-202609.json": {
+       "count": 1,
+       "hash": "h21"
+      },
+      "d022-202608.json": {
+       "count": 1,
+       "hash": "h22"
+      },
+      "d023-202609.json": {
+       "count": 1,
+       "hash": "h23"
+      },
+      "d024-202608.json": {
+       "count": 1,
+       "hash": "h24"
+      },
+      "d025-202609.json": {
+       "count": 1,
+       "hash": "h25"
+      },
+      "d026-202608.json": {
+       "count": 1,
+       "hash": "h26"
+      },
+      "d027-202609.json": {
+       "count": 1,
+       "hash": "h27"
+      },
+      "d028-202608.json": {
+       "count": 1,
+       "hash": "h28"
+      },
+      "d029-202609.json": {
+       "count": 1,
+       "hash": "h29"
+      },
+      "d030-202608.json": {
+       "count": 1,
+       "hash": "h30"
+      },
+      "d031-202609.json": {
+       "count": 1,
+       "hash": "h31"
+      },
+      "d032-202608.json": {
+       "count": 1,
+       "hash": "h32"
+      },
+      "d033-202609.json": {
+       "count": 1,
+       "hash": "h33"
+      },
+      "d034-202608.json": {
+       "count": 1,
+       "hash": "h34"
+      },
+      "d035-202609.json": {
+       "count": 1,
+       "hash": "h35"
+      },
+      "d036-202608.json": {
+       "count": 1,
+       "hash": "h36"
+      },
+      "d037-202609.json": {
+       "count": 1,
+       "hash": "h37"
+      },
+      "d038-202608.json": {
+       "count": 1,
+       "hash": "h38"
+      },
+      "d039-202609.json": {
+       "count": 1,
+       "hash": "h39"
+      },
+      "d040-202608.json": {
+       "count": 1,
+       "hash": "h40"
+      },
+      "d041-202609.json": {
+       "count": 1,
+       "hash": "h41"
+      },
+      "d042-202608.json": {
+       "count": 1,
+       "hash": "h42"
+      },
+      "d043-202609.json": {
+       "count": 1,
+       "hash": "h43"
+      },
+      "d044-202608.json": {
+       "count": 1,
+       "hash": "h44"
+      },
+      "d045-202609.json": {
+       "count": 1,
+       "hash": "h45"
+      },
+      "d046-202608.json": {
+       "count": 1,
+       "hash": "h46"
+      },
+      "d047-202609.json": {
+       "count": 1,
+       "hash": "h47"
+      },
+      "d048-202608.json": {
+       "count": 1,
+       "hash": "h48"
+      },
+      "d049-202609.json": {
+       "count": 1,
+       "hash": "h49"
+      },
+      "d050-202608.json": {
+       "count": 1,
+       "hash": "h50"
+      },
+      "d051-202609.json": {
+       "count": 1,
+       "hash": "h51"
+      },
+      "d052-202608.json": {
+       "count": 1,
+       "hash": "h52"
+      },
+      "d053-202609.json": {
+       "count": 1,
+       "hash": "h53"
+      },
+      "d054-202608.json": {
+       "count": 1,
+       "hash": "h54"
+      },
+      "d055-202609.json": {
+       "count": 1,
+       "hash": "h55"
+      },
+      "d056-202608.json": {
+       "count": 1,
+       "hash": "h56"
+      },
+      "d057-202609.json": {
+       "count": 1,
+       "hash": "h57"
+      },
+      "d058-202608.json": {
+       "count": 1,
+       "hash": "h58"
+      },
+      "d059-202609.json": {
+       "count": 1,
+       "hash": "h59"
+      },
+      "d060-202608.json": {
+       "count": 1,
+       "hash": "h60"
+      },
+      "d061-202609.json": {
+       "count": 1,
+       "hash": "h61"
+      },
+      "d062-202608.json": {
+       "count": 1,
+       "hash": "h62"
+      },
+      "d063-202609.json": {
+       "count": 1,
+       "hash": "h63"
+      },
+      "d064-202608.json": {
+       "count": 1,
+       "hash": "h64"
+      },
+      "d065-202609.json": {
+       "count": 1,
+       "hash": "h65"
+      },
+      "d066-202608.json": {
+       "count": 1,
+       "hash": "h66"
+      },
+      "d067-202609.json": {
+       "count": 1,
+       "hash": "h67"
+      },
+      "d068-202608.json": {
+       "count": 1,
+       "hash": "h68"
+      },
+      "d069-202609.json": {
+       "count": 1,
+       "hash": "h69"
+      },
+      "d070-202608.json": {
+       "count": 1,
+       "hash": "h70"
+      },
+      "d071-202609.json": {
+       "count": 1,
+       "hash": "h71"
+      },
+      "d072-202608.json": {
+       "count": 1,
+       "hash": "h72"
+      },
+      "d073-202609.json": {
+       "count": 1,
+       "hash": "h73"
+      },
+      "d074-202608.json": {
+       "count": 1,
+       "hash": "h74"
+      },
+      "d075-202609.json": {
+       "count": 1,
+       "hash": "h75"
+      },
+      "d076-202608.json": {
+       "count": 1,
+       "hash": "h76"
+      },
+      "d077-202609.json": {
+       "count": 1,
+       "hash": "h77"
+      },
+      "d078-202608.json": {
+       "count": 1,
+       "hash": "h78"
+      },
+      "d079-202609.json": {
+       "count": 1,
+       "hash": "h79"
+      },
+      "d080-202608.json": {
+       "count": 1,
+       "hash": "h80"
+      },
+      "d081-202609.json": {
+       "count": 1,
+       "hash": "h81"
+      },
+      "d082-202608.json": {
+       "count": 1,
+       "hash": "h82"
+      },
+      "d083-202609.json": {
+       "count": 1,
+       "hash": "h83"
+      },
+      "d084-202608.json": {
+       "count": 1,
+       "hash": "h84"
+      },
+      "d085-202609.json": {
+       "count": 1,
+       "hash": "h85"
+      },
+      "d086-202608.json": {
+       "count": 1,
+       "hash": "h86"
+      },
+      "d087-202609.json": {
+       "count": 1,
+       "hash": "h87"
+      },
+      "d088-202608.json": {
+       "count": 1,
+       "hash": "h88"
+      },
+      "d089-202609.json": {
+       "count": 1,
+       "hash": "h89"
+      },
+      "d090-202608.json": {
+       "count": 1,
+       "hash": "h90"
+      },
+      "d091-202609.json": {
+       "count": 1,
+       "hash": "h91"
+      },
+      "d092-202608.json": {
+       "count": 1,
+       "hash": "h92"
+      },
+      "d093-202609.json": {
+       "count": 1,
+       "hash": "h93"
+      },
+      "d094-202608.json": {
+       "count": 1,
+       "hash": "h94"
+      },
+      "d095-202609.json": {
+       "count": 1,
+       "hash": "h95"
+      },
+      "d096-202608.json": {
+       "count": 1,
+       "hash": "h96"
+      },
+      "d097-202609.json": {
+       "count": 1,
+       "hash": "h97"
+      },
+      "d098-202608.json": {
+       "count": 1,
+       "hash": "h98"
+      },
+      "d099-202609.json": {
+       "count": 1,
+       "hash": "h99"
+      },
+      "d100-202608.json": {
+       "count": 1,
+       "hash": "h100"
+      },
+      "d101-202609.json": {
+       "count": 1,
+       "hash": "h101"
+      },
+      "d102-202608.json": {
+       "count": 1,
+       "hash": "h102"
+      },
+      "d103-202609.json": {
+       "count": 1,
+       "hash": "h103"
+      },
+      "d104-202608.json": {
+       "count": 1,
+       "hash": "h104"
+      },
+      "d105-202609.json": {
+       "count": 1,
+       "hash": "h105"
+      },
+      "d106-202608.json": {
+       "count": 1,
+       "hash": "h106"
+      },
+      "d107-202609.json": {
+       "count": 1,
+       "hash": "h107"
+      },
+      "d108-202608.json": {
+       "count": 1,
+       "hash": "h108"
+      },
+      "d109-202609.json": {
+       "count": 1,
+       "hash": "h109"
+      },
+      "d110-202608.json": {
+       "count": 1,
+       "hash": "h110"
+      },
+      "d111-202609.json": {
+       "count": 1,
+       "hash": "h111"
+      },
+      "d112-202608.json": {
+       "count": 1,
+       "hash": "h112"
+      },
+      "d113-202609.json": {
+       "count": 1,
+       "hash": "h113"
+      },
+      "d114-202608.json": {
+       "count": 1,
+       "hash": "h114"
+      },
+      "d115-202609.json": {
+       "count": 1,
+       "hash": "h115"
+      },
+      "d116-202608.json": {
+       "count": 1,
+       "hash": "h116"
+      },
+      "d117-202609.json": {
+       "count": 1,
+       "hash": "h117"
+      },
+      "d118-202608.json": {
+       "count": 1,
+       "hash": "h118"
+      },
+      "d119-202609.json": {
+       "count": 1,
+       "hash": "h119"
+      },
+      "d120-202608.json": {
+       "count": 1,
+       "hash": "h120"
+      },
+      "d121-202609.json": {
+       "count": 1,
+       "hash": "h121"
+      },
+      "d122-202608.json": {
+       "count": 1,
+       "hash": "h122"
+      },
+      "d123-202609.json": {
+       "count": 1,
+       "hash": "h123"
+      },
+      "d124-202608.json": {
+       "count": 1,
+       "hash": "h124"
+      },
+      "d125-202609.json": {
+       "count": 1,
+       "hash": "h125"
+      },
+      "d126-202608.json": {
+       "count": 1,
+       "hash": "h126"
+      },
+      "d127-202609.json": {
+       "count": 1,
+       "hash": "h127"
+      },
+      "d128-202608.json": {
+       "count": 1,
+       "hash": "h128"
+      },
+      "d129-202609.json": {
+       "count": 1,
+       "hash": "h129"
+      },
+      "d130-202608.json": {
+       "count": 1,
+       "hash": "h130"
+      },
+      "d131-202609.json": {
+       "count": 1,
+       "hash": "h131"
+      },
+      "d132-202608.json": {
+       "count": 1,
+       "hash": "h132"
+      },
+      "d133-202609.json": {
+       "count": 1,
+       "hash": "h133"
+      },
+      "d134-202608.json": {
+       "count": 1,
+       "hash": "h134"
+      },
+      "d135-202609.json": {
+       "count": 1,
+       "hash": "h135"
+      },
+      "d136-202608.json": {
+       "count": 1,
+       "hash": "h136"
+      },
+      "d137-202609.json": {
+       "count": 1,
+       "hash": "h137"
+      },
+      "d138-202608.json": {
+       "count": 1,
+       "hash": "h138"
+      },
+      "d139-202609.json": {
+       "count": 1,
+       "hash": "h139"
+      },
+      "d140-202608.json": {
+       "count": 1,
+       "hash": "h140"
+      },
+      "d141-202609.json": {
+       "count": 1,
+       "hash": "h141"
+      },
+      "d142-202608.json": {
+       "count": 1,
+       "hash": "h142"
+      },
+      "d143-202609.json": {
+       "count": 1,
+       "hash": "h143"
+      },
+      "d144-202608.json": {
+       "count": 1,
+       "hash": "h144"
+      },
+      "d145-202609.json": {
+       "count": 1,
+       "hash": "h145"
+      },
+      "d146-202608.json": {
+       "count": 1,
+       "hash": "h146"
+      },
+      "d147-202609.json": {
+       "count": 1,
+       "hash": "h147"
+      },
+      "d148-202608.json": {
+       "count": 1,
+       "hash": "h148"
+      },
+      "d149-202609.json": {
+       "count": 1,
+       "hash": "h149"
+      },
+      "d150-202608.json": {
+       "count": 1,
+       "hash": "h150"
+      },
+      "d151-202609.json": {
+       "count": 1,
+       "hash": "h151"
+      },
+      "d152-202608.json": {
+       "count": 1,
+       "hash": "h152"
+      },
+      "d153-202609.json": {
+       "count": 1,
+       "hash": "h153"
+      },
+      "d154-202608.json": {
+       "count": 1,
+       "hash": "h154"
+      },
+      "d155-202609.json": {
+       "count": 1,
+       "hash": "h155"
+      },
+      "d156-202608.json": {
+       "count": 1,
+       "hash": "h156"
+      },
+      "d157-202609.json": {
+       "count": 1,
+       "hash": "h157"
+      },
+      "d158-202608.json": {
+       "count": 1,
+       "hash": "h158"
+      },
+      "d159-202609.json": {
+       "count": 1,
+       "hash": "h159"
+      },
+      "d160-202608.json": {
+       "count": 1,
+       "hash": "h160"
+      },
+      "d161-202609.json": {
+       "count": 1,
+       "hash": "h161"
+      },
+      "d162-202608.json": {
+       "count": 1,
+       "hash": "h162"
+      },
+      "d163-202609.json": {
+       "count": 1,
+       "hash": "h163"
+      },
+      "d164-202608.json": {
+       "count": 1,
+       "hash": "h164"
+      },
+      "d165-202609.json": {
+       "count": 1,
+       "hash": "h165"
+      },
+      "d166-202608.json": {
+       "count": 1,
+       "hash": "h166"
+      },
+      "d167-202609.json": {
+       "count": 1,
+       "hash": "h167"
+      },
+      "d168-202608.json": {
+       "count": 1,
+       "hash": "h168"
+      },
+      "d169-202609.json": {
+       "count": 1,
+       "hash": "h169"
+      },
+      "d170-202608.json": {
+       "count": 1,
+       "hash": "h170"
+      },
+      "d171-202609.json": {
+       "count": 1,
+       "hash": "h171"
+      },
+      "d172-202608.json": {
+       "count": 1,
+       "hash": "h172"
+      },
+      "d173-202609.json": {
+       "count": 1,
+       "hash": "h173"
+      },
+      "d174-202608.json": {
+       "count": 1,
+       "hash": "h174"
+      },
+      "d175-202609.json": {
+       "count": 1,
+       "hash": "h175"
+      },
+      "d176-202608.json": {
+       "count": 1,
+       "hash": "h176"
+      },
+      "d177-202609.json": {
+       "count": 1,
+       "hash": "h177"
+      },
+      "d178-202608.json": {
+       "count": 1,
+       "hash": "h178"
+      },
+      "d179-202609.json": {
+       "count": 1,
+       "hash": "h179"
+      },
+      "d180-202608.json": {
+       "count": 1,
+       "hash": "h180"
+      },
+      "d181-202609.json": {
+       "count": 1,
+       "hash": "h181"
+      },
+      "d182-202608.json": {
+       "count": 1,
+       "hash": "h182"
+      },
+      "d183-202609.json": {
+       "count": 1,
+       "hash": "h183"
+      },
+      "d184-202608.json": {
+       "count": 1,
+       "hash": "h184"
+      },
+      "d185-202609.json": {
+       "count": 1,
+       "hash": "h185"
+      },
+      "d186-202608.json": {
+       "count": 1,
+       "hash": "h186"
+      },
+      "d187-202609.json": {
+       "count": 1,
+       "hash": "h187"
+      },
+      "d188-202608.json": {
+       "count": 1,
+       "hash": "h188"
+      },
+      "d189-202609.json": {
+       "count": 1,
+       "hash": "h189"
+      },
+      "d190-202608.json": {
+       "count": 1,
+       "hash": "h190"
+      },
+      "d191-202609.json": {
+       "count": 1,
+       "hash": "h191"
+      },
+      "d192-202608.json": {
+       "count": 1,
+       "hash": "h192"
+      },
+      "d193-202609.json": {
+       "count": 1,
+       "hash": "h193"
+      },
+      "d194-202608.json": {
+       "count": 1,
+       "hash": "h194"
+      },
+      "d195-202609.json": {
+       "count": 1,
+       "hash": "h195"
+      },
+      "d196-202608.json": {
+       "count": 1,
+       "hash": "h196"
+      },
+      "d197-202609.json": {
+       "count": 1,
+       "hash": "h197"
+      },
+      "d198-202608.json": {
+       "count": 1,
+       "hash": "h198"
+      },
+      "d199-202609.json": {
+       "count": 1,
+       "hash": "h199"
+      },
+      "d200-202608.json": {
+       "count": 1,
+       "hash": "h200"
+      },
+      "d201-202609.json": {
+       "count": 1,
+       "hash": "h201"
+      },
+      "d202-202608.json": {
+       "count": 1,
+       "hash": "h202"
+      },
+      "d203-202609.json": {
+       "count": 1,
+       "hash": "h203"
+      },
+      "d204-202608.json": {
+       "count": 1,
+       "hash": "h204"
+      },
+      "d205-202609.json": {
+       "count": 1,
+       "hash": "h205"
+      },
+      "d206-202608.json": {
+       "count": 1,
+       "hash": "h206"
+      },
+      "d207-202609.json": {
+       "count": 1,
+       "hash": "h207"
+      },
+      "d208-202608.json": {
+       "count": 1,
+       "hash": "h208"
+      },
+      "d209-202609.json": {
+       "count": 1,
+       "hash": "h209"
+      },
+      "d210-202608.json": {
+       "count": 1,
+       "hash": "h210"
+      },
+      "d211-202609.json": {
+       "count": 1,
+       "hash": "h211"
+      },
+      "d212-202608.json": {
+       "count": 1,
+       "hash": "h212"
+      },
+      "d213-202609.json": {
+       "count": 1,
+       "hash": "h213"
+      },
+      "d214-202608.json": {
+       "count": 1,
+       "hash": "h214"
+      },
+      "d215-202609.json": {
+       "count": 1,
+       "hash": "h215"
+      },
+      "d216-202608.json": {
+       "count": 1,
+       "hash": "h216"
+      },
+      "d217-202609.json": {
+       "count": 1,
+       "hash": "h217"
+      },
+      "d218-202608.json": {
+       "count": 1,
+       "hash": "h218"
+      },
+      "d219-202609.json": {
+       "count": 1,
+       "hash": "h219"
+      },
+      "d220-202608.json": {
+       "count": 1,
+       "hash": "h220"
+      },
+      "d221-202609.json": {
+       "count": 1,
+       "hash": "h221"
+      },
+      "d222-202608.json": {
+       "count": 1,
+       "hash": "h222"
+      },
+      "d223-202609.json": {
+       "count": 1,
+       "hash": "h223"
+      },
+      "d224-202608.json": {
+       "count": 1,
+       "hash": "h224"
+      },
+      "d225-202609.json": {
+       "count": 1,
+       "hash": "h225"
+      },
+      "d226-202608.json": {
+       "count": 1,
+       "hash": "h226"
+      },
+      "d227-202609.json": {
+       "count": 1,
+       "hash": "h227"
+      },
+      "d228-202608.json": {
+       "count": 1,
+       "hash": "h228"
+      },
+      "d229-202609.json": {
+       "count": 1,
+       "hash": "h229"
+      },
+      "d230-202608.json": {
+       "count": 1,
+       "hash": "h230"
+      },
+      "d231-202609.json": {
+       "count": 1,
+       "hash": "h231"
+      },
+      "d232-202608.json": {
+       "count": 1,
+       "hash": "h232"
+      },
+      "d233-202609.json": {
+       "count": 1,
+       "hash": "h233"
+      },
+      "d234-202608.json": {
+       "count": 1,
+       "hash": "h234"
+      },
+      "d235-202609.json": {
+       "count": 1,
+       "hash": "h235"
+      },
+      "d236-202608.json": {
+       "count": 1,
+       "hash": "h236"
+      },
+      "d237-202609.json": {
+       "count": 1,
+       "hash": "h237"
+      },
+      "d238-202608.json": {
+       "count": 1,
+       "hash": "h238"
+      },
+      "d239-202609.json": {
+       "count": 1,
+       "hash": "h239"
+      },
+      "d240-202608.json": {
+       "count": 1,
+       "hash": "h240"
+      },
+      "d241-202609.json": {
+       "count": 1,
+       "hash": "h241"
+      },
+      "d242-202608.json": {
+       "count": 1,
+       "hash": "h242"
+      },
+      "d243-202609.json": {
+       "count": 1,
+       "hash": "h243"
+      },
+      "d244-202608.json": {
+       "count": 1,
+       "hash": "h244"
+      },
+      "d245-202609.json": {
+       "count": 1,
+       "hash": "h245"
+      },
+      "d246-202608.json": {
+       "count": 1,
+       "hash": "h246"
+      },
+      "d247-202609.json": {
+       "count": 1,
+       "hash": "h247"
+      },
+      "d248-202608.json": {
+       "count": 1,
+       "hash": "h248"
+      },
+      "d249-202609.json": {
+       "count": 1,
+       "hash": "h249"
+      },
+      "dev-me-202609.json": {
+       "count": 1,
+       "hash": "a6f7ef47ee8dc84a",
+       "uids": [
+        "c-1"
+       ]
+      }
+     },
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [
+     {
+      "path": "/events/dev-me-202609.json",
+      "records": [
+       {
+        "ts": 1790251199900,
+        "uid": "c-1",
+        "dev": "dev-me",
+        "kind": "habitTap"
+       }
+      ]
+     }
+    ],
+    "deletes": [],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 1,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_upload_fails_aborts",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1786795200000,
+     "uid": "dev-me-a",
+     "dev": "dev-me",
+     "kind": "habitTap",
+     "taskId": "t1",
+     "dir": 1
+    },
+    {
+     "ts": 1790251199000,
+     "uid": "dev-me-b",
+     "dev": "dev-me",
+     "kind": "habitTap",
+     "taskId": "t1",
+     "dir": -1,
+     "reps": 2
+    },
+    {
+     "ts": 1790251199500,
+     "uid": "dev-me-c",
+     "dev": "dev-me",
+     "kind": "complete",
+     "taskId": "t2",
+     "detail": "x"
+    }
+   ],
+   "uploadFails": true,
+   "expect": {
+    "threw": "upload failed: 500",
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 1,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "push_poisoned_watermark",
+   "op": "push",
+   "records": [
+    {
+     "ts": 1790510400000,
+     "uid": "p-1",
+     "dev": "dev-me",
+     "kind": "habitTap"
+    }
+   ],
+   "cfg": {
+    "evtLastUploadTs": 1790424000000
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 1790251200000,
+     "evtFullPushAt": 1790251200000,
+     "evtFileCounts": {
+      "dev-me-202609.json": {
+       "count": 1,
+       "hash": "1dee6e3ec67dc803",
+       "uids": [
+        "p-1"
+       ]
+      }
+     },
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [
+     {
+      "path": "/events/dev-me-202609.json",
+      "records": [
+       {
+        "ts": 1790510400000,
+        "uid": "p-1",
+        "dev": "dev-me",
+        "kind": "habitTap"
+       }
+      ]
+     }
+    ],
+    "deletes": [],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 1,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "pull_basic",
+   "op": "pull",
+   "entries": [
+    {
+     "name": "dev-other-202609.json",
+     "rev": "r1"
+    }
+   ],
+   "downloads": {
+    "dev-other-202609.json": {
+     "text": "[{\"ts\":1790251195000,\"uid\":\"o-1\",\"dev\":\"dev-other\",\"kind\":\"habitTap\",\"taskId\":\"t1\",\"dir\":1},{\"ts\":1790251196000,\"uid\":\"o-2\",\"dev\":\"dev-other\",\"kind\":\"complete\",\"taskId\":\"t2\"}]",
+     "rev": "r1"
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {
+      "dev-other-202609.json": "r1"
+     },
+     "evtBadRevs": {},
+     "evtLastPullAt": 1790251200000,
+     "evtFullScanAt": 1790251200000
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [
+     {
+      "ts": 1790251195000,
+      "uid": "o-1",
+      "dev": "dev-other",
+      "kind": "habitTap",
+      "taskId": "t1",
+      "dir": 1
+     },
+     {
+      "ts": 1790251196000,
+      "uid": "o-2",
+      "dev": "dev-other",
+      "kind": "complete",
+      "taskId": "t2"
+     }
+    ],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPullOk",
+      "name": "dev-other-202609.json",
+      "inserted": 2
+     }
+    ],
+    "calls": {
+     "list": 1,
+     "download": 1,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "pull_throttled",
+   "op": "pull",
+   "cfg": {
+    "evtLastPullAt": 1790251199000
+   },
+   "entries": [
+    {
+     "name": "dev-other-202609.json",
+     "rev": "r1"
+    }
+   ],
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 1790251199000,
+     "evtFullScanAt": 0
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPullSkip",
+      "name": null,
+      "reason": "throttled"
+     }
+    ],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "pull_throttle_boundary_60s",
+   "op": "pull",
+   "cfg": {
+    "evtLastPullAt": 1790251140000
+   },
+   "entries": [
+    {
+     "name": "dev-other-202609.json",
+     "rev": "r1"
+    }
+   ],
+   "downloads": {
+    "dev-other-202609.json": {
+     "text": "[{\"ts\":1790251195000,\"uid\":\"o-1\",\"dev\":\"dev-other\",\"kind\":\"habitTap\",\"taskId\":\"t1\",\"dir\":1},{\"ts\":1790251196000,\"uid\":\"o-2\",\"dev\":\"dev-other\",\"kind\":\"complete\",\"taskId\":\"t2\"}]",
+     "rev": "r1"
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {
+      "dev-other-202609.json": "r1"
+     },
+     "evtBadRevs": {},
+     "evtLastPullAt": 1790251200000,
+     "evtFullScanAt": 1790251200000
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [
+     {
+      "ts": 1790251195000,
+      "uid": "o-1",
+      "dev": "dev-other",
+      "kind": "habitTap",
+      "taskId": "t1",
+      "dir": 1
+     },
+     {
+      "ts": 1790251196000,
+      "uid": "o-2",
+      "dev": "dev-other",
+      "kind": "complete",
+      "taskId": "t2"
+     }
+    ],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPullOk",
+      "name": "dev-other-202609.json",
+      "inserted": 2
+     }
+    ],
+    "calls": {
+     "list": 1,
+     "download": 1,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "pull_rev_unchanged",
+   "op": "pull",
+   "cfg": {
+    "evtFileRevs": {
+     "dev-other-202609.json": "r1"
+    },
+    "evtFullScanAt": 1790247600000
+   },
+   "entries": [
+    {
+     "name": "dev-other-202609.json",
+     "rev": "r1"
+    }
+   ],
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {
+      "dev-other-202609.json": "r1"
+     },
+     "evtBadRevs": {},
+     "evtLastPullAt": 1790251200000,
+     "evtFullScanAt": 1790247600000
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPullSkip",
+      "name": "dev-other-202609.json",
+      "reason": "revUnchanged"
+     }
+    ],
+    "calls": {
+     "list": 1,
+     "download": 0,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "pull_full_scan_after_24h",
+   "op": "pull",
+   "cfg": {
+    "evtFileRevs": {
+     "dev-other-202609.json": "r1"
+    },
+    "evtFullScanAt": 1790164740000
+   },
+   "entries": [
+    {
+     "name": "dev-other-202609.json",
+     "rev": "r1"
+    }
+   ],
+   "downloads": {
+    "dev-other-202609.json": {
+     "text": "[{\"ts\":1790251195000,\"uid\":\"o-1\",\"dev\":\"dev-other\",\"kind\":\"habitTap\",\"taskId\":\"t1\",\"dir\":1},{\"ts\":1790251196000,\"uid\":\"o-2\",\"dev\":\"dev-other\",\"kind\":\"complete\",\"taskId\":\"t2\"}]",
+     "rev": "r1"
+    }
+   },
+   "records": [
+    {
+     "ts": 1790251195000,
+     "uid": "o-1",
+     "dev": "dev-other",
+     "kind": "habitTap",
+     "taskId": "t1",
+     "dir": 1
+    }
+   ],
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {
+      "dev-other-202609.json": "r1"
+     },
+     "evtBadRevs": {},
+     "evtLastPullAt": 1790251200000,
+     "evtFullScanAt": 1790251200000
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [
+     {
+      "ts": 1790251196000,
+      "uid": "o-2",
+      "dev": "dev-other",
+      "kind": "complete",
+      "taskId": "t2"
+     }
+    ],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtFullScan",
+      "entries": 1
+     },
+     {
+      "t": 1790251200000,
+      "kind": "evtPullOk",
+      "name": "dev-other-202609.json",
+      "inserted": 1
+     }
+    ],
+    "calls": {
+     "list": 1,
+     "download": 1,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "pull_bootstrap_full_scan_clock",
+   "op": "pull",
+   "cfg": {
+    "evtFileRevs": {
+     "dev-other-202609.json": "r1"
+    }
+   },
+   "entries": [
+    {
+     "name": "dev-other-202609.json",
+     "rev": "r1"
+    }
+   ],
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {
+      "dev-other-202609.json": "r1"
+     },
+     "evtBadRevs": {},
+     "evtLastPullAt": 1790251200000,
+     "evtFullScanAt": 1790251200000
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPullSkip",
+      "name": "dev-other-202609.json",
+      "reason": "revUnchanged"
+     }
+    ],
+    "calls": {
+     "list": 1,
+     "download": 0,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "pull_force",
+   "op": "pull",
+   "cfg": {
+    "evtFileRevs": {
+     "dev-other-202609.json": "r1"
+    },
+    "evtLastPullAt": 1790251199000,
+    "evtFullScanAt": 1790251200000
+   },
+   "entries": [
+    {
+     "name": "dev-other-202609.json",
+     "rev": "r1"
+    }
+   ],
+   "downloads": {
+    "dev-other-202609.json": {
+     "text": "[{\"ts\":1790251195000,\"uid\":\"o-1\",\"dev\":\"dev-other\",\"kind\":\"habitTap\",\"taskId\":\"t1\",\"dir\":1},{\"ts\":1790251196000,\"uid\":\"o-2\",\"dev\":\"dev-other\",\"kind\":\"complete\",\"taskId\":\"t2\"}]",
+     "rev": "r1"
+    }
+   },
+   "opts": {
+    "force": true
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {
+      "dev-other-202609.json": "r1"
+     },
+     "evtBadRevs": {},
+     "evtLastPullAt": 1790251200000,
+     "evtFullScanAt": 1790251200000
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [
+     {
+      "ts": 1790251195000,
+      "uid": "o-1",
+      "dev": "dev-other",
+      "kind": "habitTap",
+      "taskId": "t1",
+      "dir": 1
+     },
+     {
+      "ts": 1790251196000,
+      "uid": "o-2",
+      "dev": "dev-other",
+      "kind": "complete",
+      "taskId": "t2"
+     }
+    ],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPullOk",
+      "name": "dev-other-202609.json",
+      "inserted": 2
+     }
+    ],
+    "calls": {
+     "list": 1,
+     "download": 1,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "pull_corrupt_and_neighbour",
+   "op": "pull",
+   "entries": [
+    {
+     "name": "dev-other-202609.json",
+     "rev": "rbad"
+    },
+    {
+     "name": "dev-o2-202609.json",
+     "rev": "rgood"
+    }
+   ],
+   "downloads": {
+    "dev-other-202609.json": {
+     "text": "not json {",
+     "rev": "rbad"
+    },
+    "dev-o2-202609.json": {
+     "text": "[{\"ts\":1790251199900,\"uid\":\"g-1\",\"dev\":\"dev-o2\",\"kind\":\"habitTap\"}]",
+     "rev": "rgood"
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {
+      "dev-o2-202609.json": "rgood"
+     },
+     "evtBadRevs": {
+      "dev-other-202609.json": {
+       "rev": "rbad",
+       "at": 1790251200000
+      }
+     },
+     "evtLastPullAt": 1790251200000,
+     "evtFullScanAt": 1790251200000
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [
+     {
+      "ts": 1790251199900,
+      "uid": "g-1",
+      "dev": "dev-o2",
+      "kind": "habitTap"
+     }
+    ],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPullSkip",
+      "name": "dev-other-202609.json",
+      "reason": "parseError"
+     },
+     {
+      "t": 1790251200000,
+      "kind": "evtPullOk",
+      "name": "dev-o2-202609.json",
+      "inserted": 1
+     }
+    ],
+    "calls": {
+     "list": 1,
+     "download": 2,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "pull_not_array",
+   "op": "pull",
+   "entries": [
+    {
+     "name": "dev-other-202609.json",
+     "rev": "r1"
+    }
+   ],
+   "downloads": {
+    "dev-other-202609.json": {
+     "text": "{\"a\":1}",
+     "rev": "r1"
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {
+      "dev-other-202609.json": {
+       "rev": "r1",
+       "at": 1790251200000
+      }
+     },
+     "evtLastPullAt": 1790251200000,
+     "evtFullScanAt": 1790251200000
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPullSkip",
+      "name": "dev-other-202609.json",
+      "reason": "notArray"
+     }
+    ],
+    "calls": {
+     "list": 1,
+     "download": 1,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "pull_download_missing",
+   "op": "pull",
+   "entries": [
+    {
+     "name": "dev-other-202609.json",
+     "rev": "r1"
+    }
+   ],
+   "downloads": {},
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {
+      "dev-other-202609.json": {
+       "rev": "r1",
+       "at": 1790251200000
+      }
+     },
+     "evtLastPullAt": 1790251200000,
+     "evtFullScanAt": 1790251200000
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPullSkip",
+      "name": "dev-other-202609.json",
+      "reason": "downloadFailed"
+     }
+    ],
+    "calls": {
+     "list": 1,
+     "download": 1,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "pull_names",
+   "op": "pull",
+   "entries": [
+    {
+     "name": "mrl770yaq56gl-202609 (1).json",
+     "rev": "rc"
+    },
+    {
+     "name": "dev-me-202609.json",
+     "rev": "rm"
+    },
+    {
+     "name": "readme.txt",
+     "rev": "rx"
+    }
+   ],
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 1790251200000,
+     "evtFullScanAt": 1790251200000
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPullSkip",
+      "name": "mrl770yaq56gl-202609 (1).json",
+      "reason": "unparsedName"
+     },
+     {
+      "t": 1790251200000,
+      "kind": "evtPullSkip",
+      "name": "dev-me-202609.json",
+      "reason": "ownDevice"
+     },
+     {
+      "t": 1790251200000,
+      "kind": "evtPullSkip",
+      "name": "readme.txt",
+      "reason": "unparsedName"
+     }
+    ],
+    "calls": {
+     "list": 1,
+     "download": 0,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "pull_too_old",
+   "op": "pull",
+   "cfg": {
+    "evtFileRevs": {
+     "dev-other-202502.json": "r0"
+    },
+    "evtBadRevs": {
+     "dev-other-202502.json": {
+      "rev": "r0",
+      "at": 1790251199000
+     }
+    }
+   },
+   "entries": [
+    {
+     "name": "dev-other-202502.json",
+     "rev": "r0"
+    }
+   ],
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 1790251200000,
+     "evtFullScanAt": 1790251200000
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPullSkip",
+      "name": "dev-other-202502.json",
+      "reason": "tooOld"
+     }
+    ],
+    "calls": {
+     "list": 1,
+     "download": 0,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "pull_bad_rev_backoff",
+   "op": "pull",
+   "cfg": {
+    "evtBadRevs": {
+     "dev-other-202609.json": {
+      "rev": "r1",
+      "at": 1790250300001
+     }
+    }
+   },
+   "entries": [
+    {
+     "name": "dev-other-202609.json",
+     "rev": "r1"
+    }
+   ],
+   "downloads": {
+    "dev-other-202609.json": {
+     "text": "[{\"ts\":1790251195000,\"uid\":\"o-1\",\"dev\":\"dev-other\",\"kind\":\"habitTap\",\"taskId\":\"t1\",\"dir\":1},{\"ts\":1790251196000,\"uid\":\"o-2\",\"dev\":\"dev-other\",\"kind\":\"complete\",\"taskId\":\"t2\"}]",
+     "rev": "r1"
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {
+      "dev-other-202609.json": {
+       "rev": "r1",
+       "at": 1790250300001
+      }
+     },
+     "evtLastPullAt": 1790251200000,
+     "evtFullScanAt": 1790251200000
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPullSkip",
+      "name": "dev-other-202609.json",
+      "reason": "badRevBackoff"
+     }
+    ],
+    "calls": {
+     "list": 1,
+     "download": 0,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "pull_bad_rev_retry_at_15min",
+   "op": "pull",
+   "cfg": {
+    "evtBadRevs": {
+     "dev-other-202609.json": {
+      "rev": "r1",
+      "at": 1790250300000
+     }
+    }
+   },
+   "entries": [
+    {
+     "name": "dev-other-202609.json",
+     "rev": "r1"
+    }
+   ],
+   "downloads": {
+    "dev-other-202609.json": {
+     "text": "[{\"ts\":1790251195000,\"uid\":\"o-1\",\"dev\":\"dev-other\",\"kind\":\"habitTap\",\"taskId\":\"t1\",\"dir\":1},{\"ts\":1790251196000,\"uid\":\"o-2\",\"dev\":\"dev-other\",\"kind\":\"complete\",\"taskId\":\"t2\"}]",
+     "rev": "r1"
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {
+      "dev-other-202609.json": "r1"
+     },
+     "evtBadRevs": {},
+     "evtLastPullAt": 1790251200000,
+     "evtFullScanAt": 1790251200000
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [
+     {
+      "ts": 1790251195000,
+      "uid": "o-1",
+      "dev": "dev-other",
+      "kind": "habitTap",
+      "taskId": "t1",
+      "dir": 1
+     },
+     {
+      "ts": 1790251196000,
+      "uid": "o-2",
+      "dev": "dev-other",
+      "kind": "complete",
+      "taskId": "t2"
+     }
+    ],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPullOk",
+      "name": "dev-other-202609.json",
+      "inserted": 2
+     }
+    ],
+    "calls": {
+     "list": 1,
+     "download": 1,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "pull_bad_rev_full_scan_ignores_backoff",
+   "op": "pull",
+   "cfg": {
+    "evtFullScanAt": 1790164799999,
+    "evtBadRevs": {
+     "dev-other-202609.json": {
+      "rev": "r1",
+      "at": 1790251199000
+     }
+    }
+   },
+   "entries": [
+    {
+     "name": "dev-other-202609.json",
+     "rev": "r1"
+    }
+   ],
+   "downloads": {
+    "dev-other-202609.json": {
+     "text": "[{\"ts\":1790251195000,\"uid\":\"o-1\",\"dev\":\"dev-other\",\"kind\":\"habitTap\",\"taskId\":\"t1\",\"dir\":1},{\"ts\":1790251196000,\"uid\":\"o-2\",\"dev\":\"dev-other\",\"kind\":\"complete\",\"taskId\":\"t2\"}]",
+     "rev": "r1"
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {
+      "dev-other-202609.json": "r1"
+     },
+     "evtBadRevs": {},
+     "evtLastPullAt": 1790251200000,
+     "evtFullScanAt": 1790251200000
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [
+     {
+      "ts": 1790251195000,
+      "uid": "o-1",
+      "dev": "dev-other",
+      "kind": "habitTap",
+      "taskId": "t1",
+      "dir": 1
+     },
+     {
+      "ts": 1790251196000,
+      "uid": "o-2",
+      "dev": "dev-other",
+      "kind": "complete",
+      "taskId": "t2"
+     }
+    ],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtFullScan",
+      "entries": 1
+     },
+     {
+      "t": 1790251200000,
+      "kind": "evtPullOk",
+      "name": "dev-other-202609.json",
+      "inserted": 2
+     }
+    ],
+    "calls": {
+     "list": 1,
+     "download": 1,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "pull_strict_read_fails",
+   "op": "pull",
+   "strictFails": true,
+   "entries": [
+    {
+     "name": "dev-other-202609.json",
+     "rev": "r1"
+    }
+   ],
+   "downloads": {
+    "dev-other-202609.json": {
+     "text": "[{\"ts\":1790251195000,\"uid\":\"o-1\",\"dev\":\"dev-other\",\"kind\":\"habitTap\",\"taskId\":\"t1\",\"dir\":1},{\"ts\":1790251196000,\"uid\":\"o-2\",\"dev\":\"dev-other\",\"kind\":\"complete\",\"taskId\":\"t2\"}]",
+     "rev": "r1"
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {
+      "dev-other-202609.json": {
+       "rev": "r1",
+       "at": 1790251200000
+      }
+     },
+     "evtLastPullAt": 1790251200000,
+     "evtFullScanAt": 1790251200000
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPullGuardReadFailed",
+      "name": "dev-other-202609.json"
+     }
+    ],
+    "calls": {
+     "list": 1,
+     "download": 1,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "pull_insert_aborts",
+   "op": "pull",
+   "idb": "abort",
+   "entries": [
+    {
+     "name": "dev-other-202609.json",
+     "rev": "r1"
+    }
+   ],
+   "downloads": {
+    "dev-other-202609.json": {
+     "text": "[{\"ts\":1790251195000,\"uid\":\"o-1\",\"dev\":\"dev-other\",\"kind\":\"habitTap\",\"taskId\":\"t1\",\"dir\":1},{\"ts\":1790251196000,\"uid\":\"o-2\",\"dev\":\"dev-other\",\"kind\":\"complete\",\"taskId\":\"t2\"}]",
+     "rev": "r1"
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {
+      "dev-other-202609.json": {
+       "rev": "r1",
+       "at": 1790251200000
+      }
+     },
+     "evtLastPullAt": 1790251200000,
+     "evtFullScanAt": 1790251200000
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPullInsertFailed",
+      "name": "dev-other-202609.json"
+     }
+    ],
+    "calls": {
+     "list": 1,
+     "download": 1,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "pull_rev_from_entry_when_dl_rev_null",
+   "op": "pull",
+   "entries": [
+    {
+     "name": "dev-other-202609.json",
+     "rev": "r1"
+    }
+   ],
+   "downloads": {
+    "dev-other-202609.json": {
+     "text": "[]",
+     "rev": null
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {
+      "dev-other-202609.json": "r1"
+     },
+     "evtBadRevs": {},
+     "evtLastPullAt": 1790251200000,
+     "evtFullScanAt": 1790251200000
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPullOk",
+      "name": "dev-other-202609.json",
+      "inserted": 0
+     }
+    ],
+    "calls": {
+     "list": 1,
+     "download": 1,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "pull_null_revs",
+   "op": "pull",
+   "entries": [
+    {
+     "name": "dev-other-202609.json"
+    }
+   ],
+   "downloads": {
+    "dev-other-202609.json": {
+     "text": "[]",
+     "rev": null
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {
+      "dev-other-202609.json": null
+     },
+     "evtBadRevs": {},
+     "evtLastPullAt": 1790251200000,
+     "evtFullScanAt": 1790251200000
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPullOk",
+      "name": "dev-other-202609.json",
+      "inserted": 0
+     }
+    ],
+    "calls": {
+     "list": 1,
+     "download": 1,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "pull_list_fails_throws",
+   "op": "pull",
+   "listFails": true,
+   "expect": {
+    "threw": "list failed: 500",
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 1,
+     "download": 0,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "pull_bad_revs_cap_200",
+   "op": "pull",
+   "cfg": {
+    "evtBadRevs": {
+     "x0-202609.json": {
+      "rev": "r",
+      "at": 1790247600000
+     },
+     "x1-202609.json": {
+      "rev": "r",
+      "at": 1790247599999
+     },
+     "x2-202609.json": {
+      "rev": "r",
+      "at": 1790247599998
+     },
+     "x3-202609.json": {
+      "rev": "r",
+      "at": 1790247599997
+     },
+     "x4-202609.json": {
+      "rev": "r",
+      "at": 1790247599996
+     },
+     "x5-202609.json": {
+      "rev": "r",
+      "at": 1790247599995
+     },
+     "x6-202609.json": {
+      "rev": "r",
+      "at": 1790247599994
+     },
+     "x7-202609.json": {
+      "rev": "r",
+      "at": 1790247599993
+     },
+     "x8-202609.json": {
+      "rev": "r",
+      "at": 1790247599992
+     },
+     "x9-202609.json": {
+      "rev": "r",
+      "at": 1790247599991
+     },
+     "x10-202609.json": {
+      "rev": "r",
+      "at": 1790247599990
+     },
+     "x11-202609.json": {
+      "rev": "r",
+      "at": 1790247599989
+     },
+     "x12-202609.json": {
+      "rev": "r",
+      "at": 1790247599988
+     },
+     "x13-202609.json": {
+      "rev": "r",
+      "at": 1790247599987
+     },
+     "x14-202609.json": {
+      "rev": "r",
+      "at": 1790247599986
+     },
+     "x15-202609.json": {
+      "rev": "r",
+      "at": 1790247599985
+     },
+     "x16-202609.json": {
+      "rev": "r",
+      "at": 1790247599984
+     },
+     "x17-202609.json": {
+      "rev": "r",
+      "at": 1790247599983
+     },
+     "x18-202609.json": {
+      "rev": "r",
+      "at": 1790247599982
+     },
+     "x19-202609.json": {
+      "rev": "r",
+      "at": 1790247599981
+     },
+     "x20-202609.json": {
+      "rev": "r",
+      "at": 1790247599980
+     },
+     "x21-202609.json": {
+      "rev": "r",
+      "at": 1790247599979
+     },
+     "x22-202609.json": {
+      "rev": "r",
+      "at": 1790247599978
+     },
+     "x23-202609.json": {
+      "rev": "r",
+      "at": 1790247599977
+     },
+     "x24-202609.json": {
+      "rev": "r",
+      "at": 1790247599976
+     },
+     "x25-202609.json": {
+      "rev": "r",
+      "at": 1790247599975
+     },
+     "x26-202609.json": {
+      "rev": "r",
+      "at": 1790247599974
+     },
+     "x27-202609.json": {
+      "rev": "r",
+      "at": 1790247599973
+     },
+     "x28-202609.json": {
+      "rev": "r",
+      "at": 1790247599972
+     },
+     "x29-202609.json": {
+      "rev": "r",
+      "at": 1790247599971
+     },
+     "x30-202609.json": {
+      "rev": "r",
+      "at": 1790247599970
+     },
+     "x31-202609.json": {
+      "rev": "r",
+      "at": 1790247599969
+     },
+     "x32-202609.json": {
+      "rev": "r",
+      "at": 1790247599968
+     },
+     "x33-202609.json": {
+      "rev": "r",
+      "at": 1790247599967
+     },
+     "x34-202609.json": {
+      "rev": "r",
+      "at": 1790247599966
+     },
+     "x35-202609.json": {
+      "rev": "r",
+      "at": 1790247599965
+     },
+     "x36-202609.json": {
+      "rev": "r",
+      "at": 1790247599964
+     },
+     "x37-202609.json": {
+      "rev": "r",
+      "at": 1790247599963
+     },
+     "x38-202609.json": {
+      "rev": "r",
+      "at": 1790247599962
+     },
+     "x39-202609.json": {
+      "rev": "r",
+      "at": 1790247599961
+     },
+     "x40-202609.json": {
+      "rev": "r",
+      "at": 1790247599960
+     },
+     "x41-202609.json": {
+      "rev": "r",
+      "at": 1790247599959
+     },
+     "x42-202609.json": {
+      "rev": "r",
+      "at": 1790247599958
+     },
+     "x43-202609.json": {
+      "rev": "r",
+      "at": 1790247599957
+     },
+     "x44-202609.json": {
+      "rev": "r",
+      "at": 1790247599956
+     },
+     "x45-202609.json": {
+      "rev": "r",
+      "at": 1790247599955
+     },
+     "x46-202609.json": {
+      "rev": "r",
+      "at": 1790247599954
+     },
+     "x47-202609.json": {
+      "rev": "r",
+      "at": 1790247599953
+     },
+     "x48-202609.json": {
+      "rev": "r",
+      "at": 1790247599952
+     },
+     "x49-202609.json": {
+      "rev": "r",
+      "at": 1790247599951
+     },
+     "x50-202609.json": {
+      "rev": "r",
+      "at": 1790247599950
+     },
+     "x51-202609.json": {
+      "rev": "r",
+      "at": 1790247599949
+     },
+     "x52-202609.json": {
+      "rev": "r",
+      "at": 1790247599948
+     },
+     "x53-202609.json": {
+      "rev": "r",
+      "at": 1790247599947
+     },
+     "x54-202609.json": {
+      "rev": "r",
+      "at": 1790247599946
+     },
+     "x55-202609.json": {
+      "rev": "r",
+      "at": 1790247599945
+     },
+     "x56-202609.json": {
+      "rev": "r",
+      "at": 1790247599944
+     },
+     "x57-202609.json": {
+      "rev": "r",
+      "at": 1790247599943
+     },
+     "x58-202609.json": {
+      "rev": "r",
+      "at": 1790247599942
+     },
+     "x59-202609.json": {
+      "rev": "r",
+      "at": 1790247599941
+     },
+     "x60-202609.json": {
+      "rev": "r",
+      "at": 1790247599940
+     },
+     "x61-202609.json": {
+      "rev": "r",
+      "at": 1790247599939
+     },
+     "x62-202609.json": {
+      "rev": "r",
+      "at": 1790247599938
+     },
+     "x63-202609.json": {
+      "rev": "r",
+      "at": 1790247599937
+     },
+     "x64-202609.json": {
+      "rev": "r",
+      "at": 1790247599936
+     },
+     "x65-202609.json": {
+      "rev": "r",
+      "at": 1790247599935
+     },
+     "x66-202609.json": {
+      "rev": "r",
+      "at": 1790247599934
+     },
+     "x67-202609.json": {
+      "rev": "r",
+      "at": 1790247599933
+     },
+     "x68-202609.json": {
+      "rev": "r",
+      "at": 1790247599932
+     },
+     "x69-202609.json": {
+      "rev": "r",
+      "at": 1790247599931
+     },
+     "x70-202609.json": {
+      "rev": "r",
+      "at": 1790247599930
+     },
+     "x71-202609.json": {
+      "rev": "r",
+      "at": 1790247599929
+     },
+     "x72-202609.json": {
+      "rev": "r",
+      "at": 1790247599928
+     },
+     "x73-202609.json": {
+      "rev": "r",
+      "at": 1790247599927
+     },
+     "x74-202609.json": {
+      "rev": "r",
+      "at": 1790247599926
+     },
+     "x75-202609.json": {
+      "rev": "r",
+      "at": 1790247599925
+     },
+     "x76-202609.json": {
+      "rev": "r",
+      "at": 1790247599924
+     },
+     "x77-202609.json": {
+      "rev": "r",
+      "at": 1790247599923
+     },
+     "x78-202609.json": {
+      "rev": "r",
+      "at": 1790247599922
+     },
+     "x79-202609.json": {
+      "rev": "r",
+      "at": 1790247599921
+     },
+     "x80-202609.json": {
+      "rev": "r",
+      "at": 1790247599920
+     },
+     "x81-202609.json": {
+      "rev": "r",
+      "at": 1790247599919
+     },
+     "x82-202609.json": {
+      "rev": "r",
+      "at": 1790247599918
+     },
+     "x83-202609.json": {
+      "rev": "r",
+      "at": 1790247599917
+     },
+     "x84-202609.json": {
+      "rev": "r",
+      "at": 1790247599916
+     },
+     "x85-202609.json": {
+      "rev": "r",
+      "at": 1790247599915
+     },
+     "x86-202609.json": {
+      "rev": "r",
+      "at": 1790247599914
+     },
+     "x87-202609.json": {
+      "rev": "r",
+      "at": 1790247599913
+     },
+     "x88-202609.json": {
+      "rev": "r",
+      "at": 1790247599912
+     },
+     "x89-202609.json": {
+      "rev": "r",
+      "at": 1790247599911
+     },
+     "x90-202609.json": {
+      "rev": "r",
+      "at": 1790247599910
+     },
+     "x91-202609.json": {
+      "rev": "r",
+      "at": 1790247599909
+     },
+     "x92-202609.json": {
+      "rev": "r",
+      "at": 1790247599908
+     },
+     "x93-202609.json": {
+      "rev": "r",
+      "at": 1790247599907
+     },
+     "x94-202609.json": {
+      "rev": "r",
+      "at": 1790247599906
+     },
+     "x95-202609.json": {
+      "rev": "r",
+      "at": 1790247599905
+     },
+     "x96-202609.json": {
+      "rev": "r",
+      "at": 1790247599904
+     },
+     "x97-202609.json": {
+      "rev": "r",
+      "at": 1790247599903
+     },
+     "x98-202609.json": {
+      "rev": "r",
+      "at": 1790247599902
+     },
+     "x99-202609.json": {
+      "rev": "r",
+      "at": 1790247599901
+     },
+     "x100-202609.json": {
+      "rev": "r",
+      "at": 1790247599900
+     },
+     "x101-202609.json": {
+      "rev": "r",
+      "at": 1790247599899
+     },
+     "x102-202609.json": {
+      "rev": "r",
+      "at": 1790247599898
+     },
+     "x103-202609.json": {
+      "rev": "r",
+      "at": 1790247599897
+     },
+     "x104-202609.json": {
+      "rev": "r",
+      "at": 1790247599896
+     },
+     "x105-202609.json": {
+      "rev": "r",
+      "at": 1790247599895
+     },
+     "x106-202609.json": {
+      "rev": "r",
+      "at": 1790247599894
+     },
+     "x107-202609.json": {
+      "rev": "r",
+      "at": 1790247599893
+     },
+     "x108-202609.json": {
+      "rev": "r",
+      "at": 1790247599892
+     },
+     "x109-202609.json": {
+      "rev": "r",
+      "at": 1790247599891
+     },
+     "x110-202609.json": {
+      "rev": "r",
+      "at": 1790247599890
+     },
+     "x111-202609.json": {
+      "rev": "r",
+      "at": 1790247599889
+     },
+     "x112-202609.json": {
+      "rev": "r",
+      "at": 1790247599888
+     },
+     "x113-202609.json": {
+      "rev": "r",
+      "at": 1790247599887
+     },
+     "x114-202609.json": {
+      "rev": "r",
+      "at": 1790247599886
+     },
+     "x115-202609.json": {
+      "rev": "r",
+      "at": 1790247599885
+     },
+     "x116-202609.json": {
+      "rev": "r",
+      "at": 1790247599884
+     },
+     "x117-202609.json": {
+      "rev": "r",
+      "at": 1790247599883
+     },
+     "x118-202609.json": {
+      "rev": "r",
+      "at": 1790247599882
+     },
+     "x119-202609.json": {
+      "rev": "r",
+      "at": 1790247599881
+     },
+     "x120-202609.json": {
+      "rev": "r",
+      "at": 1790247599880
+     },
+     "x121-202609.json": {
+      "rev": "r",
+      "at": 1790247599879
+     },
+     "x122-202609.json": {
+      "rev": "r",
+      "at": 1790247599878
+     },
+     "x123-202609.json": {
+      "rev": "r",
+      "at": 1790247599877
+     },
+     "x124-202609.json": {
+      "rev": "r",
+      "at": 1790247599876
+     },
+     "x125-202609.json": {
+      "rev": "r",
+      "at": 1790247599875
+     },
+     "x126-202609.json": {
+      "rev": "r",
+      "at": 1790247599874
+     },
+     "x127-202609.json": {
+      "rev": "r",
+      "at": 1790247599873
+     },
+     "x128-202609.json": {
+      "rev": "r",
+      "at": 1790247599872
+     },
+     "x129-202609.json": {
+      "rev": "r",
+      "at": 1790247599871
+     },
+     "x130-202609.json": {
+      "rev": "r",
+      "at": 1790247599870
+     },
+     "x131-202609.json": {
+      "rev": "r",
+      "at": 1790247599869
+     },
+     "x132-202609.json": {
+      "rev": "r",
+      "at": 1790247599868
+     },
+     "x133-202609.json": {
+      "rev": "r",
+      "at": 1790247599867
+     },
+     "x134-202609.json": {
+      "rev": "r",
+      "at": 1790247599866
+     },
+     "x135-202609.json": {
+      "rev": "r",
+      "at": 1790247599865
+     },
+     "x136-202609.json": {
+      "rev": "r",
+      "at": 1790247599864
+     },
+     "x137-202609.json": {
+      "rev": "r",
+      "at": 1790247599863
+     },
+     "x138-202609.json": {
+      "rev": "r",
+      "at": 1790247599862
+     },
+     "x139-202609.json": {
+      "rev": "r",
+      "at": 1790247599861
+     },
+     "x140-202609.json": {
+      "rev": "r",
+      "at": 1790247599860
+     },
+     "x141-202609.json": {
+      "rev": "r",
+      "at": 1790247599859
+     },
+     "x142-202609.json": {
+      "rev": "r",
+      "at": 1790247599858
+     },
+     "x143-202609.json": {
+      "rev": "r",
+      "at": 1790247599857
+     },
+     "x144-202609.json": {
+      "rev": "r",
+      "at": 1790247599856
+     },
+     "x145-202609.json": {
+      "rev": "r",
+      "at": 1790247599855
+     },
+     "x146-202609.json": {
+      "rev": "r",
+      "at": 1790247599854
+     },
+     "x147-202609.json": {
+      "rev": "r",
+      "at": 1790247599853
+     },
+     "x148-202609.json": {
+      "rev": "r",
+      "at": 1790247599852
+     },
+     "x149-202609.json": {
+      "rev": "r",
+      "at": 1790247599851
+     },
+     "x150-202609.json": {
+      "rev": "r",
+      "at": 1790247599850
+     },
+     "x151-202609.json": {
+      "rev": "r",
+      "at": 1790247599849
+     },
+     "x152-202609.json": {
+      "rev": "r",
+      "at": 1790247599848
+     },
+     "x153-202609.json": {
+      "rev": "r",
+      "at": 1790247599847
+     },
+     "x154-202609.json": {
+      "rev": "r",
+      "at": 1790247599846
+     },
+     "x155-202609.json": {
+      "rev": "r",
+      "at": 1790247599845
+     },
+     "x156-202609.json": {
+      "rev": "r",
+      "at": 1790247599844
+     },
+     "x157-202609.json": {
+      "rev": "r",
+      "at": 1790247599843
+     },
+     "x158-202609.json": {
+      "rev": "r",
+      "at": 1790247599842
+     },
+     "x159-202609.json": {
+      "rev": "r",
+      "at": 1790247599841
+     },
+     "x160-202609.json": {
+      "rev": "r",
+      "at": 1790247599840
+     },
+     "x161-202609.json": {
+      "rev": "r",
+      "at": 1790247599839
+     },
+     "x162-202609.json": {
+      "rev": "r",
+      "at": 1790247599838
+     },
+     "x163-202609.json": {
+      "rev": "r",
+      "at": 1790247599837
+     },
+     "x164-202609.json": {
+      "rev": "r",
+      "at": 1790247599836
+     },
+     "x165-202609.json": {
+      "rev": "r",
+      "at": 1790247599835
+     },
+     "x166-202609.json": {
+      "rev": "r",
+      "at": 1790247599834
+     },
+     "x167-202609.json": {
+      "rev": "r",
+      "at": 1790247599833
+     },
+     "x168-202609.json": {
+      "rev": "r",
+      "at": 1790247599832
+     },
+     "x169-202609.json": {
+      "rev": "r",
+      "at": 1790247599831
+     },
+     "x170-202609.json": {
+      "rev": "r",
+      "at": 1790247599830
+     },
+     "x171-202609.json": {
+      "rev": "r",
+      "at": 1790247599829
+     },
+     "x172-202609.json": {
+      "rev": "r",
+      "at": 1790247599828
+     },
+     "x173-202609.json": {
+      "rev": "r",
+      "at": 1790247599827
+     },
+     "x174-202609.json": {
+      "rev": "r",
+      "at": 1790247599826
+     },
+     "x175-202609.json": {
+      "rev": "r",
+      "at": 1790247599825
+     },
+     "x176-202609.json": {
+      "rev": "r",
+      "at": 1790247599824
+     },
+     "x177-202609.json": {
+      "rev": "r",
+      "at": 1790247599823
+     },
+     "x178-202609.json": {
+      "rev": "r",
+      "at": 1790247599822
+     },
+     "x179-202609.json": {
+      "rev": "r",
+      "at": 1790247599821
+     },
+     "x180-202609.json": {
+      "rev": "r",
+      "at": 1790247599820
+     },
+     "x181-202609.json": {
+      "rev": "r",
+      "at": 1790247599819
+     },
+     "x182-202609.json": {
+      "rev": "r",
+      "at": 1790247599818
+     },
+     "x183-202609.json": {
+      "rev": "r",
+      "at": 1790247599817
+     },
+     "x184-202609.json": {
+      "rev": "r",
+      "at": 1790247599816
+     },
+     "x185-202609.json": {
+      "rev": "r",
+      "at": 1790247599815
+     },
+     "x186-202609.json": {
+      "rev": "r",
+      "at": 1790247599814
+     },
+     "x187-202609.json": {
+      "rev": "r",
+      "at": 1790247599813
+     },
+     "x188-202609.json": {
+      "rev": "r",
+      "at": 1790247599812
+     },
+     "x189-202609.json": {
+      "rev": "r",
+      "at": 1790247599811
+     },
+     "x190-202609.json": {
+      "rev": "r",
+      "at": 1790247599810
+     },
+     "x191-202609.json": {
+      "rev": "r",
+      "at": 1790247599809
+     },
+     "x192-202609.json": {
+      "rev": "r",
+      "at": 1790247599808
+     },
+     "x193-202609.json": {
+      "rev": "r",
+      "at": 1790247599807
+     },
+     "x194-202609.json": {
+      "rev": "r",
+      "at": 1790247599806
+     },
+     "x195-202609.json": {
+      "rev": "r",
+      "at": 1790247599805
+     },
+     "x196-202609.json": {
+      "rev": "r",
+      "at": 1790247599804
+     },
+     "x197-202609.json": {
+      "rev": "r",
+      "at": 1790247599803
+     },
+     "x198-202609.json": {
+      "rev": "r",
+      "at": 1790247599802
+     },
+     "x199-202609.json": {
+      "rev": "r",
+      "at": 1790247599801
+     },
+     "x200-202609.json": {
+      "rev": "r",
+      "at": 1790247599800
+     },
+     "x201-202609.json": {
+      "rev": "r",
+      "at": 1790247599799
+     },
+     "x202-202609.json": {
+      "rev": "r",
+      "at": 1790247599798
+     },
+     "x203-202609.json": {
+      "rev": "r",
+      "at": 1790247599797
+     },
+     "x204-202609.json": {
+      "rev": "r",
+      "at": 1790247599796
+     }
+    }
+   },
+   "entries": [],
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {
+      "x0-202609.json": {
+       "rev": "r",
+       "at": 1790247600000
+      },
+      "x1-202609.json": {
+       "rev": "r",
+       "at": 1790247599999
+      },
+      "x2-202609.json": {
+       "rev": "r",
+       "at": 1790247599998
+      },
+      "x3-202609.json": {
+       "rev": "r",
+       "at": 1790247599997
+      },
+      "x4-202609.json": {
+       "rev": "r",
+       "at": 1790247599996
+      },
+      "x5-202609.json": {
+       "rev": "r",
+       "at": 1790247599995
+      },
+      "x6-202609.json": {
+       "rev": "r",
+       "at": 1790247599994
+      },
+      "x7-202609.json": {
+       "rev": "r",
+       "at": 1790247599993
+      },
+      "x8-202609.json": {
+       "rev": "r",
+       "at": 1790247599992
+      },
+      "x9-202609.json": {
+       "rev": "r",
+       "at": 1790247599991
+      },
+      "x10-202609.json": {
+       "rev": "r",
+       "at": 1790247599990
+      },
+      "x11-202609.json": {
+       "rev": "r",
+       "at": 1790247599989
+      },
+      "x12-202609.json": {
+       "rev": "r",
+       "at": 1790247599988
+      },
+      "x13-202609.json": {
+       "rev": "r",
+       "at": 1790247599987
+      },
+      "x14-202609.json": {
+       "rev": "r",
+       "at": 1790247599986
+      },
+      "x15-202609.json": {
+       "rev": "r",
+       "at": 1790247599985
+      },
+      "x16-202609.json": {
+       "rev": "r",
+       "at": 1790247599984
+      },
+      "x17-202609.json": {
+       "rev": "r",
+       "at": 1790247599983
+      },
+      "x18-202609.json": {
+       "rev": "r",
+       "at": 1790247599982
+      },
+      "x19-202609.json": {
+       "rev": "r",
+       "at": 1790247599981
+      },
+      "x20-202609.json": {
+       "rev": "r",
+       "at": 1790247599980
+      },
+      "x21-202609.json": {
+       "rev": "r",
+       "at": 1790247599979
+      },
+      "x22-202609.json": {
+       "rev": "r",
+       "at": 1790247599978
+      },
+      "x23-202609.json": {
+       "rev": "r",
+       "at": 1790247599977
+      },
+      "x24-202609.json": {
+       "rev": "r",
+       "at": 1790247599976
+      },
+      "x25-202609.json": {
+       "rev": "r",
+       "at": 1790247599975
+      },
+      "x26-202609.json": {
+       "rev": "r",
+       "at": 1790247599974
+      },
+      "x27-202609.json": {
+       "rev": "r",
+       "at": 1790247599973
+      },
+      "x28-202609.json": {
+       "rev": "r",
+       "at": 1790247599972
+      },
+      "x29-202609.json": {
+       "rev": "r",
+       "at": 1790247599971
+      },
+      "x30-202609.json": {
+       "rev": "r",
+       "at": 1790247599970
+      },
+      "x31-202609.json": {
+       "rev": "r",
+       "at": 1790247599969
+      },
+      "x32-202609.json": {
+       "rev": "r",
+       "at": 1790247599968
+      },
+      "x33-202609.json": {
+       "rev": "r",
+       "at": 1790247599967
+      },
+      "x34-202609.json": {
+       "rev": "r",
+       "at": 1790247599966
+      },
+      "x35-202609.json": {
+       "rev": "r",
+       "at": 1790247599965
+      },
+      "x36-202609.json": {
+       "rev": "r",
+       "at": 1790247599964
+      },
+      "x37-202609.json": {
+       "rev": "r",
+       "at": 1790247599963
+      },
+      "x38-202609.json": {
+       "rev": "r",
+       "at": 1790247599962
+      },
+      "x39-202609.json": {
+       "rev": "r",
+       "at": 1790247599961
+      },
+      "x40-202609.json": {
+       "rev": "r",
+       "at": 1790247599960
+      },
+      "x41-202609.json": {
+       "rev": "r",
+       "at": 1790247599959
+      },
+      "x42-202609.json": {
+       "rev": "r",
+       "at": 1790247599958
+      },
+      "x43-202609.json": {
+       "rev": "r",
+       "at": 1790247599957
+      },
+      "x44-202609.json": {
+       "rev": "r",
+       "at": 1790247599956
+      },
+      "x45-202609.json": {
+       "rev": "r",
+       "at": 1790247599955
+      },
+      "x46-202609.json": {
+       "rev": "r",
+       "at": 1790247599954
+      },
+      "x47-202609.json": {
+       "rev": "r",
+       "at": 1790247599953
+      },
+      "x48-202609.json": {
+       "rev": "r",
+       "at": 1790247599952
+      },
+      "x49-202609.json": {
+       "rev": "r",
+       "at": 1790247599951
+      },
+      "x50-202609.json": {
+       "rev": "r",
+       "at": 1790247599950
+      },
+      "x51-202609.json": {
+       "rev": "r",
+       "at": 1790247599949
+      },
+      "x52-202609.json": {
+       "rev": "r",
+       "at": 1790247599948
+      },
+      "x53-202609.json": {
+       "rev": "r",
+       "at": 1790247599947
+      },
+      "x54-202609.json": {
+       "rev": "r",
+       "at": 1790247599946
+      },
+      "x55-202609.json": {
+       "rev": "r",
+       "at": 1790247599945
+      },
+      "x56-202609.json": {
+       "rev": "r",
+       "at": 1790247599944
+      },
+      "x57-202609.json": {
+       "rev": "r",
+       "at": 1790247599943
+      },
+      "x58-202609.json": {
+       "rev": "r",
+       "at": 1790247599942
+      },
+      "x59-202609.json": {
+       "rev": "r",
+       "at": 1790247599941
+      },
+      "x60-202609.json": {
+       "rev": "r",
+       "at": 1790247599940
+      },
+      "x61-202609.json": {
+       "rev": "r",
+       "at": 1790247599939
+      },
+      "x62-202609.json": {
+       "rev": "r",
+       "at": 1790247599938
+      },
+      "x63-202609.json": {
+       "rev": "r",
+       "at": 1790247599937
+      },
+      "x64-202609.json": {
+       "rev": "r",
+       "at": 1790247599936
+      },
+      "x65-202609.json": {
+       "rev": "r",
+       "at": 1790247599935
+      },
+      "x66-202609.json": {
+       "rev": "r",
+       "at": 1790247599934
+      },
+      "x67-202609.json": {
+       "rev": "r",
+       "at": 1790247599933
+      },
+      "x68-202609.json": {
+       "rev": "r",
+       "at": 1790247599932
+      },
+      "x69-202609.json": {
+       "rev": "r",
+       "at": 1790247599931
+      },
+      "x70-202609.json": {
+       "rev": "r",
+       "at": 1790247599930
+      },
+      "x71-202609.json": {
+       "rev": "r",
+       "at": 1790247599929
+      },
+      "x72-202609.json": {
+       "rev": "r",
+       "at": 1790247599928
+      },
+      "x73-202609.json": {
+       "rev": "r",
+       "at": 1790247599927
+      },
+      "x74-202609.json": {
+       "rev": "r",
+       "at": 1790247599926
+      },
+      "x75-202609.json": {
+       "rev": "r",
+       "at": 1790247599925
+      },
+      "x76-202609.json": {
+       "rev": "r",
+       "at": 1790247599924
+      },
+      "x77-202609.json": {
+       "rev": "r",
+       "at": 1790247599923
+      },
+      "x78-202609.json": {
+       "rev": "r",
+       "at": 1790247599922
+      },
+      "x79-202609.json": {
+       "rev": "r",
+       "at": 1790247599921
+      },
+      "x80-202609.json": {
+       "rev": "r",
+       "at": 1790247599920
+      },
+      "x81-202609.json": {
+       "rev": "r",
+       "at": 1790247599919
+      },
+      "x82-202609.json": {
+       "rev": "r",
+       "at": 1790247599918
+      },
+      "x83-202609.json": {
+       "rev": "r",
+       "at": 1790247599917
+      },
+      "x84-202609.json": {
+       "rev": "r",
+       "at": 1790247599916
+      },
+      "x85-202609.json": {
+       "rev": "r",
+       "at": 1790247599915
+      },
+      "x86-202609.json": {
+       "rev": "r",
+       "at": 1790247599914
+      },
+      "x87-202609.json": {
+       "rev": "r",
+       "at": 1790247599913
+      },
+      "x88-202609.json": {
+       "rev": "r",
+       "at": 1790247599912
+      },
+      "x89-202609.json": {
+       "rev": "r",
+       "at": 1790247599911
+      },
+      "x90-202609.json": {
+       "rev": "r",
+       "at": 1790247599910
+      },
+      "x91-202609.json": {
+       "rev": "r",
+       "at": 1790247599909
+      },
+      "x92-202609.json": {
+       "rev": "r",
+       "at": 1790247599908
+      },
+      "x93-202609.json": {
+       "rev": "r",
+       "at": 1790247599907
+      },
+      "x94-202609.json": {
+       "rev": "r",
+       "at": 1790247599906
+      },
+      "x95-202609.json": {
+       "rev": "r",
+       "at": 1790247599905
+      },
+      "x96-202609.json": {
+       "rev": "r",
+       "at": 1790247599904
+      },
+      "x97-202609.json": {
+       "rev": "r",
+       "at": 1790247599903
+      },
+      "x98-202609.json": {
+       "rev": "r",
+       "at": 1790247599902
+      },
+      "x99-202609.json": {
+       "rev": "r",
+       "at": 1790247599901
+      },
+      "x100-202609.json": {
+       "rev": "r",
+       "at": 1790247599900
+      },
+      "x101-202609.json": {
+       "rev": "r",
+       "at": 1790247599899
+      },
+      "x102-202609.json": {
+       "rev": "r",
+       "at": 1790247599898
+      },
+      "x103-202609.json": {
+       "rev": "r",
+       "at": 1790247599897
+      },
+      "x104-202609.json": {
+       "rev": "r",
+       "at": 1790247599896
+      },
+      "x105-202609.json": {
+       "rev": "r",
+       "at": 1790247599895
+      },
+      "x106-202609.json": {
+       "rev": "r",
+       "at": 1790247599894
+      },
+      "x107-202609.json": {
+       "rev": "r",
+       "at": 1790247599893
+      },
+      "x108-202609.json": {
+       "rev": "r",
+       "at": 1790247599892
+      },
+      "x109-202609.json": {
+       "rev": "r",
+       "at": 1790247599891
+      },
+      "x110-202609.json": {
+       "rev": "r",
+       "at": 1790247599890
+      },
+      "x111-202609.json": {
+       "rev": "r",
+       "at": 1790247599889
+      },
+      "x112-202609.json": {
+       "rev": "r",
+       "at": 1790247599888
+      },
+      "x113-202609.json": {
+       "rev": "r",
+       "at": 1790247599887
+      },
+      "x114-202609.json": {
+       "rev": "r",
+       "at": 1790247599886
+      },
+      "x115-202609.json": {
+       "rev": "r",
+       "at": 1790247599885
+      },
+      "x116-202609.json": {
+       "rev": "r",
+       "at": 1790247599884
+      },
+      "x117-202609.json": {
+       "rev": "r",
+       "at": 1790247599883
+      },
+      "x118-202609.json": {
+       "rev": "r",
+       "at": 1790247599882
+      },
+      "x119-202609.json": {
+       "rev": "r",
+       "at": 1790247599881
+      },
+      "x120-202609.json": {
+       "rev": "r",
+       "at": 1790247599880
+      },
+      "x121-202609.json": {
+       "rev": "r",
+       "at": 1790247599879
+      },
+      "x122-202609.json": {
+       "rev": "r",
+       "at": 1790247599878
+      },
+      "x123-202609.json": {
+       "rev": "r",
+       "at": 1790247599877
+      },
+      "x124-202609.json": {
+       "rev": "r",
+       "at": 1790247599876
+      },
+      "x125-202609.json": {
+       "rev": "r",
+       "at": 1790247599875
+      },
+      "x126-202609.json": {
+       "rev": "r",
+       "at": 1790247599874
+      },
+      "x127-202609.json": {
+       "rev": "r",
+       "at": 1790247599873
+      },
+      "x128-202609.json": {
+       "rev": "r",
+       "at": 1790247599872
+      },
+      "x129-202609.json": {
+       "rev": "r",
+       "at": 1790247599871
+      },
+      "x130-202609.json": {
+       "rev": "r",
+       "at": 1790247599870
+      },
+      "x131-202609.json": {
+       "rev": "r",
+       "at": 1790247599869
+      },
+      "x132-202609.json": {
+       "rev": "r",
+       "at": 1790247599868
+      },
+      "x133-202609.json": {
+       "rev": "r",
+       "at": 1790247599867
+      },
+      "x134-202609.json": {
+       "rev": "r",
+       "at": 1790247599866
+      },
+      "x135-202609.json": {
+       "rev": "r",
+       "at": 1790247599865
+      },
+      "x136-202609.json": {
+       "rev": "r",
+       "at": 1790247599864
+      },
+      "x137-202609.json": {
+       "rev": "r",
+       "at": 1790247599863
+      },
+      "x138-202609.json": {
+       "rev": "r",
+       "at": 1790247599862
+      },
+      "x139-202609.json": {
+       "rev": "r",
+       "at": 1790247599861
+      },
+      "x140-202609.json": {
+       "rev": "r",
+       "at": 1790247599860
+      },
+      "x141-202609.json": {
+       "rev": "r",
+       "at": 1790247599859
+      },
+      "x142-202609.json": {
+       "rev": "r",
+       "at": 1790247599858
+      },
+      "x143-202609.json": {
+       "rev": "r",
+       "at": 1790247599857
+      },
+      "x144-202609.json": {
+       "rev": "r",
+       "at": 1790247599856
+      },
+      "x145-202609.json": {
+       "rev": "r",
+       "at": 1790247599855
+      },
+      "x146-202609.json": {
+       "rev": "r",
+       "at": 1790247599854
+      },
+      "x147-202609.json": {
+       "rev": "r",
+       "at": 1790247599853
+      },
+      "x148-202609.json": {
+       "rev": "r",
+       "at": 1790247599852
+      },
+      "x149-202609.json": {
+       "rev": "r",
+       "at": 1790247599851
+      },
+      "x150-202609.json": {
+       "rev": "r",
+       "at": 1790247599850
+      },
+      "x151-202609.json": {
+       "rev": "r",
+       "at": 1790247599849
+      },
+      "x152-202609.json": {
+       "rev": "r",
+       "at": 1790247599848
+      },
+      "x153-202609.json": {
+       "rev": "r",
+       "at": 1790247599847
+      },
+      "x154-202609.json": {
+       "rev": "r",
+       "at": 1790247599846
+      },
+      "x155-202609.json": {
+       "rev": "r",
+       "at": 1790247599845
+      },
+      "x156-202609.json": {
+       "rev": "r",
+       "at": 1790247599844
+      },
+      "x157-202609.json": {
+       "rev": "r",
+       "at": 1790247599843
+      },
+      "x158-202609.json": {
+       "rev": "r",
+       "at": 1790247599842
+      },
+      "x159-202609.json": {
+       "rev": "r",
+       "at": 1790247599841
+      },
+      "x160-202609.json": {
+       "rev": "r",
+       "at": 1790247599840
+      },
+      "x161-202609.json": {
+       "rev": "r",
+       "at": 1790247599839
+      },
+      "x162-202609.json": {
+       "rev": "r",
+       "at": 1790247599838
+      },
+      "x163-202609.json": {
+       "rev": "r",
+       "at": 1790247599837
+      },
+      "x164-202609.json": {
+       "rev": "r",
+       "at": 1790247599836
+      },
+      "x165-202609.json": {
+       "rev": "r",
+       "at": 1790247599835
+      },
+      "x166-202609.json": {
+       "rev": "r",
+       "at": 1790247599834
+      },
+      "x167-202609.json": {
+       "rev": "r",
+       "at": 1790247599833
+      },
+      "x168-202609.json": {
+       "rev": "r",
+       "at": 1790247599832
+      },
+      "x169-202609.json": {
+       "rev": "r",
+       "at": 1790247599831
+      },
+      "x170-202609.json": {
+       "rev": "r",
+       "at": 1790247599830
+      },
+      "x171-202609.json": {
+       "rev": "r",
+       "at": 1790247599829
+      },
+      "x172-202609.json": {
+       "rev": "r",
+       "at": 1790247599828
+      },
+      "x173-202609.json": {
+       "rev": "r",
+       "at": 1790247599827
+      },
+      "x174-202609.json": {
+       "rev": "r",
+       "at": 1790247599826
+      },
+      "x175-202609.json": {
+       "rev": "r",
+       "at": 1790247599825
+      },
+      "x176-202609.json": {
+       "rev": "r",
+       "at": 1790247599824
+      },
+      "x177-202609.json": {
+       "rev": "r",
+       "at": 1790247599823
+      },
+      "x178-202609.json": {
+       "rev": "r",
+       "at": 1790247599822
+      },
+      "x179-202609.json": {
+       "rev": "r",
+       "at": 1790247599821
+      },
+      "x180-202609.json": {
+       "rev": "r",
+       "at": 1790247599820
+      },
+      "x181-202609.json": {
+       "rev": "r",
+       "at": 1790247599819
+      },
+      "x182-202609.json": {
+       "rev": "r",
+       "at": 1790247599818
+      },
+      "x183-202609.json": {
+       "rev": "r",
+       "at": 1790247599817
+      },
+      "x184-202609.json": {
+       "rev": "r",
+       "at": 1790247599816
+      },
+      "x185-202609.json": {
+       "rev": "r",
+       "at": 1790247599815
+      },
+      "x186-202609.json": {
+       "rev": "r",
+       "at": 1790247599814
+      },
+      "x187-202609.json": {
+       "rev": "r",
+       "at": 1790247599813
+      },
+      "x188-202609.json": {
+       "rev": "r",
+       "at": 1790247599812
+      },
+      "x189-202609.json": {
+       "rev": "r",
+       "at": 1790247599811
+      },
+      "x190-202609.json": {
+       "rev": "r",
+       "at": 1790247599810
+      },
+      "x191-202609.json": {
+       "rev": "r",
+       "at": 1790247599809
+      },
+      "x192-202609.json": {
+       "rev": "r",
+       "at": 1790247599808
+      },
+      "x193-202609.json": {
+       "rev": "r",
+       "at": 1790247599807
+      },
+      "x194-202609.json": {
+       "rev": "r",
+       "at": 1790247599806
+      },
+      "x195-202609.json": {
+       "rev": "r",
+       "at": 1790247599805
+      },
+      "x196-202609.json": {
+       "rev": "r",
+       "at": 1790247599804
+      },
+      "x197-202609.json": {
+       "rev": "r",
+       "at": 1790247599803
+      },
+      "x198-202609.json": {
+       "rev": "r",
+       "at": 1790247599802
+      },
+      "x199-202609.json": {
+       "rev": "r",
+       "at": 1790247599801
+      }
+     },
+     "evtLastPullAt": 1790251200000,
+     "evtFullScanAt": 1790251200000
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 1,
+     "download": 0,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "pull_dedup_collisions",
+   "op": "pull",
+   "records": [
+    {
+     "ts": 1790251193000,
+     "uid": "same",
+     "dev": "dev-other",
+     "kind": "habitTap",
+     "taskId": "t1",
+     "dir": 1
+    },
+    {
+     "ts": 1790251194000,
+     "uid": "coll",
+     "dev": "dev-other",
+     "kind": "habitTap",
+     "taskId": "t1",
+     "dir": 1
+    },
+    {
+     "ts": 1790251194500,
+     "uid": "rep-old1",
+     "dev": "dev-third",
+     "kind": "complete",
+     "taskId": "t9",
+     "detail": "d",
+     "done": true
+    },
+    {
+     "ts": 1790251194600,
+     "uid": "mine-1",
+     "dev": "dev-me",
+     "kind": "habitTap"
+    }
+   ],
+   "entries": [
+    {
+     "name": "dev-other-202609.json",
+     "rev": "r1"
+    }
+   ],
+   "downloads": {
+    "dev-other-202609.json": {
+     "text": "[{\"ts\":1790251193000,\"uid\":\"same\",\"dev\":\"dev-other\",\"kind\":\"habitTap\",\"taskId\":\"t1\",\"dir\":1},{\"ts\":1790251193500,\"uid\":\"coll\",\"dev\":\"dev-other\",\"kind\":\"habitTap\",\"taskId\":\"t1\",\"dir\":1},{\"ts\":1790251194500,\"uid\":\"rep-new1\",\"dev\":\"dev-other\",\"kind\":\"complete\",\"taskId\":\"t9\",\"detail\":\"d\",\"done\":true},{\"ts\":1790251195000,\"uid\":\"rep-new2\",\"dev\":\"dev-other\",\"kind\":\"x\"},{\"ts\":1790251195000,\"uid\":\"rep-new3\",\"dev\":\"dev-other\",\"kind\":\"x\"},{\"ts\":1790251196000,\"uid\":\"b-1\",\"dev\":\"dev-other\",\"kind\":\"habitTap\",\"subId\":\"s1\",\"done\":false},{\"ts\":1790251196010,\"uid\":\"b-1\",\"dev\":\"dev-other\",\"kind\":\"habitTap\",\"subId\":\"s1\",\"done\":false},{\"ts\":1790251196000,\"uid\":\"b-1\",\"dev\":\"dev-other\",\"kind\":\"habitTap\",\"subId\":\"s1\",\"done\":false},{\"ts\":\"x\",\"uid\":\"noTs\",\"dev\":\"dev-other\",\"kind\":\"habitTap\"},{\"ts\":1790251199990,\"dev\":\"dev-other\",\"kind\":\"habitTap\"},{\"ts\":1790251199991,\"uid\":\"syn\",\"dev\":\"dev-other\",\"kind\":\"habitTap\",\"synthetic\":true},{\"ts\":1790251199992,\"uid\":\"life\",\"dev\":\"dev-other\",\"kind\":\"lifecycle\"},{\"ts\":1790251199993,\"uid\":\"own\",\"dev\":\"dev-me\",\"kind\":\"habitTap\"},{\"ts\":1743595199999,\"uid\":\"aged\",\"dev\":\"dev-other\",\"kind\":\"habitTap\"},{\"ts\":1790251199994,\"uid\":\"withId\",\"dev\":\"dev-other\",\"kind\":\"habitTap\",\"id\":42},\"str\",null,7]",
+     "rev": "r1"
+    }
+   },
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {
+      "dev-other-202609.json": "r1"
+     },
+     "evtBadRevs": {},
+     "evtLastPullAt": 1790251200000,
+     "evtFullScanAt": 1790251200000
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [
+     {
+      "ts": 1790251193500,
+      "uid": "coll~ba4e8695",
+      "dev": "dev-other",
+      "kind": "habitTap",
+      "taskId": "t1",
+      "dir": 1
+     },
+     {
+      "ts": 1790251195000,
+      "uid": "rep-new2",
+      "dev": "dev-other",
+      "kind": "x"
+     },
+     {
+      "ts": 1790251196000,
+      "uid": "b-1",
+      "dev": "dev-other",
+      "kind": "habitTap",
+      "subId": "s1",
+      "done": false
+     },
+     {
+      "ts": 1790251196010,
+      "uid": "b-1~b64aebc8",
+      "dev": "dev-other",
+      "kind": "habitTap",
+      "subId": "s1",
+      "done": false
+     },
+     {
+      "ts": 1790251199994,
+      "uid": "withId",
+      "dev": "dev-other",
+      "kind": "habitTap"
+     }
+    ],
+    "diag": [
+     {
+      "t": 1790251200000,
+      "kind": "evtPullOk",
+      "name": "dev-other-202609.json",
+      "inserted": 5
+     }
+    ],
+    "calls": {
+     "list": 1,
+     "download": 1,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  },
+  {
+   "name": "purge_own_only",
+   "op": "purge",
+   "devId": "dev-old",
+   "entries": [
+    {
+     "name": "dev-old-202609.json",
+     "rev": "a"
+    },
+    {
+     "name": "dev-old-202608.json",
+     "rev": "b"
+    },
+    {
+     "name": "dev-old-2-202609.json",
+     "rev": "c"
+    },
+    {
+     "name": "dev-other-202609.json",
+     "rev": "d"
+    },
+    {
+     "name": "dev-old-202609 (1).json",
+     "rev": "e"
+    },
+    {
+     "name": "x-dev-old-202609.json",
+     "rev": "f"
+    }
+   ],
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [],
+    "deletes": [
+     "/events/dev-old-202609.json",
+     "/events/dev-old-202608.json"
+    ],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 1,
+     "download": 0,
+     "upload": 0,
+     "del": 2
+    }
+   }
+  },
+  {
+   "name": "purge_delete_error_continues",
+   "op": "purge",
+   "devId": "dev-old",
+   "entries": [
+    {
+     "name": "dev-old-202609.json",
+     "rev": "a"
+    },
+    {
+     "name": "dev-old-202608.json",
+     "rev": "b"
+    }
+   ],
+   "deleteFails": [
+    "/events/dev-old-202609.json"
+   ],
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [],
+    "deletes": [
+     "/events/dev-old-202609.json",
+     "/events/dev-old-202608.json"
+    ],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 1,
+     "download": 0,
+     "upload": 0,
+     "del": 2
+    }
+   }
+  },
+  {
+   "name": "purge_empty_dev_noop",
+   "op": "purge",
+   "devId": "",
+   "entries": [
+    {
+     "name": "dev-old-202609.json",
+     "rev": "a"
+    }
+   ],
+   "expect": {
+    "threw": null,
+    "cfg": {
+     "evtLastUploadTs": 0,
+     "evtFullPushAt": 0,
+     "evtFileCounts": {},
+     "evtPushBlocked": {},
+     "evtFileRevs": {},
+     "evtBadRevs": {},
+     "evtLastPullAt": 0,
+     "evtFullScanAt": 0
+    },
+    "uploads": [],
+    "deletes": [],
+    "inserted": [],
+    "diag": [],
+    "calls": {
+     "list": 0,
+     "download": 0,
+     "upload": 0,
+     "del": 0
+    }
+   }
+  }
+ ]
+}

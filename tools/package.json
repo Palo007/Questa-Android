@@ -1,0 +1,22 @@
+{
+  "name": "questa-kotlin-tools",
+  "private": true,
+  "version": "1.0.0",
+  "description": "WP-8.0 fixture/verification tooling (plans/PARITY_FIX_PLAN.html §5 row 8.0), plus the WP-8.12 live gate harness in live/. The fixture tools use Node built-ins only; the one pinned dependency (playwright, exact version, lockfile) is for live/ only: npm ci; npx playwright install chromium.",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "gen-opti-fixtures": "node gen_opti_fixtures.mjs",
+    "gen-golden-fixtures": "node gen_golden_fixtures.mjs",
+    "verify-with-pwa": "node verify_with_pwa.mjs",
+    "parity-check": "node parity_check.mjs",
+    "live": "node live/run_live.mjs",
+    "live-plan": "node live/run_live.mjs --plan",
+    "test-live": "node --test live/test/live.test.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  }
+}

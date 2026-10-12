@@ -1,0 +1,585 @@
+{
+ "now": 1789898400000,
+ "tz": "Europe/Bratislava",
+ "tasks": [
+  {
+   "id": "h1",
+   "type": "habit",
+   "title": "Kliky 20",
+   "tags": [
+    "tg1"
+   ],
+   "createdAt": 1764586800000,
+   "updatedAt": 1788256800000,
+   "history": [
+    {
+     "date": 1764673200000,
+     "value": 0,
+     "scoredUp": 2,
+     "scoredDown": 0
+    },
+    {
+     "date": 1774737000000,
+     "value": 1.2,
+     "scoredUp": 1,
+     "scoredDown": 0,
+     "reps": 20,
+     "repCounted": true,
+     "scored": true
+    },
+    {
+     "date": 1774767600000,
+     "value": 1.5,
+     "scoredUp": 3,
+     "scoredDown": 0,
+     "reps": 60,
+     "repCounted": true,
+     "scored": true
+    },
+    {
+     "date": 1787652000000,
+     "value": 2,
+     "scoredUp": 0,
+     "scoredDown": 0,
+     "reps": 50,
+     "repCounted": true,
+     "scored": false
+    },
+    {
+     "date": 1787738400000,
+     "value": 2,
+     "scoredUp": 0,
+     "scoredDown": 0,
+     "reps": -20,
+     "repCounted": true,
+     "scored": false
+    },
+    {
+     "date": 1788239700000,
+     "value": 2.2,
+     "scoredUp": 2,
+     "scoredDown": 1,
+     "reps": 40,
+     "repCounted": true,
+     "scored": true
+    },
+    {
+     "date": 1789725600000,
+     "value": 2.4,
+     "scoredUp": 1,
+     "scoredDown": 0,
+     "scored": true
+    },
+    {
+     "date": 1789884000000,
+     "value": 2.5,
+     "scoredUp": 1,
+     "scoredDown": 0,
+     "reps": 20,
+     "repCounted": true,
+     "scored": true
+    }
+   ]
+  },
+  {
+   "id": "h2",
+   "type": "habit",
+   "title": "Zdvihy x5",
+   "repsPerTap": 5,
+   "tags": [],
+   "createdAt": 1769943600000,
+   "updatedAt": 1769943600000,
+   "history": [
+    {
+     "date": 1770116400000,
+     "value": 0,
+     "scoredUp": 4,
+     "scoredDown": 0
+    },
+    {
+     "date": 1784023200000,
+     "value": 0.5,
+     "scoredUp": 2,
+     "scoredDown": 0,
+     "reps": 10,
+     "repCounted": true,
+     "scored": true
+    },
+    {
+     "date": 1789207200000,
+     "value": 0.8,
+     "scoredUp": 0,
+     "scoredDown": 2,
+     "reps": 0,
+     "repCounted": false,
+     "scored": true
+    }
+   ]
+  },
+  {
+   "id": "h3",
+   "type": "habit",
+   "title": "Read book",
+   "tags": [
+    "tg2"
+   ],
+   "createdAt": 1777975200000,
+   "updatedAt": 1789034400000,
+   "history": [
+    {
+     "date": 1778061600000,
+     "value": 0,
+     "scoredUp": 1,
+     "scoredDown": 0,
+     "reps": 1,
+     "repCounted": true,
+     "scored": true
+    },
+    {
+     "date": 1789466400000,
+     "value": 1,
+     "scoredUp": 3,
+     "scoredDown": 0,
+     "reps": 3,
+     "repCounted": true,
+     "scored": true
+    }
+   ]
+  },
+  {
+   "id": "d1",
+   "type": "daily",
+   "title": "Morning run",
+   "tags": [
+    "tg1"
+   ],
+   "repeat": [
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false
+   ],
+   "streak": 4,
+   "done": false,
+   "createdAt": 1788235200000,
+   "updatedAt": 1788602400000,
+   "history": [
+    {
+     "date": 1788285600000,
+     "value": 1,
+     "completed": true
+    },
+    {
+     "date": 1788372000000,
+     "value": 1,
+     "completed": true
+    },
+    {
+     "date": 1788458400000,
+     "value": 0,
+     "completed": false
+    },
+    {
+     "date": 1788804000000,
+     "value": 1,
+     "completed": true
+    },
+    {
+     "date": 1788890400000,
+     "value": 1,
+     "completed": true
+    },
+    {
+     "date": 1788976800000,
+     "value": 1,
+     "completed": true
+    },
+    {
+     "date": 1789063200000,
+     "value": 1,
+     "completed": true
+    },
+    {
+     "date": 1789668000000,
+     "value": 0,
+     "completed": false
+    }
+   ]
+  },
+  {
+   "id": "d2",
+   "type": "daily",
+   "title": "Meditate",
+   "tags": [
+    "tg1",
+    "tg2"
+   ],
+   "streak": 10,
+   "done": true,
+   "createdAt": 1789012800000,
+   "updatedAt": 1789012800000,
+   "history": [
+    {
+     "date": 1789153200000,
+     "value": 1,
+     "completed": true
+    },
+    {
+     "date": 1789239600000,
+     "value": 1,
+     "completed": true
+    },
+    {
+     "date": 1789844400000,
+     "value": 1,
+     "completed": true
+    }
+   ]
+  },
+  {
+   "id": "t1",
+   "type": "todo",
+   "title": "Buy milk",
+   "tags": [],
+   "done": false,
+   "createdAt": 1789380000000,
+   "updatedAt": 1789552800000,
+   "history": []
+  },
+  {
+   "id": "t2",
+   "type": "todo",
+   "title": "File taxes",
+   "tags": [
+    "tg2"
+   ],
+   "done": true,
+   "completedAt": 1789027200000,
+   "createdAt": 1785578400000,
+   "updatedAt": 1785578400000,
+   "history": [
+    {
+     "date": 1789027200000,
+     "value": 0,
+     "completed": true
+    }
+   ]
+  },
+  {
+   "id": "t3",
+   "type": "todo",
+   "title": "Old no-date",
+   "tags": [],
+   "done": true,
+   "completedAt": 1781949600000,
+   "history": []
+  }
+ ],
+ "tags": [
+  {
+   "id": "tg1",
+   "name": "Fitness",
+   "color": "#48b677"
+  },
+  {
+   "id": "tg2",
+   "name": "Mind",
+   "color": "#50b5e9"
+  },
+  {
+   "id": "tg3",
+   "name": "Empty",
+   "color": "#f74e52"
+  }
+ ],
+ "rewards": [
+  {
+   "id": "r1",
+   "title": "Coffee",
+   "cost": 10,
+   "createdAt": 1788343200000,
+   "updatedAt": 1789812000000
+  },
+  {
+   "id": "r2",
+   "title": "Movie",
+   "cost": 50,
+   "createdAt": 1772362800000,
+   "updatedAt": 1772362800000
+  }
+ ],
+ "metrics": [
+  {
+   "id": "m1",
+   "name": "Kliky",
+   "keyword": "klik",
+   "createdAt": 1,
+   "updatedAt": 1
+  },
+  {
+   "id": "m2",
+   "name": "Zdvihy",
+   "keyword": "zdvih",
+   "createdAt": 2,
+   "updatedAt": 2
+  },
+  {
+   "id": "m3",
+   "name": "Exact",
+   "keyword": "",
+   "exact": true,
+   "habits": [
+    {
+     "id": "h1",
+     "reps": null
+    },
+    {
+     "id": "h3",
+     "reps": 2.5
+    }
+   ],
+   "createdAt": 3,
+   "updatedAt": 3
+  },
+  {
+   "id": "m4",
+   "name": "ExactEmpty",
+   "keyword": "read",
+   "exact": true,
+   "habits": [],
+   "createdAt": 4,
+   "updatedAt": 4
+  }
+ ],
+ "views": [
+  {
+   "id": "v01",
+   "name": "v01",
+   "source": "overview",
+   "group": "day",
+   "chart": "list",
+   "tags": [],
+   "types": []
+  },
+  {
+   "id": "v02",
+   "name": "v02",
+   "source": "tagsummary",
+   "group": "tag",
+   "chart": "bar",
+   "tags": [],
+   "types": []
+  },
+  {
+   "id": "v03",
+   "name": "v03",
+   "source": "completed",
+   "group": "day",
+   "chart": "line",
+   "tags": [],
+   "types": []
+  },
+  {
+   "id": "v04",
+   "name": "v04",
+   "source": "completed",
+   "group": "week",
+   "chart": "bar",
+   "tags": [],
+   "types": []
+  },
+  {
+   "id": "v05",
+   "name": "v05",
+   "source": "created",
+   "group": "tag",
+   "chart": "bar",
+   "tags": [],
+   "types": []
+  },
+  {
+   "id": "v06",
+   "name": "v06",
+   "source": "updated",
+   "group": "type",
+   "chart": "list",
+   "tags": [],
+   "types": []
+  },
+  {
+   "id": "v07",
+   "name": "v07",
+   "source": "incomplete",
+   "group": "type",
+   "chart": "bar",
+   "tags": [],
+   "types": []
+  },
+  {
+   "id": "v08",
+   "name": "v08",
+   "source": "incomplete",
+   "group": "day",
+   "chart": "line",
+   "tags": [],
+   "types": []
+  },
+  {
+   "id": "v09",
+   "name": "v09",
+   "source": "streaks",
+   "group": "day",
+   "chart": "line",
+   "tags": [],
+   "types": []
+  },
+  {
+   "id": "v10",
+   "name": "v10",
+   "source": "streaks",
+   "group": "tag",
+   "chart": "list",
+   "tags": [],
+   "types": []
+  },
+  {
+   "id": "v11",
+   "name": "v11",
+   "source": "tagcount",
+   "group": "month",
+   "chart": "bar",
+   "tags": [],
+   "types": []
+  },
+  {
+   "id": "v12",
+   "name": "v12",
+   "source": "reps",
+   "group": "day",
+   "chart": "heatmap",
+   "tags": [],
+   "types": []
+  },
+  {
+   "id": "v13",
+   "name": "v13",
+   "source": "reps",
+   "group": "tag",
+   "chart": "bar",
+   "tags": [],
+   "types": [
+    "habit"
+   ]
+  },
+  {
+   "id": "v14",
+   "name": "v14",
+   "source": "metric",
+   "group": "week",
+   "chart": "bar",
+   "tags": [],
+   "types": [],
+   "metricId": "m3"
+  },
+  {
+   "id": "v15",
+   "name": "v15",
+   "source": "metric",
+   "group": "day",
+   "chart": "list",
+   "tags": [],
+   "types": [],
+   "metricId": "gone"
+  },
+  {
+   "id": "v16",
+   "name": "v16",
+   "source": "completed",
+   "group": "day",
+   "chart": "list",
+   "tags": [
+    "tg1"
+   ],
+   "types": []
+  },
+  {
+   "id": "v17",
+   "name": "v17",
+   "source": "incomplete",
+   "group": "week",
+   "chart": "line",
+   "tags": [],
+   "types": [
+    "daily"
+   ]
+  },
+  {
+   "id": "v18",
+   "name": "v18",
+   "source": "created",
+   "group": "month",
+   "chart": "heatmap",
+   "tags": [],
+   "types": []
+  },
+  {
+   "id": "v19",
+   "name": "v19",
+   "source": "reps",
+   "group": "type",
+   "chart": "line",
+   "tags": [],
+   "types": []
+  },
+  {
+   "id": "v20",
+   "name": "v20",
+   "source": "streaks",
+   "group": "day",
+   "chart": "heatmap",
+   "tags": [],
+   "types": []
+  }
+ ],
+ "prefCases": [
+  {
+   "name": "90d",
+   "fromOff": 90,
+   "toOff": 0,
+   "snap": "90d"
+  },
+  {
+   "name": "7d",
+   "fromOff": 7,
+   "toOff": 0,
+   "snap": "7d"
+  },
+  {
+   "name": "all",
+   "fromOff": 294,
+   "toOff": 0,
+   "snap": "all"
+  },
+  {
+   "name": "custom",
+   "fromOff": 200,
+   "toOff": 10,
+   "snap": null
+  },
+  {
+   "name": "zeroFrom",
+   "fromOff": 0,
+   "toOff": 0,
+   "snap": null
+  },
+  {
+   "name": "beyond",
+   "fromOff": 5000,
+   "toOff": 0,
+   "snap": null
+  }
+ ]
+}

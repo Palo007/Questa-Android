@@ -1,0 +1,440 @@
+{
+ "rev": "7d5d4f3",
+ "tasks": [
+  {
+   "id": "h1",
+   "type": "habit",
+   "title": "Drink water",
+   "quickLog": true
+  },
+  {
+   "id": "h2",
+   "type": "habit",
+   "title": "Both but no down",
+   "quickLog": "both",
+   "down": false
+  },
+  {
+   "id": "h3",
+   "type": "habit",
+   "title": "Down only",
+   "quickLog": "down",
+   "notes": "less sugar"
+  },
+  {
+   "id": "h4",
+   "type": "habit",
+   "title": "No shortcut"
+  },
+  {
+   "id": "h5",
+   "type": "habit",
+   "title": "Č\"a\\j\n  \u0001 é😀",
+   "quickLog": "both"
+  },
+  {
+   "id": "h6",
+   "type": "habit",
+   "title": "",
+   "quickLog": "down",
+   "down": false
+  },
+  {
+   "id": "d1",
+   "type": "daily",
+   "title": "Stretch",
+   "quickLog": true,
+   "repeat": [
+    true,
+    false,
+    true,
+    false,
+    true,
+    false,
+    true
+   ],
+   "reminders": [
+    {
+     "time": "08:00",
+     "enabled": true,
+     "kind": "daily",
+     "days": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "time": "09:00",
+     "enabled": false
+    }
+   ]
+  },
+  {
+   "id": "t1",
+   "type": "todo",
+   "title": "Done todo",
+   "done": true,
+   "reminders": [
+    {
+     "time": "10:00",
+     "enabled": true
+    }
+   ]
+  },
+  {
+   "id": "t2",
+   "type": "todo",
+   "title": "Open todo",
+   "notes": "call mom",
+   "reminders": [
+    {
+     "time": "",
+     "enabled": true
+    },
+    {
+     "time": "11:30",
+     "enabled": true,
+     "kind": "once",
+     "date": "2026-09-30",
+     "days": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ]
+    }
+   ]
+  },
+  {
+   "id": "h7",
+   "type": "habit",
+   "title": "Weekly",
+   "reminders": [
+    {
+     "time": "07:15",
+     "enabled": true,
+     "kind": "weekly",
+     "days": [
+      false,
+      true,
+      false,
+      true,
+      false,
+      true,
+      false
+     ]
+    },
+    {
+     "time": "07:20",
+     "enabled": true,
+     "days": [
+      true,
+      true
+     ]
+    }
+   ]
+  }
+ ],
+ "up": [
+  {
+   "path": "/inbox-meta/habits.json",
+   "text": "{\"v\":1,\"updatedAt\":1790000000000,\"habits\":[{\"id\":\"h1\",\"title\":\"Drink water\",\"quickLog\":true,\"dirs\":[1]},{\"id\":\"h2\",\"title\":\"Both but no down\",\"quickLog\":true,\"dirs\":[1]},{\"id\":\"h3\",\"title\":\"Down only\",\"quickLog\":true,\"dirs\":[-1]},{\"id\":\"h4\",\"title\":\"No shortcut\",\"quickLog\":false,\"dirs\":[]},{\"id\":\"h5\",\"title\":\"Č\\\"a\\\\j\\n  \\u0001 é😀\",\"quickLog\":true,\"dirs\":[1,-1]},{\"id\":\"h6\",\"title\":\"\",\"quickLog\":false,\"dirs\":[]},{\"id\":\"h7\",\"title\":\"Weekly\",\"quickLog\":false,\"dirs\":[]}]}"
+  },
+  {
+   "path": "/inbox-meta/reminders.json",
+   "text": "{\"v\":1,\"updatedAt\":1790000000000,\"items\":[{\"key\":\"d1#0\",\"taskId\":\"d1\",\"type\":\"daily\",\"title\":\"Stretch\",\"body\":\"Check off your daily task!\",\"time\":\"08:00\",\"date\":null,\"days\":[true,false,true,false,true,false,true]},{\"key\":\"t2#1\",\"taskId\":\"t2\",\"type\":\"todo\",\"title\":\"Open todo\",\"body\":\"To-Do due: call mom\",\"time\":\"11:30\",\"date\":\"2026-09-30\",\"days\":null},{\"key\":\"h7#0\",\"taskId\":\"h7\",\"type\":\"habit\",\"title\":\"Weekly\",\"body\":\"Time to score your habit!\",\"time\":\"07:15\",\"date\":null,\"days\":[false,true,false,true,false,true,false]},{\"key\":\"h7#1\",\"taskId\":\"h7\",\"type\":\"habit\",\"title\":\"Weekly\",\"body\":\"Time to score your habit!\",\"time\":\"07:20\",\"date\":null,\"days\":null}]}"
+  }
+ ],
+ "cfg": {
+  "inboxMetaHash": "c3a66122:429",
+  "inboxRemindersHash": "3cbf0f27:618"
+ },
+ "second": false,
+ "hashes": [
+  {
+   "input": "{}",
+   "hash": "5465b825:2"
+  },
+  {
+   "input": "[]",
+   "hash": "741638a5:2"
+  },
+  {
+   "input": "",
+   "hash": "811c9dc5:0"
+  },
+  {
+   "input": "Č😀 ",
+   "hash": "b44ce42a:4"
+  },
+  {
+   "input": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "hash": "1dd9658d:1000"
+  }
+ ],
+ "recs": {
+  "valid_min": [
+   "{\"v\":1,\"id\":\"abcd1234\",\"kind\":\"habit\",\"habitId\":\"h1\",\"dir\":1,\"ts\":1790000000000}",
+   "abcd1234.json"
+  ],
+  "valid_full": [
+   "{\"v\":1,\"id\":\"0b3c5a2e-1111-4222-8333-944445555666\",\"kind\":\"habit\",\"habitId\":\"h1\",\"dir\":-1,\"ts\":1790000000123,\"tzOffsetMin\":-120,\"src\":\"android-shortcut\"}",
+   "0b3c5a2e-1111-4222-8333-944445555666.json"
+  ],
+  "v_float": [
+   "{\"v\":1.0,\"id\":\"abcd1234\",\"kind\":\"habit\",\"habitId\":\"h1\",\"dir\":1.0,\"ts\":1790000000000.0}",
+   "abcd1234.json"
+  ],
+  "ts_frac": [
+   "{\"v\":1,\"id\":\"abcd1234\",\"kind\":\"habit\",\"habitId\":\"h1\",\"dir\":1,\"ts\":1.5}",
+   "abcd1234.json"
+  ],
+  "v_string": [
+   "{\"v\":\"1\",\"id\":\"abcd1234\",\"kind\":\"habit\",\"habitId\":\"h1\",\"dir\":1,\"ts\":5}",
+   "abcd1234.json"
+  ],
+  "id_short": [
+   "{\"v\":1,\"id\":\"abc1234\",\"kind\":\"habit\",\"habitId\":\"h1\",\"dir\":1,\"ts\":5}",
+   "abc1234.json"
+  ],
+  "id_65": [
+   "{\"v\":1,\"id\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"kind\":\"habit\",\"habitId\":\"h1\",\"dir\":1,\"ts\":5}",
+   "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json"
+  ],
+  "id_64": [
+   "{\"v\":1,\"id\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"kind\":\"habit\",\"habitId\":\"h1\",\"dir\":1,\"ts\":5}",
+   "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json"
+  ],
+  "id_bad_char": [
+   "{\"v\":1,\"id\":\"abcd_1234\",\"kind\":\"habit\",\"habitId\":\"h1\",\"dir\":1,\"ts\":5}",
+   "abcd_1234.json"
+  ],
+  "name_case": [
+   "{\"v\":1,\"id\":\"abcd1234\",\"kind\":\"habit\",\"habitId\":\"h1\",\"dir\":1,\"ts\":5}",
+   "abcd1234.JSON"
+  ],
+  "kind_missing": [
+   "{\"v\":1,\"id\":\"abcd1234\",\"habitId\":\"h1\",\"dir\":1,\"ts\":5}",
+   "abcd1234.json"
+  ],
+  "kind_other": [
+   "{\"v\":1,\"id\":\"abcd1234\",\"kind\":\"daily\",\"habitId\":\"h1\",\"dir\":1,\"ts\":5}",
+   "abcd1234.json"
+  ],
+  "habit_empty": [
+   "{\"v\":1,\"id\":\"abcd1234\",\"kind\":\"habit\",\"habitId\":\"\",\"dir\":1,\"ts\":5}",
+   "abcd1234.json"
+  ],
+  "habit_num": [
+   "{\"v\":1,\"id\":\"abcd1234\",\"kind\":\"habit\",\"habitId\":7,\"dir\":1,\"ts\":5}",
+   "abcd1234.json"
+  ],
+  "dir_2": [
+   "{\"v\":1,\"id\":\"abcd1234\",\"kind\":\"habit\",\"habitId\":\"h1\",\"dir\":2,\"ts\":5}",
+   "abcd1234.json"
+  ],
+  "dir_str": [
+   "{\"v\":1,\"id\":\"abcd1234\",\"kind\":\"habit\",\"habitId\":\"h1\",\"dir\":\"1\",\"ts\":5}",
+   "abcd1234.json"
+  ],
+  "ts_neg": [
+   "{\"v\":1,\"id\":\"abcd1234\",\"kind\":\"habit\",\"habitId\":\"h1\",\"dir\":1,\"ts\":-5}",
+   "abcd1234.json"
+  ],
+  "ts_str": [
+   "{\"v\":1,\"id\":\"abcd1234\",\"kind\":\"habit\",\"habitId\":\"h1\",\"dir\":1,\"ts\":\"5\"}",
+   "abcd1234.json"
+  ],
+  "tz_str": [
+   "{\"v\":1,\"id\":\"abcd1234\",\"kind\":\"habit\",\"habitId\":\"h1\",\"dir\":1,\"ts\":5,\"tzOffsetMin\":\"60\"}",
+   "abcd1234.json"
+  ],
+  "tz_frac": [
+   "{\"v\":1,\"id\":\"abcd1234\",\"kind\":\"habit\",\"habitId\":\"h1\",\"dir\":1,\"ts\":5,\"tzOffsetMin\":330.5}",
+   "abcd1234.json"
+  ],
+  "src_empty": [
+   "{\"v\":1,\"id\":\"abcd1234\",\"kind\":\"habit\",\"habitId\":\"h1\",\"dir\":1,\"ts\":5,\"src\":\"\"}",
+   "abcd1234.json"
+  ],
+  "src_long": [
+   "{\"v\":1,\"id\":\"abcd1234\",\"kind\":\"habit\",\"habitId\":\"h1\",\"dir\":1,\"ts\":5,\"src\":\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"}",
+   "abcd1234.json"
+  ],
+  "src_num": [
+   "{\"v\":1,\"id\":\"abcd1234\",\"kind\":\"habit\",\"habitId\":\"h1\",\"dir\":1,\"ts\":5,\"src\":3}",
+   "abcd1234.json"
+  ],
+  "array": [
+   "[1,2]",
+   "abcd1234.json"
+  ],
+  "json_null": [
+   "null",
+   "abcd1234.json"
+  ],
+  "empty": [
+   "",
+   "abcd1234.json"
+  ],
+  "trailing": [
+   "{\"v\":1,\"id\":\"abcd1234\",\"kind\":\"habit\",\"habitId\":\"h1\",\"dir\":1,\"ts\":5} x",
+   "abcd1234.json"
+  ],
+  "dup_key": [
+   "{\"v\":1,\"id\":\"abcd1234\",\"kind\":\"habit\",\"habitId\":\"h1\",\"dir\":1,\"dir\":-1,\"ts\":5}",
+   "abcd1234.json"
+  ],
+  "extra_field": [
+   "{\"v\":1,\"id\":\"abcd1234\",\"kind\":\"habit\",\"habitId\":\"h1\",\"dir\":1,\"ts\":5,\"extra\":{\"a\":1}}",
+   "abcd1234.json"
+  ]
+ },
+ "parsed": {
+  "valid_min": {
+   "v": 1,
+   "id": "abcd1234",
+   "kind": "habit",
+   "habitId": "h1",
+   "dir": 1,
+   "ts": 1790000000000,
+   "tzOffsetMin": null,
+   "src": "android-shortcut"
+  },
+  "valid_full": {
+   "v": 1,
+   "id": "0b3c5a2e-1111-4222-8333-944445555666",
+   "kind": "habit",
+   "habitId": "h1",
+   "dir": -1,
+   "ts": 1790000000123,
+   "tzOffsetMin": -120,
+   "src": "android-shortcut"
+  },
+  "v_float": {
+   "v": 1,
+   "id": "abcd1234",
+   "kind": "habit",
+   "habitId": "h1",
+   "dir": 1,
+   "ts": 1790000000000,
+   "tzOffsetMin": null,
+   "src": "android-shortcut"
+  },
+  "ts_frac": {
+   "v": 1,
+   "id": "abcd1234",
+   "kind": "habit",
+   "habitId": "h1",
+   "dir": 1,
+   "ts": 1.5,
+   "tzOffsetMin": null,
+   "src": "android-shortcut"
+  },
+  "v_string": null,
+  "id_short": null,
+  "id_65": null,
+  "id_64": {
+   "v": 1,
+   "id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "kind": "habit",
+   "habitId": "h1",
+   "dir": 1,
+   "ts": 5,
+   "tzOffsetMin": null,
+   "src": "android-shortcut"
+  },
+  "id_bad_char": null,
+  "name_case": null,
+  "kind_missing": null,
+  "kind_other": null,
+  "habit_empty": null,
+  "habit_num": null,
+  "dir_2": null,
+  "dir_str": null,
+  "ts_neg": null,
+  "ts_str": null,
+  "tz_str": {
+   "v": 1,
+   "id": "abcd1234",
+   "kind": "habit",
+   "habitId": "h1",
+   "dir": 1,
+   "ts": 5,
+   "tzOffsetMin": null,
+   "src": "android-shortcut"
+  },
+  "tz_frac": {
+   "v": 1,
+   "id": "abcd1234",
+   "kind": "habit",
+   "habitId": "h1",
+   "dir": 1,
+   "ts": 5,
+   "tzOffsetMin": 330.5,
+   "src": "android-shortcut"
+  },
+  "src_empty": {
+   "v": 1,
+   "id": "abcd1234",
+   "kind": "habit",
+   "habitId": "h1",
+   "dir": 1,
+   "ts": 5,
+   "tzOffsetMin": null,
+   "src": "android-shortcut"
+  },
+  "src_long": {
+   "v": 1,
+   "id": "abcd1234",
+   "kind": "habit",
+   "habitId": "h1",
+   "dir": 1,
+   "ts": 5,
+   "tzOffsetMin": null,
+   "src": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  },
+  "src_num": {
+   "v": 1,
+   "id": "abcd1234",
+   "kind": "habit",
+   "habitId": "h1",
+   "dir": 1,
+   "ts": 5,
+   "tzOffsetMin": null,
+   "src": "android-shortcut"
+  },
+  "array": null,
+  "json_null": null,
+  "empty": null,
+  "trailing": null,
+  "dup_key": {
+   "v": 1,
+   "id": "abcd1234",
+   "kind": "habit",
+   "habitId": "h1",
+   "dir": -1,
+   "ts": 5,
+   "tzOffsetMin": null,
+   "src": "android-shortcut"
+  },
+  "extra_field": {
+   "v": 1,
+   "id": "abcd1234",
+   "kind": "habit",
+   "habitId": "h1",
+   "dir": 1,
+   "ts": 5,
+   "tzOffsetMin": null,
+   "src": "android-shortcut"
+  }
+ }
+}

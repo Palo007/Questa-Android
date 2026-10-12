@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- WP-8.12-T1: debug builds only (merged into the dev APK, absent from release). -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <!-- DUMP: only adb shell / system can send these broadcasts. -->
+        <receiver
+            android:name="com.example.debug.DebugClockReceiver"
+            android:exported="true"
+            android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="${applicationId}.DEBUG_SET_CLOCK_OFFSET" />
+                <action android:name="${applicationId}.DEBUG_GET_CLOCK_OFFSET" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>

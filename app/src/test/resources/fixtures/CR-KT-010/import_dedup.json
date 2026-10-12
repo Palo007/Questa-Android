@@ -1,0 +1,86 @@
+{
+  "_source": "Opti app.js eventMergeSig/eventMergeFilter (Map form, as the import at app.js:8553-8565), run in Node from the live file",
+  "existing": [
+    {
+      "ts": 1759900000000,
+      "uid": "u1",
+      "dev": "dev-a",
+      "kind": "habitTap",
+      "taskId": "h1",
+      "dir": 1
+    },
+    {
+      "ts": 1759900000001,
+      "uid": "u2",
+      "dev": "dev-a",
+      "kind": "lifecycle",
+      "detail": "visibilitychange"
+    }
+  ],
+  "incoming": [
+    {
+      "ts": 1759900000000,
+      "uid": "rep-x1",
+      "dev": "dev-pwa",
+      "kind": "habitTap",
+      "taskId": "h1",
+      "dir": 1,
+      "imported": true,
+      "origDev": "dev-a"
+    },
+    {
+      "ts": 1759900000001,
+      "uid": "u2",
+      "dev": "dev-a",
+      "kind": "lifecycle",
+      "detail": "visibilitychange"
+    },
+    {
+      "ts": 1759900000001,
+      "uid": "rep-x3",
+      "dev": "dev-pwa",
+      "kind": "lifecycle",
+      "detail": "pagehide",
+      "imported": true
+    },
+    {
+      "ts": 1759900000002,
+      "uid": "rep-x4",
+      "dev": "dev-pwa",
+      "kind": "complete",
+      "taskType": "daily",
+      "taskId": "d1",
+      "imported": true
+    },
+    {
+      "ts": 1759900000002,
+      "uid": "rep-x5",
+      "dev": "dev-pwa",
+      "kind": "complete",
+      "taskType": "daily",
+      "taskId": "d1",
+      "imported": true
+    },
+    {
+      "ts": 1759900000003,
+      "uid": "u6",
+      "dev": "dev-a",
+      "kind": "miss",
+      "taskId": "d2"
+    }
+  ],
+  "expected_added_uids": [
+    "rep-x3",
+    "rep-x4",
+    "u6"
+  ],
+  "expected_skipped": 3,
+  "sigs": {
+    "rep-x1": "1759900000000|habitTap|h1|1|0|||",
+    "u2": "1759900000001|lifecycle||0|0|visibilitychange||",
+    "rep-x3": "1759900000001|lifecycle||0|0|pagehide||",
+    "rep-x4": "1759900000002|complete|d1|0|0|||",
+    "rep-x5": "1759900000002|complete|d1|0|0|||",
+    "u6": "1759900000003|miss|d2|0|0|||"
+  }
+}

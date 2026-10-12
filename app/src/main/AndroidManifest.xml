@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Dropbox sync and OAuth. Declared here, not left to a library's merged manifest. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- WP-8.11 reminders (as Bubblewrap). USE_EXACT_ALARM is restricted by Play policy; see WP-8.I_W3_NOTES.md. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission
+        android:name="android.permission.SCHEDULE_EXACT_ALARM"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <!-- WP-8.16 DeviceBuzz (exact buzz lengths). Normal permission, no prompt. -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- WP-8.12-U1: Android 11+ package visibility, so CustomTabsClient.getPackageName finds the browser. -->
+    <queries>
+        <intent>
+            <action android:name="android.support.customtabs.action.CustomTabsService" />
+        </intent>
+    </queries>
+
+    <application
+        android:name=".QuestaApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyApplication">
+        <!-- Rotation must not recreate the activity: DashboardScreen keeps the open tab, the sheet
+             stack and every editor draft in plain remember {} state, so a destroy/create would jump
+             to Habits and drop unsaved edits. Compose recomposes against the new config on its own. -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MyApplication">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- Dropbox OAuth PKCE redirect (see SyncManager.getAuthorizationUri / handleRedirectUri) -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="${oauthScheme}"
+                    android:host="oauth" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <!-- WP-8.11 reminder alarms and re-arm on boot / time / zone / update. -->
+        <receiver
+            android:name=".reminders.ReminderReceiver"
+            android:exported="false" />
+        <receiver
+            android:name=".reminders.ReminderBootReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+        <!-- P14 / CR-TWA-005: no-op marker the TWA detects, so only one app fires reminders. Exported, no permission. -->
+        <receiver
+            android:name=".reminders.ReminderOwnerReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="io.github.palo007.questa.action.REMINDER_OWNER" />
+            </intent-filter>
+        </receiver>
+
+        <!-- WP-8.13: headless target of the long-press habit items. Not exported: only our own shortcuts start it. -->
+        <activity
+            android:name=".launcher.QuickLogActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:taskAffinity="" />
+        <!-- WP-8.13: Android Settings > Apps > Questa gear -> Settings > Dropbox. Reads no extras. -->
+        <activity
+            android:name=".launcher.QuickLogSettingsActivity"
+            android:exported="true"
+            android:label="Questa quick log"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:excludeFromRecents="true"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.APPLICATION_PREFERENCES" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
