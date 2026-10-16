@@ -32,6 +32,12 @@ interface EventLogDao {
     @Query("SELECT * FROM event_logs WHERE kind IN ('complete', 'uncomplete') ORDER BY timestamp ASC, id ASC")
     suspend fun getCompletionEventsSync(): List<EventLogEntity>
 
+    // CR-KT-023: the bulk-reps rows the history replay may use (RepsReplay), up to the pinned
+    // boundary id, in the replay order (time, then insert order). RepsReplay.isLocal filters dev/
+    // imported/synthetic in Kotlin so the fixture-pinned rule has one source.
+    @Query("SELECT * FROM event_logs WHERE kind = 'habitReps' AND id <= :maxId ORDER BY timestamp ASC, id ASC")
+    suspend fun getHabitRepsUpToSync(maxId: Long): List<EventLogEntity>
+
     // WP-8.22-B (review 44 item 2): Settings "Waiting to upload" -- how many rows
     // EvtUploadPolicy.uploadable(e, dev, since) would pick, as one COUNT (no rows loaded).
     // Must stay equal to EvtUploadPolicy.ownMonthRecord + `ts > since` (UploadBacklogCountTest).

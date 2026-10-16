@@ -898,31 +898,11 @@ class MainViewModel(
 
     fun addHabitReps(taskId: String, reps: Int, isPositive: Boolean) {
         viewModelScope.launch {
-            val task = repository.allTasks.first().find { it.id == taskId } ?: return@launch
-            // WP-8.10 (§4.4): the HLC stamp (Opti `t.updatedAt = now()`), not the wall clock.
-            // [DEFERRED_OPEN_QUESTION] Opti bulk reps do not touch cUp/cDown (app.js REP sheet); WP-8.16.
-            val stamp = repository.hlcClock.now()
-            val updatedTask = if (isPositive) {
-                task.copy(
-                    cUp = task.cUp + reps,
-                    updatedAt = stamp
-                )
-            } else {
-                task.copy(
-                    cDown = task.cDown + reps,
-                    updatedAt = stamp
-                )
-            }
-            repository.updateTask(updatedTask)
-            repository.insertLog(EventLogEntity(
-                timestamp = repository.physicalNow(),
-                kind = "habitReps",
-                direction = if (isPositive) 1 else -1,
-                taskId = task.id,
-                taskTitle = task.title,
-                reps = reps,
-                value = task.value
-            ))
+            // CR-KT-023: Opti addReps(id, n) with the signed n -- the repository writes the history
+            // point (Analytics' reps metric reads it), cUp/cDown, the HLC updatedAt and the
+            // unchanged habitReps event row.
+            val n = if (isPositive) reps else -reps
+            repository.addHabitReps(taskId, n) ?: return@launch
             // WP-8.16: Opti addReps toasts, with no floating text (app.js:2531).
             _toasts.tryEmit((if (isPositive) "+" else "-") + reps + " reps · no reward")
             _rewardBursts.tryEmit(RewardBurst(0, 0.0, text = (if (isPositive) "+" else "-") + reps + " reps"))
@@ -1203,9 +1183,11 @@ class MainViewModel(
     fun repairCompletionHistory() {
         viewModelScope.launch {
             val report = repository.backfillCompletionHistory()
+            // CR-KT-023: the one-shot bulk-reps replay too (a no-op once the boot hook ran it).
+            val reps = repository.backfillRepsHistory()
             _toasts.tryEmit(
-                if (report.restored == 0) "History repair: nothing to restore"
-                else "History repair: ${report.restored} day(s) restored"
+                if (report.restored == 0 && reps.replayed == 0) "History repair: nothing to restore"
+                else "History repair: ${report.restored} day(s), ${reps.replayed} rep entr${if (reps.replayed == 1) "y" else "ies"} restored"
             )
         }
     }

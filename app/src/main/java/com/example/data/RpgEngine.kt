@@ -392,6 +392,21 @@ object RpgEngine {
     }
 
     /**
+     * CR-KT-023: Opti `addReps(id, n)` (3581f49 app.js:2722-2734), the bulk "Log N reps" sheet.
+     * [n] is SIGNED (negative for the minus sheet). No scoring: value/XP/gold/HP stay; positive
+     * reps add to `cUp`, negative to `cDown`; the history point is the `logHistory` patch
+     * `{value: t.value, reps: n, repCounted: true, scored: false}` dated [atMs]; `updatedAt` is the
+     * HLC stamp [now]. Pre-CR-KT-023 Kotlin wrote no history point here, so Analytics' reps metric
+     * never saw bulk reps ([RepsReplay] restores the old ones).
+     */
+    fun addReps(task: TaskEntity, n: Int, now: Long, atMs: Long): TaskEntity = task.copy(
+        cUp = if (n > 0) task.cUp + n else task.cUp,
+        cDown = if (n > 0) task.cDown else task.cDown + (-n),
+        history = logHistory(task.history, HistoryPatch(value = task.value, reps = n, repCounted = true, scored = false), atMs),
+        updatedAt = now,
+    )
+
+    /**
      * Opti saveTask counter loops (027e371 app.js:6906-6950): the habit counter edited in the task
      * editor. [upDelta]/[downDelta] are the user's own +/- in the editor (Opti: sheet copy minus the
      * open-time baseline `_base`); the task gets [newCUp]/[newCDown]. The returned
