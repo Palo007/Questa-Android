@@ -75,9 +75,9 @@ internal class ShortcutPublisherStatesTest : PublisherTestBase() {
         assertEquals(SettingsRoute.Dropbox, settingsRouteForExtra(i.getStringExtra(EXTRA_OPEN_SETTINGS)))
     }
 
-    @Test fun linked_upToThreeHabitItems_ranks0to2_intentsTargetQuickLog() {
+    @Test fun linked_upToFourHabitItems_ranks0to3_intentsTargetQuickLog() {
         publish(AuthState.LINKED, SCRIPT_HABITS)
-        assertEquals(listOf("0:ql-h-h1=+1 H1", "1:ql-h-h1-down=−1 H1", "2:ql-h-h2=+1 H2"), menu())
+        assertEquals(listOf("0:ql-h-h1=+1 H1", "1:ql-h-h1-down=−1 H1", "2:ql-h-h2=+1 H2", "3:ql-h-h3-down=−1 H3"), menu())
         val down = dynamic()[1]
         assertEquals("−1 H1", down.longLabel)
         val i = down.intent
@@ -88,9 +88,9 @@ internal class ShortcutPublisherStatesTest : PublisherTestBase() {
         assertEquals(-1, i.getIntExtra(QuickLogActivity.EXTRA_DIR, 0))
     }
 
-    @Test fun reconnectRequired_reconnectAtRank0_plusTwoHabits() {
+    @Test fun reconnectRequired_reconnectAtRank0_plusThreeHabitItems() {
         publish(AuthState.RECONNECT_REQUIRED, SCRIPT_HABITS)
-        assertEquals(listOf("0:ql-connect=Reconnect Dropbox", "1:ql-h-h1=+1 H1", "2:ql-h-h1-down=−1 H1"), menu())
+        assertEquals(listOf("0:ql-connect=Reconnect Dropbox", "1:ql-h-h1=+1 H1", "2:ql-h-h1-down=−1 H1", "3:ql-h-h2=+1 H2"), menu())
         assertEquals("Reconnect Dropbox for quick log", dynamic()[0].longLabel)
     }
 
@@ -132,7 +132,7 @@ internal class ShortcutPublisherStatesTest : PublisherTestBase() {
 
     @Test fun desired_isPure_andSignatureFormat() {
         val d = ShortcutPublisher.desired(AuthState.LINKED, SCRIPT_HABITS)
-        assertEquals("ql-h-h1=+1 H1|ql-h-h1-down=−1 H1|ql-h-h2=+1 H2", ShortcutPublisher.signature(d))
+        assertEquals("ql-h-h1=+1 H1|ql-h-h1-down=−1 H1|ql-h-h2=+1 H2|ql-h-h3-down=−1 H3", ShortcutPublisher.signature(d))
         assertEquals(1, ShortcutPublisher.desired(AuthState.NOT_LINKED, null).size)
         assertEquals(1, ShortcutPublisher.desired(AuthState.RECONNECT_REQUIRED, null).size)
     }
@@ -146,7 +146,7 @@ internal class SignatureSkipTest : PublisherTestBase() {
 
     @Test fun samePublishTwice_zeroAddCalls_andSignatureStored() {
         publish(AuthState.LINKED, SCRIPT_HABITS)
-        assertEquals("ql-h-h1=+1 H1|ql-h-h1-down=−1 H1|ql-h-h2=+1 H2", sig.value)
+        assertEquals("ql-h-h1=+1 H1|ql-h-h1-down=−1 H1|ql-h-h2=+1 H2|ql-h-h3-down=−1 H3", sig.value)
         mockkStatic(ShortcutManagerCompat::class)
         repeat(15) { publish(AuthState.LINKED, SCRIPT_HABITS) }
         verify(exactly = 0) { ShortcutManagerCompat.addDynamicShortcuts(any(), any()) }
@@ -168,7 +168,7 @@ internal class SignatureSkipTest : PublisherTestBase() {
         publish(AuthState.LINKED, SCRIPT_HABITS)
         ShortcutManagerCompat.removeAllDynamicShortcuts(ctx)
         publish(AuthState.LINKED, SCRIPT_HABITS)
-        assertEquals(3, dynamic().size)
+        assertEquals(4, dynamic().size)
     }
 
     @Test fun addRefused_signatureNotStored_nextPublishRetries() {
@@ -178,7 +178,7 @@ internal class SignatureSkipTest : PublisherTestBase() {
         assertNull(sig.value)
         unmockkStatic(ShortcutManagerCompat::class)
         publish(AuthState.LINKED, SCRIPT_HABITS)
-        assertEquals(3, dynamic().size)
+        assertEquals(4, dynamic().size)
     }
 }
 

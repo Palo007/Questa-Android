@@ -38,7 +38,7 @@ import kotlinx.coroutines.sync.withLock
 object ShortcutPublisher {
     const val PREFIX = "ql-"
     const val CONNECT_ID = "ql-connect"
-    const val MAX_ITEMS = 3
+    const val MAX_ITEMS = 4
     const val LABEL_MAX = 25
     const val ORPHAN_MESSAGE = "Habit no longer in Questa"
 

@@ -4,7 +4,7 @@ import com.example.data.inbox.QuickLogHabit
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-/** WP-8.13 card: pick vectors, Bubblewrap HabitList.kt:53-67 (caps 0/2/3). */
+/** WP-8.13 card: pick vectors, Bubblewrap HabitList.kt:53-67 (caps 0/2/3/4). */
 class PickShortcutItemsTest {
     private fun h(id: String, vararg dirs: Int) = QuickLogHabit(id, id.uppercase(), dirs.isNotEmpty(), dirs.toList())
     private fun List<ShortcutItem>.v() = map { it.habit.id + (if (it.dir == 1) "+" else "-") }
@@ -14,6 +14,10 @@ class PickShortcutItemsTest {
 
     @Test fun cap3_plusBeforeMinus_inOrder() {
         assertEquals(listOf("h1+", "h1-", "h2+"), pickShortcutItems(habits, 3).v())
+    }
+
+    @Test fun cap4_plusBeforeMinus_inOrder() {
+        assertEquals(listOf("h1+", "h1-", "h2+", "h3-"), pickShortcutItems(habits, 4).v())
     }
 
     @Test fun cap2_bothItemsOfOneHabitCountTwo() {

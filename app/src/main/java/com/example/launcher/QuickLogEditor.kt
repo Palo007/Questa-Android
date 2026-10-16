@@ -32,7 +32,7 @@ import com.example.ui.theme.TextSecondary
  */
 object QuickLogEditorText {
     const val LABEL = "Android shortcut"
-    const val HINT = "Long-press items in the Android app. Only the buttons this habit has are used. The menu shows about 3 items."
+    const val HINT = "Long-press items in the Android app. Only the buttons this habit has are used. The menu shows about 4 items."
     /** Opti's option order and labels. */
     val OPTIONS: List<Pair<QuickLogMode, String>> = listOf(
         QuickLogMode.OFF to "Off",
