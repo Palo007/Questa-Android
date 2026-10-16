@@ -161,7 +161,7 @@ class CrKt020PersistTest {
     }
 
     @Test
-    fun `todo completion persists completedAt and its point - un-tick keeps completedAt (held CR-PWA-004)`() {
+    fun `todo completion persists completedAt and its point - un-tick deletes completedAt (CR-PWA-004)`() {
         val todo = TaskEntity(id = "t1", type = "todo", title = "Buy milk", difficulty = "easy", value = 1.0, createdAt = 1, updatedAt = 1)
         runBlocking {
             repository.insertTask(todo)
@@ -178,15 +178,16 @@ class CrKt020PersistTest {
 
         runBlocking { assertTrue(repository.uncompleteTask("t1")) }
         val u = stored("t1")
-        // [DEFERRED_OPEN_QUESTION] CR-PWA-004 (RE-PWA-021 quirk a): today's PWA uncompleteTodo
-        // keeps `completedAt` (app.js:2569-2580); the fixed one deletes it. Held as-is, so the
-        // held value is what this test pins.
-        assertEquals(nowMs, u.completedAt)
+        // CR-PWA-004 (app.js:2572 at Opti 338d430): the fixed un-tick DELETES `completedAt` -- the
+        // analytics todo fallback (`!any && t.completedAt`, app.js:4428) must not count a reverted
+        // todo. (Pre-fix this kept the stamp; that old behavior is held in the afdae43 fixture.)
+        assertNull(u.completedAt)
         assertEquals("the point is kept -- _histCreated was never true for a todo", 1, u.history.size)
         assertEquals(false, u.history.single().completed)
         assertEquals(1.0, u.history.single().value!!, 1e-12)
         assertNull(u.history.single().reward)
         assertNull(u.doneAt)
         assertFalse(SerializationEngine.buildTaskJson(u).containsKey("_histCreated"))
+        assertFalse("the deleted stamp is not emitted", SerializationEngine.buildTaskJson(u).containsKey("completedAt"))
     }
 }

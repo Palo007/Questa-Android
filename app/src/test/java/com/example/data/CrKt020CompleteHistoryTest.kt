@@ -31,16 +31,20 @@ import java.time.ZoneId
  * block out of app.js at runtime; TZ=UTC; never edited after ACCEPTED — PROTOCOL P4).
  *
  * Driving, mirroring the generator: [SerializationEngine.parseTaskEntity] on `task_before`, one
- * engine call with the generator's frozen clocks (`nowMs` = `now_ms` / `now_ms_2`; HLC `now()` =
- * `hlc_base + 1` on completion, `+2` on the un-tick), then [SerializationEngine.buildTaskJson]
- * compared field-for-field (key order-insensitive — key order is not on the wire — with JS number
- * semantics, `1 == 1.0`). `daily_complete_paused` is the fixture's one paused case (the
- * generator's `c.paused`, the value the fixture JSON does not carry).
+ * engine call with the generator's frozen clocks (`nowMs` = `now_ms`; HLC `now()` = `hlc_base + 1`
+ * on completion, `+2` on the un-tick — the un-tick reads no wall clock since CR-PWA-004 removed
+ * the PWA's day test), then [SerializationEngine.buildTaskJson] compared field-for-field (key
+ * order-insensitive — key order is not on the wire — with JS number semantics, `1 == 1.0`).
+ * `daily_complete_paused` is the fixture's one paused case (the generator's `c.paused`, the value
+ * the fixture JSON does not carry).
  *
- * HELD (RE-PWA-021 -> CR-PWA-004; not pinned here, see the last two tests):
- *  - `todo_uncomplete_keeps_point`: the kept `completedAt` (will change: deleted on un-tick);
- *  - `daily_uncomplete_next_day_guard`: the kept `completed:true` point + `_histCreated`
- *    (will change: device-local day test, earlier-day points un-marked).
+ * HELD (RE-PWA-021 -> CR-PWA-004): this fixture is the afdae43-era oracle and still records the
+ * pre-fix un-tick, so its two known-bad quirks stay excluded below:
+ *  - `todo_uncomplete_keeps_point`: the kept `completedAt` (the fixed PWA deletes it);
+ *  - `daily_uncomplete_next_day_guard`: the kept `completed:true` point + `_histCreated` (the
+ *    fixed PWA retracts the whole point, no day test).
+ * Both fixed outcomes are pinned, every field, by [CrPwa004UncompleteTest] against
+ * `fixtures/cr_pwa_004/untick_fix.json` (Opti 338d430 — the commit that made CR-PWA-004 live).
  */
 class CrKt020CompleteHistoryTest {
 
@@ -81,7 +85,6 @@ class CrKt020CompleteHistoryTest {
         character = char(),
         task = task,
         paused = isPaused(c),
-        nowMs = long(c, "now_ms_2"),
         now = long(c, "hlc_base") + 2,
     ).second
 
@@ -177,9 +180,10 @@ class CrKt020CompleteHistoryTest {
         val c = case("todo_uncomplete_keeps_point")
         val undone = uncomplete(c, complete(c))
         assertNull(undone.gr)
-        // [DEFERRED_OPEN_QUESTION] CR-PWA-004 (RE-PWA-021 quirk a): the fixture keeps
-        // `completedAt = 1792144800000` because `uncompleteTodo` never deletes it
-        // (app.js:2569-2580). Unintended; the fixed PWA un-tick deletes it. NOT asserted.
+        // HELD: the afdae43-era fixture keeps `completedAt = 1792144800000` because the old
+        // `uncompleteTodo` never deleted it (app.js:2569-2580, pre-CR-PWA-004). The FIXED
+        // behavior (deleted; app.js:2572 at Opti 338d430) is pinned by CrPwa004UncompleteTest;
+        // held here so this old oracle stays exact. NOT asserted.
         val held = setOf("completedAt")
         assertJson(
             "todo_uncomplete_keeps_point after_uncomplete (completedAt held)",
@@ -193,10 +197,11 @@ class CrKt020CompleteHistoryTest {
         val c = case("daily_uncomplete_next_day_guard")
         val undone = uncomplete(c, complete(c))
         assertNull(undone.gr)
-        // [DEFERRED_OPEN_QUESTION] CR-PWA-004 (RE-PWA-021 quirk b): the fixture keeps the old
-        // `completed:true` point and `_histCreated: true` because `unlogToday` only touches a
-        // point dated the current UTC day (app.js:2538-2540). Unintended; the fixed PWA uses a
-        // device-local day test and un-marks earlier-day points. NOT asserted.
+        // HELD: the afdae43-era fixture keeps the old `completed:true` point and `_histCreated:
+        // true` because its `unlogToday` only touched a point dated the current UTC day
+        // (app.js:2538-2540, pre-CR-PWA-004). The FIXED behavior (point popped, `_histCreated`
+        // deleted — no day test; app.js:2536-2553 at Opti 338d430) is pinned by
+        // CrPwa004UncompleteTest; held here so this old oracle stays exact. NOT asserted.
         val held = setOf("history", "_histCreated")
         assertJson(
             "daily_uncomplete_next_day_guard after_uncomplete (history/_histCreated held)",

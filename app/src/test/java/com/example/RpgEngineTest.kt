@@ -111,7 +111,7 @@ class RpgEngineTest {
         assertNotNull(completedTask.gr)
 
         // Uncomplete task -> should perfectly reverse everything
-        val (undoneChar, undoneTask) = RpgEngine.uncompleteTask(completedChar, completedTask, nowMs = NOW, now = NOW)
+        val (undoneChar, undoneTask) = RpgEngine.uncompleteTask(completedChar, completedTask, now = NOW)
         assertEquals(char.lvl, undoneChar.lvl)
         assertEquals(char.xp, undoneChar.xp)
         assertEquals(char.gold, undoneChar.gold, 0.001)

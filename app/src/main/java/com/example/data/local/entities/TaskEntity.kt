@@ -107,8 +107,8 @@ data class TaskEntity(
     // `history` point, false = it merged into an existing same-UTC-day one. `unlogToday` may only
     // pop a point this completion actually created (app.js:2536-2553), so the flag has to survive
     // a process restart to be read there. NULL = absent: a todo is never stamped, and the un-tick
-    // deletes it once `unlogToday` processes the day's point (kept when the day test fails --
-    // [DEFERRED_OPEN_QUESTION] CR-PWA-004, see RpgEngine.unlogToday).
+    // deletes it whenever the history was non-empty (app.js:2552-2553; no day test since
+    // CR-PWA-004 -- see RpgEngine.unlogToday).
     val histCreated: Boolean? = null,
     // Stage 3 / T3.1 (unknown-field passthrough): compact-JSON verbatim copy of the ORIGINAL task
     // object as parsed from a PWA import/merge -- e.g. `reminders[]` (spec §1.2 "task" table,
