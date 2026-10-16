@@ -436,7 +436,7 @@ class RpgRepository(
         val task = taskDao.getTaskByIdSync(taskId) ?: return false
         val char = getCharacterSync()
         
-        val (updatedChar, updatedTask) = RpgEngine.uncompleteTask(char, task, pauseState().paused, hlcClock.now())
+        val (updatedChar, updatedTask) = RpgEngine.uncompleteTask(char, task, pauseState().paused, physicalNow(), hlcClock.now())
         insertCharacter(updatedChar)
         insertTask(updatedTask)
         

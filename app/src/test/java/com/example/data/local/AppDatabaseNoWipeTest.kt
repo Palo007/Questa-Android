@@ -38,7 +38,7 @@ class AppDatabaseNoWipeTest {
         private const val SCENARIO_A_DB = "kt01-missing-migration"
         private const val CHAIN_DB = "kt01-chain"
         private const val SCHEMA_ASSET_DIR = "com.example.data.local.AppDatabase"
-        private const val CURRENT_VERSION = 8
+        private const val CURRENT_VERSION = 9
     }
 
     @get:Rule
@@ -105,18 +105,18 @@ class AppDatabaseNoWipeTest {
     /** Design test (KT-01 scenario b): downgrade from an unknown newer version. */
     @Test
     fun unknownVersion_keepsRows_andThrows() {
-        plantFile(PROD_DB, 9)
+        plantFile(PROD_DB, 10)
         val db = AppDatabase.getDatabase(context())
         try {
             db.openHelper.writableDatabase
-            fail("open of a v9 file must throw, not wipe")
+            fail("open of a v10 file must throw, not wipe")
         } catch (e: IllegalStateException) {
-            // expected: no migration 9 -> 8 and no destructive fallback for 9
+            // expected: no migration 10 -> 9 and no destructive fallback for 10
         } finally {
             db.close()
         }
         assertEquals("sentinel row must survive", 1, sentinelRows(PROD_DB))
-        assertEquals("file version must be unchanged", 9, fileVersion(PROD_DB))
+        assertEquals("file version must be unchanged", 10, fileVersion(PROD_DB))
     }
 
     /**

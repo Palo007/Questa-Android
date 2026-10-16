@@ -158,7 +158,7 @@ class DiagnosticsReaderTest {
         assertEquals("legacy-app-key-under-test", s.appKeyOfData)
         assertEquals("h123", s.inboxHabitsHash)
         assertTrue(s.refreshTokenPresent && s.accessTokenPresent)
-        assertEquals(8, s.roomVersion) // CR-KT-015: schema v8
+        assertEquals(9, s.roomVersion) // CR-KT-020: schema v9 (histCreated)
         assertTrue("row counts from Room", s.rowCounts.isNotEmpty())
         assertEquals("Daily", s.autoBackupTiers)
         assertEquals(1, s.diagRing.size)

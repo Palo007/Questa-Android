@@ -201,7 +201,7 @@ class PauseFeatureTest {
         val daily = TaskEntity(id = "d", type = "daily", title = "x", streak = 4, createdAt = com.example.data.clock.PhysicalClock.nowMs(), updatedAt = com.example.data.clock.PhysicalClock.nowMs())
         val (_, done) = RpgEngine.completeTask(char, daily, paused = true, nowMs = at(2026, 9, 28, 9), now = HLC, zone = BRATISLAVA)
         assertEquals(4, done.streak)
-        val (_, undone) = RpgEngine.uncompleteTask(char, done, paused = true, now = HLC)
+        val (_, undone) = RpgEngine.uncompleteTask(char, done, paused = true, nowMs = at(2026, 9, 28, 9), now = HLC)
         assertEquals(4, undone.streak)
         val credit = RpgEngine.creditYesterday(char, daily, paused = true, nowMs = at(2026, 9, 28, 9), now = HLC, zone = BRATISLAVA)!!
         assertEquals(4, credit.task.streak)
@@ -209,8 +209,8 @@ class PauseFeatureTest {
         val (_, d2) = RpgEngine.completeTask(char, daily, paused = false, nowMs = at(2026, 9, 28, 9), now = HLC, zone = BRATISLAVA)
         assertEquals(5, d2.streak)
         assertEquals(20260928, d2.doneDay)
-        assertEquals(4, RpgEngine.uncompleteTask(char, d2, paused = false, now = HLC).second.streak)
-        assertNull(RpgEngine.uncompleteTask(char, d2, paused = false, now = HLC).second.doneDay)
+        assertEquals(4, RpgEngine.uncompleteTask(char, d2, paused = false, nowMs = at(2026, 9, 28, 9), now = HLC).second.streak)
+        assertNull(RpgEngine.uncompleteTask(char, d2, paused = false, nowMs = at(2026, 9, 28, 9), now = HLC).second.doneDay)
     }
 }
 

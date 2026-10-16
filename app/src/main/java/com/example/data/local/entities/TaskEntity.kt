@@ -102,6 +102,14 @@ data class TaskEntity(
     val resetFreq: String? = null,
     val repsPerTap: Int? = null,
     val gr: GrantedReward? = null,
+    // CR-KT-020 (schema v9): the daily-only wire key `_histCreated` (app.js:2513-2515). Written by
+    // `RpgEngine.completeTask` when a daily completes: true = the completion PUSHED a new
+    // `history` point, false = it merged into an existing same-UTC-day one. `unlogToday` may only
+    // pop a point this completion actually created (app.js:2536-2553), so the flag has to survive
+    // a process restart to be read there. NULL = absent: a todo is never stamped, and the un-tick
+    // deletes it once `unlogToday` processes the day's point (kept when the day test fails --
+    // [DEFERRED_OPEN_QUESTION] CR-PWA-004, see RpgEngine.unlogToday).
+    val histCreated: Boolean? = null,
     // Stage 3 / T3.1 (unknown-field passthrough): compact-JSON verbatim copy of the ORIGINAL task
     // object as parsed from a PWA import/merge -- e.g. `reminders[]` (spec §1.2 "task" table,
     // added by saveTask()/line 4439), `up`/`down` (habit tap-enable flags), or any future PWA

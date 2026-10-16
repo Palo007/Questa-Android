@@ -46,7 +46,7 @@ class Migration7to8Test {
         }
         helper.runMigrationsAndValidate(dbPath(), 8, true, AppDatabase.MIGRATION_7_8).close()
         val db = Room.databaseBuilder(context(), AppDatabase::class.java, testDb)
-            .addMigrations(AppDatabase.MIGRATION_7_8).allowMainThreadQueries().build()
+            .addMigrations(AppDatabase.MIGRATION_7_8, AppDatabase.MIGRATION_8_9).allowMainThreadQueries().build()
         try {
             val t = db.taskDao().getTaskByIdSync("t1")!!
             assertEquals("Bike", t.title)

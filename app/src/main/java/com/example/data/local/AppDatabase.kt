@@ -61,7 +61,7 @@ import kotlinx.serialization.json.longOrNull
         SyncPrefsEntity::class,
         AttachmentUploadEntity::class
     ],
-    version = 8,
+    version = 9,
     exportSchema = true
 )
 @TypeConverters(Converters::class)
@@ -401,6 +401,33 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
+        // CR-KT-020 (v8 -> v9): the daily-only `_histCreated` completion stamp. Additive: new
+        // nullable `tasks.histCreated` (INTEGER 0/1, NULL = absent, §5 "null = absent") plus a
+        // Kotlin backfill (MIGRATION_6_7 convention: read `extraJson` here, no json_extract) that
+        // ports a `_histCreated` boolean an existing row's PWA original already carried into the
+        // typed column, so the keep-original rule in SerializationEngine.buildTaskJson can hand it
+        // back verbatim instead of dropping a field this app now models.
+        val MIGRATION_8_9: Migration = object : Migration(8, 9) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE tasks ADD COLUMN histCreated INTEGER")
+                val cursor = db.query("SELECT id, extraJson FROM tasks")
+                cursor.use {
+                    val idIdx = it.getColumnIndexOrThrow("id")
+                    val extraIdx = it.getColumnIndexOrThrow("extraJson")
+                    while (it.moveToNext()) {
+                        if (it.isNull(extraIdx)) continue
+                        val id = it.getString(idIdx)
+                        val obj = parseJsonObjectOrNull(it.getString(extraIdx)) ?: continue
+                        val histCreated = (obj["_histCreated"] as? JsonPrimitive)?.booleanOrNull ?: continue
+                        db.execSQL(
+                            "UPDATE tasks SET histCreated = ? WHERE id = ?",
+                            arrayOf<Any?>(histCreated.toIntFlag(), id)
+                        )
+                    }
+                }
+            }
+        }
+
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
@@ -420,7 +447,7 @@ abstract class AppDatabase : RoomDatabase() {
 
         /** The production migration chain. */
         internal val QUESTA_MIGRATIONS: Array<Migration>
-            get() = arrayOf(MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
+            get() = arrayOf(MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9)
 
         /**
          * The production migration + fallback policy, shared with AppDatabaseNoWipeTest.

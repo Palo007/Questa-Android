@@ -734,6 +734,11 @@ object SerializationEngine {
             originalGr != null || original?.get("gr") is JsonObject -> JsonNull
             else -> null
         }
+        // CR-KT-020 (schema v9): `_histCreated` -- the daily-only completion stamp. Opti unsets
+        // the key on an un-tick (`delete t._histCreated`, app.js:2546/2551), so a null live value
+        // removes it; a boolean original that still matches the live value is kept verbatim
+        // (byte-stable round trip, key position preserved).
+        typed["_histCreated"] = keepOrTyped(original, "_histCreated", t.histCreated?.let { JsonPrimitive(it) }) { (it as? JsonPrimitive)?.booleanOrNull == t.histCreated }
         return applyTyped(overlayJson(original, fresh), typed)
     }
 
@@ -774,6 +779,8 @@ object SerializationEngine {
             resetFreq = (obj["resetFreq"] as? JsonPrimitive)?.contentOrNull,
             repsPerTap = (obj["repsPerTap"] as? JsonPrimitive)?.intOrNull,
             gr = gr,
+            // CR-KT-020 (schema v9): null = the `_histCreated` key is absent.
+            histCreated = (obj["_histCreated"] as? JsonPrimitive)?.booleanOrNull,
             extraJson = encodeExtraJson(obj),
             // WP-8.3: schema v7 typed columns; null = the key is absent.
             up = (obj["up"] as? JsonPrimitive)?.booleanOrNull,

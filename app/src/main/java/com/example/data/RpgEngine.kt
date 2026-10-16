@@ -152,9 +152,19 @@ object RpgEngine {
     }
 
     /**
-     * app.js:2282-2332 (the parts Kotlin models). WP-8.10: G7 (the daily streak rises only when
-     * not [paused], :2309), SY-18 (`doneDay` = the local day of [nowMs], :2310; `missedOn`
-     * cleared). [nowMs] is the physical instant (`doneAt = Date.now()`), [now] the HLC stamp.
+     * app.js:2481-2526 `completeTask`. WP-8.10: G7 (the daily streak rises only when not
+     * [paused]); SY-18 (`doneDay` = the local day of [nowMs]; `missedOn` cleared). [nowMs] is the
+     * physical instant (`doneAt = Date.now()`), [now] the HLC stamp.
+     *
+     * CR-KT-020: writes the per-task `history` point exactly as the PWA -- daily: `value`,
+     * `completed:true`, `isDue:true`, a copy of `_gr`, a copy of `repeat` and a `{text,done}`
+     * checklist snapshot when the checklist is non-empty (:2514); todo: `value`, `completed:true`,
+     * a copy of `_gr` (:2521). Records the REALIZED `_gr` delta (`newValue - task.value` after
+     * the clamp, :2491-2493, so a complete/un-complete round trip at the 99 ceiling no longer
+     * walks the value down), stamps the todo `completedAt` (:2520), and stamps `_histCreated` for
+     * dailies only (:2515): `true` = this completion PUSHED the day's point, `false` = it merged
+     * into an existing same-UTC-day one. This resolves the Stage 6 / T6.7
+     * [DEFERRED_OPEN_QUESTION] about `completeTask`'s history point and `_gr`.
      */
     fun completeTask(
         character: CharacterEntity,
@@ -183,8 +193,47 @@ object RpgEngine {
         }
 
         val newValue = clamp(task.value + delta, -47.27, 99.0)
-        // Stage 6 / T6.7: task.history is intentionally not touched here.
-        // [DEFERRED_OPEN_QUESTION] completeTask's history point and realized-delta `_gr` (app.js:2296-2322).
+        // app.js:2491-2493: `_gr.delta` is the REALIZED delta, not the requested one, so
+        // `reverseGrant`'s `value - gr.delta` restores exactly what the clamp granted.
+        val realizedDelta = newValue - task.value
+        val gr = GrantedReward(r.xp, r.gold, r.mp, realizedDelta)
+
+        // app.js:2508-2523: the history point; `_histCreated` is a daily-only stamp.
+        val newHistory: List<TaskHistoryPoint>
+        val histCreated: Boolean?
+        when (task.type) {
+            "daily" -> {
+                val cl = task.checklist
+                newHistory = logHistory(
+                    task.history,
+                    HistoryPatch(
+                        value = newValue,
+                        completed = true,
+                        isDue = true, // safe: a non-due daily is gated above
+                        reward = gr,
+                        repeat = task.repeat ?: emptyList(),
+                        checklist = if (cl.isNotEmpty()) cl.map { snapItem(it, it.done) } else null,
+                    ),
+                    nowMs,
+                )
+                // app.js:2513-2515 `t._histCreated = ((t.history||[]).length > _hLen)`: true when
+                // the point was PUSHED, false when it merged into an existing one (a cron miss,
+                // an imported row). `unlogToday` may only pop a point it created.
+                histCreated = newHistory.size > task.history.size
+            }
+            "todo" -> {
+                newHistory = logHistory(task.history, HistoryPatch(value = newValue, completed = true, reward = gr), nowMs)
+                // The PWA touches `_histCreated` only in the daily branch: a todo is never stamped.
+                histCreated = task.histCreated
+            }
+            else -> {
+                // Not reachable from the app's tick paths; a completion of any other type
+                // writes no point (PWA completeTask has no branch for it either).
+                newHistory = task.history
+                histCreated = task.histCreated
+            }
+        }
+
         val updatedTask = task.copy(
             value = newValue,
             done = true,
@@ -194,14 +243,28 @@ object RpgEngine {
             streak = if (task.type == "daily" && !paused) (task.streak ?: 0) + 1 else task.streak,
             updatedAt = now,
             missedOn = null,
-            gr = GrantedReward(r.xp, r.gold, r.mp, delta)
+            gr = gr,
+            history = newHistory,
+            histCreated = histCreated,
+            // app.js:2520: `t.completedAt = Date.now()` -- todos only.
+            completedAt = if (task.type == "todo") nowMs else task.completedAt,
         )
 
         return Pair(updatedChar, updatedTask)
     }
 
-    /** app.js:2356-2367 `uncompleteDaily`: `doneAt`/`doneDay` retracted; streak -1 only when not [paused]. */
-    fun uncompleteTask(character: CharacterEntity, task: TaskEntity, paused: Boolean = false, now: Long): Pair<CharacterEntity, TaskEntity> {
+    /**
+     * app.js:2554-2580 `uncompleteDaily`/`uncompleteTodo`: `reverseGrant` (the xp/gold/mp
+     * clawback and the clamped value restore from `_gr.delta`), then [unlogToday], then
+     * `done = false`, `doneAt`/`doneDay` retracted, streak -1 only when not [paused], `updatedAt`
+     * bumped. [nowMs] is the physical instant `unlogToday`'s day test reads (`Date.now()`).
+     *
+     * [DEFERRED_OPEN_QUESTION] CR-PWA-004 (RE-PWA-021 quirk a): the todo un-tick KEEPS
+     * `completedAt`, as today's PWA `uncompleteTodo` does (app.js:2569-2580); the fixed PWA will
+     * delete it (the analytics todo fallback `!any && t.completedAt`, app.js:4428, still counts a
+     * reverted todo). Held as-is until CR-PWA-004 settles and the new fixture is checked.
+     */
+    fun uncompleteTask(character: CharacterEntity, task: TaskEntity, paused: Boolean = false, nowMs: Long, now: Long): Pair<CharacterEntity, TaskEntity> {
         if (!task.done) return Pair(character, task)
         val gr = task.gr ?: GrantedReward(0, 0.0, 0, valueDelta(task.value))
 
@@ -211,6 +274,9 @@ object RpgEngine {
         val updatedChar = character.copy(xp = newXp, gold = newGold, mp = newMp, updatedAt = now)
 
         val newValue = clamp(task.value - gr.delta, -47.27, 99.0)
+        // app.js:2557: `unlogToday` runs on the RESTORED value (reverseGrant ran first) and owns
+        // `_histCreated`'s deletion.
+        val (newHistory, newHistCreated) = unlogToday(task.history, newValue, task.histCreated, nowMs)
         val updatedTask = task.copy(
             value = newValue,
             done = false,
@@ -218,10 +284,51 @@ object RpgEngine {
             doneDay = null,
             streak = if (task.type == "daily" && (task.streak ?: 0) > 0 && !paused) (task.streak ?: 0) - 1 else task.streak,
             updatedAt = now,
-            gr = null
+            gr = null,
+            history = newHistory,
+            histCreated = newHistCreated,
+            // `completedAt` is deliberately NOT touched here -- [DEFERRED_OPEN_QUESTION]
+            // CR-PWA-004 (quirk a): the PWA un-tick keeps it; the fixed one deletes it.
         )
 
         return Pair(updatedChar, updatedTask)
+    }
+
+    /**
+     * app.js:2536-2553 `unlogToday(t)`. Only when the LAST point is dated the current UTC day
+     * (`floor(ms/86400000)`, as Opti): set it `completed = false`; pop it when this completion
+     * created it ([histCreated] `true` and the point carries no scoredUp/scoredDown); otherwise
+     * keep it with `value` = the restored [restoredValue] and no `reward`. `_histCreated` is
+     * deleted exactly when the day test passes (both branches) -- never when it does not, and
+     * never when the history is empty.
+     *
+     * [DEFERRED_OPEN_QUESTION] CR-PWA-004 (RE-PWA-021 quirk b): the UTC day test, and the fact
+     * that only the LAST point is considered, are today's accepted behavior; the fixed PWA uses a
+     * device-local day test and also un-marks points dated earlier days. Held until CR-PWA-004
+     * settles and the new fixture is checked.
+     */
+    private fun unlogToday(
+        history: List<TaskHistoryPoint>,
+        restoredValue: Double,
+        histCreated: Boolean?,
+        nowMs: Long,
+    ): Pair<List<TaskHistoryPoint>, Boolean?> {
+        val last = history.lastOrNull() ?: return Pair(history, histCreated)
+        fun dayOf(ms: Long) = Math.floorDiv(ms, 86_400_000L)
+        if (dayOf(last.date) != dayOf(nowMs)) return Pair(history, histCreated)
+
+        // `if(last.completed){ last.completed=false; }` -- a falsy/absent flag is left as it is.
+        val updated = if (last.completed == true) last.copy(completed = false) else last
+        // `if(t._histCreated && !last.scoredUp && !last.scoredDown && !last.completed) pop`
+        // (`last` here is the point AFTER the un-mark above).
+        val pop = histCreated == true &&
+            (last.scoredUp ?: 0) == 0 && (last.scoredDown ?: 0) == 0 &&
+            updated.completed != true
+        return if (pop) {
+            Pair(history.dropLast(1), null)
+        } else {
+            Pair(history.dropLast(1) + updated.copy(value = restoredValue, reward = null), null)
+        }
     }
 
     /** app.js:3573 `repsPerTap(title)`: the first run of digits in the title, else 1. */

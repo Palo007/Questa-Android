@@ -162,7 +162,7 @@ class Migration6to7Test {
         helper.runMigrationsAndValidate(dbPath(), 7, true, AppDatabase.MIGRATION_6_7)
 
         val migratedDb = Room.databaseBuilder(context(), AppDatabase::class.java, TEST_DB)
-            .addMigrations(AppDatabase.MIGRATION_6_7, AppDatabase.MIGRATION_7_8)
+            .addMigrations(AppDatabase.MIGRATION_6_7, AppDatabase.MIGRATION_7_8, AppDatabase.MIGRATION_8_9)
             .allowMainThreadQueries()
             .build()
 
@@ -260,7 +260,7 @@ class Migration6to7Test {
 
         helper.runMigrationsAndValidate(dbPath(), 7, true, AppDatabase.MIGRATION_6_7)
         val migratedDb = Room.databaseBuilder(context(), AppDatabase::class.java, TEST_DB)
-            .addMigrations(AppDatabase.MIGRATION_6_7, AppDatabase.MIGRATION_7_8)
+            .addMigrations(AppDatabase.MIGRATION_6_7, AppDatabase.MIGRATION_7_8, AppDatabase.MIGRATION_8_9)
             .allowMainThreadQueries()
             .build()
 
@@ -284,7 +284,7 @@ class Migration6to7Test {
 
         helper.runMigrationsAndValidate(dbPath(), 7, true, AppDatabase.MIGRATION_6_7)
         val migratedDb = Room.databaseBuilder(context(), AppDatabase::class.java, TEST_DB)
-            .addMigrations(AppDatabase.MIGRATION_6_7, AppDatabase.MIGRATION_7_8)
+            .addMigrations(AppDatabase.MIGRATION_6_7, AppDatabase.MIGRATION_7_8, AppDatabase.MIGRATION_8_9)
             .allowMainThreadQueries()
             .build()
 
