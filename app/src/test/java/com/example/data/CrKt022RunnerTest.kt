@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import com.example.AppBootQuiesce
+import com.example.data.boot.BootGate
 import com.example.data.clock.DefaultHlcClock
 import com.example.data.local.AppDatabase
 import com.example.data.local.DataStoreCompletionBackfillStore
@@ -32,6 +33,7 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import java.io.File
+import java.time.ZoneId
 import java.util.concurrent.Executor
 
 /**
@@ -226,6 +228,53 @@ class CrKt022RunnerTest {
         val stamp = changed.updatedAt
         runBlocking { repository.backfillCompletionHistory() }
         assertEquals(stamp, stored("tChanged").updatedAt)
+    }
+
+    /**
+     * RE-PWA-024 follow-up: the PWA cron-echo guard (sync.js:1072-1076 `_isCronEchoReset`, Kotlin
+     * `OptiSnapshotMerger.isCronEchoResetRaw`) matches a daily whose phone copy is a stale cron
+     * reset of today's PWA tick: done=false, doneAt today, raw `updatedAt` equal to the PWA's done
+     * copy. A backfill stamp would break that equality, rule 3 would pick the phone copy and revert
+     * the tick. Such a daily is deferred: not written, not stamped, counted in `deferred` (the boot
+     * hook then leaves its one-shot flag unset). Once doneAt is no longer today the guard cannot
+     * match, and the next run repairs and stamps it.
+     */
+    @Test
+    fun `a daily whose local copy is a cron reset of today is deferred, then repaired the next day`() {
+        val savedClock = BootGate.clock
+        val savedZone = BootGate.zoneProvider
+        try {
+            BootGate.clock = { t0 }
+            BootGate.zoneProvider = { ZoneId.of("UTC") }
+            val old = t0 - 3 * 86_400_000L
+            runBlocking {
+                repository.insertTask(daily("dEcho", updatedAt = 999).copy(done = false, doneAt = t0 - 60_000))
+                repository.insertTask(daily("dPlain", updatedAt = 998))
+            }
+            log(old, "complete", "dEcho", 1.9)
+            log(old, "complete", "dPlain", 1.9)
+
+            val report = runBlocking { repository.backfillCompletionHistory() }
+            assertEquals("only dPlain restored", 1, report.restored)
+            assertEquals("dEcho deferred", 1, report.deferred)
+            assertEquals("cron-reset copy keeps its raw updatedAt", 999L, stored("dEcho").updatedAt)
+            assertEquals(emptyList<TaskHistoryPoint>(), stored("dEcho").history)
+            assertTrue("a plain daily is still stamped", stored("dPlain").updatedAt > 998L)
+
+            // Next day: doneAt is yesterday, the echo guard cannot match -> repaired and stamped.
+            BootGate.clock = { t0 + 86_400_000L }
+            val next = runBlocking { repository.backfillCompletionHistory() }
+            assertEquals(1, next.restored)
+            assertEquals(0, next.deferred)
+            assertTrue(stored("dEcho").updatedAt > 999L)
+            assertEquals(
+                listOf(TaskHistoryPoint(date = old, value = 1.9, completed = true, isDue = true, repeat = all7)),
+                stored("dEcho").history
+            )
+        } finally {
+            BootGate.clock = savedClock
+            BootGate.zoneProvider = savedZone
+        }
     }
 
     // ---- the device-only flag store + the never-exported guarantees (CR-KT-014 pattern) ----

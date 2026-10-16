@@ -293,7 +293,8 @@ open class QuestaApplication : Application() { // open: TestQuestaApplication (8
                         val flag = com.example.data.local.DataStoreCompletionBackfillStore.forApp(applicationContext)
                         if (!flag.hasRun()) {
                             val report = repository.backfillCompletionHistory()
-                            if (report.hadEvents) flag.markRun()
+                            // A deferred cron-reset daily (RE-PWA-024) keeps the flag unset: retry next boot.
+                            if (report.hadEvents && report.deferred == 0) flag.markRun()
                             if (report.restored > 0) android.util.Log.i("Questa.rpg", "CR-KT-022 backfill restored ${report.restored} completion day(s)")
                         }
                     } catch (e: CancellationException) {
