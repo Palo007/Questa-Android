@@ -37,8 +37,9 @@ import java.util.concurrent.Executor
 /**
  * CR-KT-022: `RpgRepository.backfillCompletionHistory()` end-to-end on a real Room database.
  * Drives the same shapes the golden fixture pins (fresh chain, cron-miss merge, dedup, todo,
- * `late:true` skip, same-millisecond `id` tiebreak), then checks: the row was updated WITHOUT an
- * `updatedAt`/`_gr`/`_histCreated`/`completedAt` touch (add-only), the character is untouched,
+ * `late:true` skip, same-millisecond `id` tiebreak), then checks: a changed row gets a fresh HLC
+ * `updatedAt` and an unchanged one keeps its stamp, no `_gr`/`_histCreated`/`completedAt` touch
+ * (add-only), the character is untouched,
  * the run signals one local save (so the next sync carries the repaired history), and a second
  * run is a no-op (idempotent re-run after sync).
  *
@@ -169,13 +170,14 @@ class CrKt022RunnerTest {
             stored("d5").history
         )
 
-        // Add-only: no updatedAt bump, no _gr/_histCreated/completedAt invention, character untouched.
-        assertEquals(111L, d1.updatedAt)
-        assertEquals(222L, stored("d2").updatedAt)
-        assertEquals(333L, stored("d3").updatedAt)
-        assertEquals(444L, stored("t1").updatedAt)
-        assertEquals(555L, stored("d4").updatedAt)
-        assertEquals(666L, stored("d5").updatedAt)
+        // A changed task gets a fresh HLC updatedAt (so the sync's whole-task LWW keeps the restored
+        // points); an unchanged one keeps its stamp. No _gr/_histCreated/completedAt invention.
+        assertTrue("d1 stamped", d1.updatedAt > 111L)
+        assertTrue("d2 stamped", stored("d2").updatedAt > 222L)
+        assertEquals("deduped d3 unchanged", 333L, stored("d3").updatedAt)
+        assertTrue("t1 stamped", t1.updatedAt > 444L)
+        assertEquals("late-skipped d4 unchanged", 555L, stored("d4").updatedAt)
+        assertTrue("d5 stamped", stored("d5").updatedAt > 666L)
         listOf(d1, stored("d2"), stored("d3"), t1, stored("d4"), stored("d5")).forEach {
             assertNull(it.gr)
             assertNull(it.histCreated)
@@ -194,6 +196,36 @@ class CrKt022RunnerTest {
         assertTrue("the log still has rows", rerun.hadEvents)
         before.forEach { (id, t) -> assertEquals("$id unchanged on re-run", t, stored(id)) }
         assertEquals(savedAfterFirst, runBlocking { store.localSavedAt.first() })
+    }
+
+    @Test
+    fun `backfill stamps a changed todo with a fresh HLC updatedAt and leaves an unchanged todo alone`() {
+        val counted = TaskHistoryPoint(date = t0 - 1_800_000, value = 1.2, completed = true)
+        runBlocking {
+            repository.insertTask(
+                TaskEntity(id = "tChanged", type = "todo", title = "tChanged", difficulty = "easy", value = 1.0, createdAt = 1, updatedAt = 777)
+            )
+            repository.insertTask(
+                TaskEntity(id = "tSame", type = "todo", title = "tSame", difficulty = "easy", value = 1.0, history = listOf(counted), createdAt = 1, updatedAt = 888)
+            )
+        }
+        log(t0 - 300_000, "complete", "tChanged", 1.5)
+        log(t0 - 1_800_000, "complete", "tSame", 1.2) // its day already has a completed point
+
+        val report = runBlocking { repository.backfillCompletionHistory() }
+        assertEquals(1, report.restored)
+
+        val changed = stored("tChanged")
+        assertEquals(listOf(TaskHistoryPoint(date = t0 - 300_000, value = 1.5, completed = true)), changed.history)
+        // Whole-task LWW (OptiSnapshotMerger, both changed): only a newer updatedAt keeps the point.
+        assertTrue("changed todo gets a fresh HLC updatedAt", changed.updatedAt > 777L)
+        assertEquals("unchanged todo keeps its updatedAt", 888L, stored("tSame").updatedAt)
+        assertEquals(listOf(counted), stored("tSame").history)
+
+        // A re-run changes nothing, so it stamps nothing.
+        val stamp = changed.updatedAt
+        runBlocking { repository.backfillCompletionHistory() }
+        assertEquals(stamp, stored("tChanged").updatedAt)
     }
 
     // ---- the device-only flag store + the never-exported guarantees (CR-KT-014 pattern) ----

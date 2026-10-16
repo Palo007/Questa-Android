@@ -33,8 +33,8 @@ import kotlinx.serialization.json.doubleOrNull
  *     idempotent). A non-completed same-day point (a cron miss) is merged in place exactly as
  *     `logHistory` would: `date`/`value`/`completed` update, every other field stays.
  *  4. Add-only: nothing is ever deleted or un-marked. `_gr`, `completedAt`, done/streak/
- *     `updatedAt` and `_histCreated` are never touched (the caller compares lists and skips a task
- *     whose history is already correct).
+ *     `updatedAt` and `_histCreated` are never touched here (the caller compares lists, skips a
+ *     task whose history is already correct, and stamps a fresh HLC `updatedAt` on a changed one).
  */
 object HistoryBackfill {
 

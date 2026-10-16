@@ -30,7 +30,9 @@
 2. The standing completions become one point per UTC day (last one wins), written with the `logHistory` merge
    rules: daily `{date, value, completed:true, isDue:true, repeat}`; todo `{date, value, completed:true}`.
    `reward`/`checklist` are omitted — they were never recorded in the event log and are not fabricated.
-   `_gr`, `completedAt`, done/streak/`updatedAt` are untouched; `_histCreated` is not stamped.
+   `_gr`, `completedAt`, done/streak/`updatedAt` are untouched by the pure repair; `_histCreated` is not
+   stamped. The runner (RpgRepository.backfillCompletionHistory) stamps a fresh HLC `updatedAt` on each task
+   whose history changed (CR-KT-022 Rev 3, as the CR-KT-023 replay); an unchanged task keeps its stamp.
 3. A UTC day that already carries a `completed:true` point is never modified (protects PWA-recorded days;
    idempotent re-runs). A non-completed same-day point (cron miss) is merged in place as `logHistory` would.
 4. Add-only: nothing is ever deleted or un-marked.
@@ -68,7 +70,7 @@
 
 ## Not in this fixture
 
-- The PWA merge behaviour of a backfilled task (changed history, unchanged `updatedAt`) — asked in the CR; the
-  Kotlin fallback is the idempotent re-run after sync.
+- The merge of a backfilled task. Answered from the merge port (Rev 3): a both-changed task merges by whole-task
+  LWW on `updatedAt` (todo; daily after resolveDailyConflict rules 1-2), so the runner now stamps a changed task.
 - Habit taps / cron (they already wrote history), import ordering beyond the `id` cursor, and completions whose
   events were already lost to the CR-KT-013/014 prune (unrecoverable by definition).

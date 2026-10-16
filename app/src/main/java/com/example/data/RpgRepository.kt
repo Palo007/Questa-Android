@@ -480,9 +480,12 @@ class RpgRepository(
     // repository logged the events but no point; see CR-KT-020). Replays every local
     // complete/uncomplete row through HistoryBackfill into the per-task history, add-only: a UTC
     // day that already carries a completed:true point is never modified, nothing is deleted, and
-    // `updatedAt`/`_gr`/`completedAt`/`_histCreated`/done/streak/value are not touched -- the task
-    // changes without an edit stamp, exactly what the CR's idempotent re-run fallback needs (the
-    // PWA merge side is asked in the CR; a re-run after sync is always harmless).
+    // `_gr`/`completedAt`/`_histCreated`/done/streak/value are not touched. Each changed task gets
+    // a fresh HLC `updatedAt` (as the CR-KT-023 reps replay): task history rides inside the task
+    // record, and a both-changed task merges by whole-task LWW on `updatedAt` (todo:
+    // OptiSnapshotMerger.mergeCollection; daily: resolveDailyConflict rule 3), so an unstamped
+    // repair would lose to a concurrently edited PWA copy for good. An unchanged task is not
+    // stamped, so a re-run after sync stays a silent no-op.
     // Returns a [CompletionBackfillReport]; the boot hook's one-shot stamp policy reads its
     // `hadEvents` (see the type's KDoc).
     suspend fun backfillCompletionHistory(): CompletionBackfillReport {
@@ -490,19 +493,21 @@ class RpgRepository(
         if (events.isEmpty()) return CompletionBackfillReport(restored = 0, hadEvents = false)
         val byTask = events.groupBy { it.taskId }
         var restored = 0
+        var changed = 0
         inTransaction {
             taskDao.getAllTasksSync().forEach { task ->
                 val rows = byTask[task.id] ?: return@forEach
                 val repaired = HistoryBackfill.repair(task, rows)
                 if (repaired != task.history) {
+                    changed++
                     restored += repaired.count { it.completed == true } - task.history.count { it.completed == true }
-                    taskDao.updateTask(task.copy(history = repaired))
+                    taskDao.updateTask(task.copy(history = repaired, updatedAt = hlcClock.now()))
                 }
             }
         }
         // A repaired history must reach the PWA: signal one local save (the sync debounce reads
-        // this) if anything changed. No write -> no signal, so a no-op re-run stays silent.
-        if (restored > 0) markLocalSaved()
+        // this) if any task was written. No write -> no signal, so a no-op re-run stays silent.
+        if (changed > 0) markLocalSaved()
         return CompletionBackfillReport(restored = restored, hadEvents = true)
     }
 
