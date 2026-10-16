@@ -51,8 +51,10 @@ import kotlinx.coroutines.flow.asSharedFlow
  * one-shot stamp keys on it: an empty log means nothing pre-1.3 can exist to repair, so the
  * flag stays unset and later boots re-check (free on an empty table) until the log has
  * content -- from then on the flag stops the re-read of a growing log.
+ * [deferred] counts dailies skipped as a cron reset of today (RE-PWA-024 cron-echo guard); the
+ * boot hook leaves its flag unset while it is > 0, so a later boot repairs them.
  */
-data class CompletionBackfillReport(val restored: Int, val hadEvents: Boolean)
+data class CompletionBackfillReport(val restored: Int, val hadEvents: Boolean, val deferred: Int = 0)
 
 /** CR-KT-023: one [RpgRepository.backfillRepsHistory] run -- [replayed] rows, [tasks] changed. */
 data class RepsReplayReport(val replayed: Int, val tasks: Int)
@@ -486,19 +488,34 @@ class RpgRepository(
     // OptiSnapshotMerger.mergeCollection; daily: resolveDailyConflict rule 3), so an unstamped
     // repair would lose to a concurrently edited PWA copy for good. An unchanged task is not
     // stamped, so a re-run after sync stays a silent no-op.
+    // RE-PWA-024 follow-up: a daily whose local copy is a cron reset of a tick made today
+    // (done=false, doneAt today; a local un-tick clears doneAt) is DEFERRED, not written: the
+    // stamp would break the raw-updatedAt equality of the cron-echo guard (sync.js:1072-1076
+    // `_isCronEchoReset`, OptiSnapshotMerger.isCronEchoResetRaw), rule 3 would then pick this
+    // copy and revert the PWA's tick. From the next local day the guard cannot match (it needs
+    // doneAt >= today), so a later run repairs it; the boot hook keeps its flag unset meanwhile.
     // Returns a [CompletionBackfillReport]; the boot hook's one-shot stamp policy reads its
-    // `hadEvents` (see the type's KDoc).
+    // `hadEvents` and `deferred` (see the type's KDoc).
     suspend fun backfillCompletionHistory(): CompletionBackfillReport {
         val events = eventLogDao.getCompletionEventsSync()
         if (events.isEmpty()) return CompletionBackfillReport(restored = 0, hadEvents = false)
         val byTask = events.groupBy { it.taskId }
+        val zone = zone()
+        val today = java.time.Instant.ofEpochMilli(physicalNow()).atZone(zone).toLocalDate()
         var restored = 0
         var changed = 0
+        var deferred = 0
         inTransaction {
             taskDao.getAllTasksSync().forEach { task ->
                 val rows = byTask[task.id] ?: return@forEach
                 val repaired = HistoryBackfill.repair(task, rows)
-                if (repaired != task.history) {
+                if (repaired == task.history) return@forEach
+                val doneAt = task.doneAt
+                val cronResetToday = task.type == "daily" && !task.done && doneAt != null && doneAt != 0L &&
+                    !java.time.Instant.ofEpochMilli(doneAt).atZone(zone).toLocalDate().isBefore(today)
+                if (cronResetToday) {
+                    deferred++
+                } else {
                     changed++
                     restored += repaired.count { it.completed == true } - task.history.count { it.completed == true }
                     taskDao.updateTask(task.copy(history = repaired, updatedAt = hlcClock.now()))
@@ -508,7 +525,7 @@ class RpgRepository(
         // A repaired history must reach the PWA: signal one local save (the sync debounce reads
         // this) if any task was written. No write -> no signal, so a no-op re-run stays silent.
         if (changed > 0) markLocalSaved()
-        return CompletionBackfillReport(restored = restored, hadEvents = true)
+        return CompletionBackfillReport(restored = restored, hadEvents = true, deferred = deferred)
     }
 
     /**
