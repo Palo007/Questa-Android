@@ -27,6 +27,30 @@ import com.example.data.local.entities.TaskHistoryPoint
  *  5. Add-only: no point is removed; `cUp`/`cDown`/`value`/`updatedAt`/`_gr`/done/streak of the
  *     task are never touched (the bulk sheet already bumped the counters).
  */
+/**
+ * CR-KT-023: the one-shot state of the bulk-reps replay. Implemented by
+ * [com.example.data.sync.SyncDataStore] (the `questa_sync_preferences` file, which Android backup
+ * restores TOGETHER with the Room data: a restored install that already replayed sees the flag
+ * and never replays again -- reps are additive, a second replay would double count).
+ *
+ * [pinBoundary] fixes, ONCE, the highest `event_logs.id` the pre-fix `addHabitReps` can have
+ * written: whoever comes first pins it -- the replay or the fixed `RpgRepository.addHabitReps`
+ * (`MAX(id)` BEFORE its own insert) -- so a fixed row is never replayed.
+ */
+interface RepsReplayStore {
+    /** Stores [candidate] if no boundary is stored yet; returns the stored boundary. */
+    suspend fun pinBoundary(candidate: Long): Long
+
+    /**
+     * Atomic test-and-set (one read-modify-write): if the replay is already done, null; else mark
+     * it done, pin the boundary ([candidate] if none yet) and return it. Exactly one caller wins.
+     */
+    suspend fun claimReplay(candidate: Long): Long?
+
+    /** Un-marks the done flag after a failed replay write (the boundary stays pinned). */
+    suspend fun releaseReplay()
+}
+
 object RepsReplay {
 
     /** Rows of THIS device's buggy `addHabitReps`, excluding pulled/imported/synthetic rows. */
@@ -67,6 +91,11 @@ object RepsReplay {
         return history
     }
 
-    /** JS `Math.floor(ms / 86400000)`, Opti `logHistory`'s day key. */
+    /**
+     * JS `Math.floor(ms / 86400000)`, Opti `logHistory`'s day key.
+     * [DEFERRED_OPEN_QUESTION] the merge key is the UTC day (parity-equal with the PWA
+     * `logHistory`), while Analytics buckets and the snapshot merge use the LOCAL day: outside UTC a
+     * row near midnight can merge into a point of the neighbouring local day. Kept as the PWA does.
+     */
     private fun utcDay(ms: Long): Long = Math.floorDiv(ms, 86_400_000L)
 }

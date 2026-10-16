@@ -35,6 +35,7 @@ import com.example.data.local.dao.CronInputs
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.sync.withLock
 import kotlin.coroutines.AbstractCoroutineContextElement
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.flow.Flow
@@ -79,11 +80,17 @@ class RpgRepository(
     private val database: AppDatabase? = null,
     // WP-8.6 (PX-46): the HLC that stamps localSavedAt. Defaults to the process HLC.
     hlc: HlcClock? = null,
-    // CR-KT-023: the device-only bulk-reps replay state (boundary id + done flag). null (tests,
-    // SyncWorker, the attachment fallback): addHabitReps pins nothing and the replay does nothing.
-    private val repsReplayStore: com.example.data.local.RepsReplayStore? = null,
+    // CR-KT-023: the bulk-reps replay state (boundary id + done flag). null = the sync prefs
+    // ([syncDataStore]), which Android backup restores together with the Room data. A test seam.
+    private val repsReplayStore: RepsReplayStore? = null,
 ) {
     private val hlcOverride = hlc
+
+    /** CR-KT-023: where the replay state lives (see the constructor parameter). */
+    private val replayStore: RepsReplayStore get() = repsReplayStore ?: syncDataStore
+
+    /** CR-KT-023: one replay at a time per repository (boot hook vs the Diagnostics button). */
+    private val repsReplayMutex = kotlinx.coroutines.sync.Mutex()
 
     /** WP-8.6: the process HLC (Opti's one `lastIssued`, app.js:131-165), or the injected one. */
     val hlcClock: HlcClock get() = hlcOverride ?: ProcessHlc.get(syncDataStore)
@@ -502,28 +509,32 @@ class RpgRepository(
     /**
      * CR-KT-023: Opti `addReps(id, n)` -- the bulk "Log N reps" sheet, [n] signed. Writes the
      * history point (RpgEngine.addReps), the counters and the HLC `updatedAt` through [updateTask]
-     * (one local save), then the `habitReps` event row exactly as before CR-KT-023
-     * (`direction` = sign, `reps` = |n|, `value` = task value).
+     * (one local save), then the `habitReps` event row as before CR-KT-023 (`direction` =
+     * `Math.sign(n)` -- 0 for n = 0, as the PWA's `dir` -- `reps` = |n|, `value` = task value).
+     * The task read, task write and event insert run in ONE Room transaction.
      *
      * Before its insert it pins the replay boundary (`MAX(id)` now), so this row -- whose point
      * this call already wrote -- is above it and [backfillRepsHistory] never replays it.
      */
     suspend fun addHabitReps(taskId: String, n: Int): TaskEntity? {
-        val task = taskDao.getTaskByIdSync(taskId) ?: return null
-        val atMs = physicalNow()
-        val updated = RpgEngine.addReps(task, n, hlcClock.now(), atMs)
-        repsReplayStore?.pinBoundary(eventLogDao.maxId() ?: 0L)
-        updateTask(updated)
-        insertLog(EventLogEntity(
-            timestamp = atMs,
-            kind = "habitReps",
-            direction = if (n > 0) 1 else -1,
-            taskId = task.id,
-            taskTitle = task.title,
-            reps = kotlin.math.abs(n),
-            value = task.value
-        ))
-        return updated
+        // Pinned before the transaction (a DataStore write): any later row id is above it.
+        replayStore.pinBoundary(eventLogDao.maxId() ?: 0L)
+        return inTransaction {
+            val task = taskDao.getTaskByIdSync(taskId) ?: return@inTransaction null
+            val atMs = physicalNow()
+            val updated = RpgEngine.addReps(task, n, hlcClock.now(), atMs)
+            updateTask(updated)
+            insertLog(EventLogEntity(
+                timestamp = atMs,
+                kind = "habitReps",
+                direction = Integer.signum(n),
+                taskId = task.id,
+                taskTitle = task.title,
+                reps = kotlin.math.abs(n),
+                value = task.value
+            ))
+            updated
+        }
     }
 
     /**
@@ -532,23 +543,27 @@ class RpgRepository(
      * imported, not synthetic) up to the pinned boundary id: pulled rows (EventPuller skips own
      * `dev`) and imported rows came from the PWA, which already wrote the point.
      *
-     * Runs at most once per install: the done flag is set BEFORE the Room write (reps add up, so a
-     * crash between the write and a later flag would double count on the next run; the other
-     * order can at worst lose the replay) and cleared again if the write throws. Add-only on
-     * history; counters/value/updatedAt/_gr/done/streak untouched; one local save only if a task
-     * changed. A re-run (Diagnostics) replays nothing.
+     * Runs at most once: [RepsReplayStore.claimReplay] is an atomic test-and-set of the done flag
+     * (plus [repsReplayMutex] around the whole run, so the boot hook and the Diagnostics button
+     * never both replay). The state lives in the sync prefs, backed up and restored together with
+     * the Room data, so a restored install never replays again. The flag is set BEFORE the Room
+     * write (reps add up: a crash after the write with no flag would double count; this order can
+     * at worst lose the replay) and released if the write throws.
+     *
+     * Add-only on history; counters/value/_gr/done/streak untouched. Each changed task gets a
+     * fresh HLC `updatedAt` (a real local change: without it a concurrently edited PWA copy wins
+     * the whole-task LWW merge and drops the replayed points for good). One local save only if a
+     * task changed. A re-run (Diagnostics) replays nothing.
      */
-    suspend fun backfillRepsHistory(): RepsReplayReport {
-        val store = repsReplayStore ?: return RepsReplayReport(0, 0)
-        if (store.isReplayDone()) return RepsReplayReport(0, 0)
-        val boundary = store.pinBoundary(eventLogDao.maxId() ?: 0L)
-        val myDev = syncDataStore.getOrCreateDeviceId()
-        val rows = eventLogDao.getHabitRepsUpToSync(boundary).filter { RepsReplay.isLocal(it, myDev, boundary) }
-        store.setReplayDone(true)
-        if (rows.isEmpty()) return RepsReplayReport(0, 0)
+    suspend fun backfillRepsHistory(): RepsReplayReport = repsReplayMutex.withLock {
+        val store = replayStore
+        val boundary = store.claimReplay(eventLogDao.maxId() ?: 0L) ?: return@withLock RepsReplayReport(0, 0)
         var replayed = 0
         var tasks = 0
         try {
+            val myDev = syncDataStore.getOrCreateDeviceId()
+            val rows = eventLogDao.getHabitRepsUpToSync(boundary).filter { RepsReplay.isLocal(it, myDev, boundary) }
+            if (rows.isEmpty()) return@withLock RepsReplayReport(0, 0)
             val byTask = rows.groupBy { it.taskId }
             inTransaction {
                 taskDao.getAllTasksSync().forEach { task ->
@@ -557,16 +572,16 @@ class RpgRepository(
                     replayed += mine.size
                     if (repaired != task.history) {
                         tasks++
-                        taskDao.updateTask(task.copy(history = repaired))
+                        taskDao.updateTask(task.copy(history = repaired, updatedAt = hlcClock.now()))
                     }
                 }
             }
         } catch (e: Exception) {
-            store.setReplayDone(false)
+            store.releaseReplay()
             throw e
         }
         if (tasks > 0) markLocalSaved()
-        return RepsReplayReport(replayed, tasks)
+        RepsReplayReport(replayed, tasks)
     }
 
     suspend fun scoreHabitUp(taskId: String): Boolean {

@@ -8,7 +8,6 @@ import com.example.AppBootQuiesce
 import com.example.data.clock.DefaultHlcClock
 import com.example.data.local.AppDatabase
 import com.example.data.local.DataStoreCompletionBackfillStore
-import com.example.data.local.RepsReplayStore
 import com.example.data.local.entities.CharacterEntity
 import com.example.data.local.entities.EventLogEntity
 import com.example.data.local.entities.TaskEntity
@@ -21,6 +20,8 @@ import com.example.ui.analytics.AnalyticsCalc
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
@@ -28,6 +29,7 @@ import kotlinx.serialization.json.jsonObject
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
@@ -42,10 +44,16 @@ import java.util.concurrent.Executor
 /**
  * CR-KT-023 on a real Room database: [RpgRepository.addHabitReps] (the fixed bulk-reps path) and
  * [RpgRepository.backfillRepsHistory] (the one-shot replay). Pins: only THIS device's own
- * `habitReps` rows are replayed (pulled/imported rows never), add-only (updatedAt/cUp/cDown/value
- * untouched), one local save only when something changed, a re-run replays nothing, the fixed
- * path pins the boundary BEFORE its row so the replay never double counts it, the event row is
- * unchanged, and Analytics' reps metric now sees bulk reps.
+ * `habitReps` rows are replayed (pulled/imported rows never); add-only on history with
+ * cUp/cDown/value untouched, and a changed task gets a fresh HLC `updatedAt` (so the sync's
+ * whole-task LWW keeps the replayed points); one local save only when something changed; a re-run
+ * replays nothing; the state is restored with the DB (a restored install never replays again);
+ * two concurrent runs replay once; the fixed path pins the boundary BEFORE its row so the replay
+ * never double counts it; the event row is unchanged (n = 0 -> direction 0, as the PWA's
+ * `Math.sign`); Analytics' reps metric now sees bulk reps.
+ *
+ * The replay state is the real [SyncDataStore] (the sync prefs, the repository default) over a
+ * temp DataStore file per test.
  */
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [34])
@@ -59,19 +67,11 @@ class CrKt023RunnerTest {
     private val nowMs = 1_792_144_800_000L
     private val myDev = "dev-mine0001"
 
-    /** In-memory [RepsReplayStore] (the DataStore one is round-tripped separately). */
-    private class MemStore : RepsReplayStore {
-        var boundary: Long? = null
-        var done = false
-        override suspend fun pinBoundary(candidate: Long): Long = boundary ?: candidate.also { boundary = it }
-        override suspend fun isReplayDone(): Boolean = done
-        override suspend fun setReplayDone(done: Boolean) { this.done = done }
-    }
-
     private lateinit var db: AppDatabase
     private lateinit var repository: RpgRepository
     private lateinit var store: SyncDataStore
-    private lateinit var replayStore: MemStore
+    private lateinit var scope: CoroutineScope
+    private var dsCount = 0
 
     @Before
     fun setUp() {
@@ -80,14 +80,9 @@ class CrKt023RunnerTest {
         val same = Executor { it.run() }
         db = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java)
             .allowMainThreadQueries().setQueryExecutor(same).setTransactionExecutor(same).build()
-        store = SyncDataStore(context)
-        replayStore = MemStore()
-        repository = RpgRepository(
-            db.characterDao(), db.taskDao(), db.rewardDao(), db.eventLogDao(),
-            db.tagDao(), db.deviceDao(), db.charHistoryDao(), db.tombstoneDao(),
-            db.customViewDao(), db.snapshotExtrasDao(), db.metricsExtrasDao(),
-            store, database = db, hlc = DefaultHlcClock(1_000L) { }, repsReplayStore = replayStore,
-        )
+        scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+        store = newSyncStore()
+        repository = newRepository(store)
         runBlocking {
             store.saveLocalDeviceId(myDev)
             repository.insertCharacter(
@@ -101,6 +96,23 @@ class CrKt023RunnerTest {
         db.close()
         AppBootQuiesce.quiesce()
     }
+
+    private fun newSyncStore(): SyncDataStore {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val f = tmp.newFile("sync${dsCount++}.preferences_pb").also { it.delete() }
+        return SyncDataStore(context, PreferenceDataStoreFactory.create(scope = scope, produceFile = { f }))
+    }
+
+    /** No explicit replay store: the repository keeps the replay state in the sync prefs [s]. */
+    private fun newRepository(s: SyncDataStore) = RpgRepository(
+        db.characterDao(), db.taskDao(), db.rewardDao(), db.eventLogDao(),
+        db.tagDao(), db.deviceDao(), db.charHistoryDao(), db.tombstoneDao(),
+        db.customViewDao(), db.snapshotExtrasDao(), db.metricsExtrasDao(),
+        s, database = db, hlc = DefaultHlcClock(1_000L) { },
+    )
+
+    private fun done() = runBlocking { store.isRepsReplayDone() }
+    private fun boundary() = runBlocking { store.repsReplayBoundary() }
 
     private fun habit(id: String, title: String, history: List<TaskHistoryPoint> = emptyList(), cUp: Int = 0, cDown: Int = 0) =
         TaskEntity(
@@ -121,9 +133,12 @@ class CrKt023RunnerTest {
     }
 
     @Test
-    fun `replay restores only this device's rows, add-only, once`() {
+    fun `replay restores only this device's rows, add-only, stamps updatedAt, once`() {
         val tap = TaskHistoryPoint(date = nowMs - day - 3_600_000, value = 0.0, reps = 1, repCounted = true, scored = false)
-        runBlocking { repository.insertTask(habit("h1", "Pushups", listOf(tap), cUp = 13, cDown = 3)) }
+        runBlocking {
+            repository.insertTask(habit("h1", "Pushups", listOf(tap), cUp = 13, cDown = 3))
+            repository.insertTask(habit("h0", "Untouched"))
+        }
         buggyRow(nowMs - day, "h1", 12)          // merges into the tap point (same UTC day, later)
         buggyRow(nowMs - 2 * day, "h1", -3)      // a new, earlier point
         runBlocking {
@@ -144,12 +159,13 @@ class CrKt023RunnerTest {
             ),
             h1.history
         )
-        assertEquals("updatedAt untouched", 111L, h1.updatedAt)
+        assertTrue("a changed task gets a fresh HLC updatedAt (the sync LWW keeps the replayed points)", h1.updatedAt > 111L)
+        assertEquals("an unchanged task keeps its updatedAt", 111L, stored("h0").updatedAt)
         assertEquals("cUp untouched", 13, h1.cUp)
         assertEquals("cDown untouched", 3, h1.cDown)
         assertEquals(100, runBlocking { repository.getCharacterSync() }.xp)
         assertTrue("one local save", runBlocking { store.localSavedAt.first() } > savedBefore)
-        assertTrue(replayStore.done)
+        assertTrue(done())
 
         // Re-run (boot or Diagnostics): nothing, no save.
         val savedAfter = runBlocking { store.localSavedAt.first() }
@@ -164,7 +180,7 @@ class CrKt023RunnerTest {
         val savedBefore = runBlocking { store.localSavedAt.first() }
         assertEquals(RepsReplayReport(0, 0), runBlocking { repository.backfillRepsHistory() })
         assertEquals(savedBefore, runBlocking { store.localSavedAt.first() })
-        assertTrue(replayStore.done)
+        assertTrue(done())
     }
 
     @Test
@@ -181,7 +197,7 @@ class CrKt023RunnerTest {
         assertEquals(TaskHistoryPoint(date = p.date, value = 0.0, reps = -4, repCounted = true, scored = false), p)
         assertEquals(out.updatedAt, h3.updatedAt)
         assertTrue("HLC updatedAt bumped", h3.updatedAt > 111L)
-        assertEquals("boundary pinned at MAX(id) before the fixed row", 1L, replayStore.boundary)
+        assertEquals("boundary pinned at MAX(id) before the fixed row", 1L, boundary())
 
         val rows = runBlocking { db.eventLogDao().getHabitRepsUpToSync(Long.MAX_VALUE) }
         assertEquals(2, rows.size)
@@ -207,44 +223,108 @@ class CrKt023RunnerTest {
     }
 
     @Test
+    fun `addHabitReps on a missing task writes nothing`() {
+        assertNull(runBlocking { repository.addHabitReps("nope", 5) })
+        assertEquals(0, runBlocking { db.eventLogDao().countAll() })
+    }
+
+    @Test
     fun `replay first, then fixed rows stay above the boundary`() {
         runBlocking { repository.insertTask(habit("h4", "Dips")) }
         buggyRow(nowMs - day, "h4", 5)
         assertEquals(RepsReplayReport(1, 1), runBlocking { repository.backfillRepsHistory() })
-        assertEquals(1L, replayStore.boundary)
+        assertEquals(1L, boundary())
         runBlocking { repository.addHabitReps("h4", 3) }
-        assertEquals("the later pin keeps the first boundary", 1L, replayStore.boundary)
-        replayStore.done = false // even a lost done flag cannot pick up the fixed row (id 2 > boundary 1)
-        assertEquals(1, runBlocking { db.eventLogDao().getHabitRepsUpToSync(replayStore.boundary!!) }.size)
+        assertEquals("the later pin keeps the first boundary", 1L, boundary())
+        runBlocking { store.releaseReplay() } // even a lost done flag cannot pick up the fixed row (id 2 > boundary 1)
+        assertEquals(1, runBlocking { db.eventLogDao().getHabitRepsUpToSync(boundary()!!) }.size)
     }
 
-    // ---- the device-only store (same file as CR-KT-022: excluded from backup and transfer) ----
+    // ---- review fixes: restore, concurrency, n = 0, where the state lives ----
 
     @Test
-    fun `datastore store pins once and round-trips the done flag`() = runBlocking {
-        val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
-        val ds = PreferenceDataStoreFactory.create(scope = scope, produceFile = { tmp.newFile("rr.preferences_pb").also { it.delete() } })
-        val s: RepsReplayStore = DataStoreCompletionBackfillStore(ds)
-        assertEquals(7L, s.pinBoundary(7L))
-        assertEquals("the first pin wins", 7L, s.pinBoundary(42L))
-        assertFalse(s.isReplayDone())
-        s.setReplayDone(true)
-        assertTrue(s.isReplayDone())
-        s.setReplayDone(false)
-        assertFalse(s.isReplayDone())
+    fun `restored install - DB and sync prefs restored, device-only backfill store empty - replays nothing`() {
+        runBlocking { repository.insertTask(habit("h5", "Pushups", cUp = 9)) }
+        buggyRow(nowMs - day, "h5", 9)
+        assertEquals(RepsReplayReport(1, 1), runBlocking { repository.backfillRepsHistory() })
+        val repaired = stored("h5")
+
+        // Android restore: the Room data and questa_sync_preferences come back (same DEVICE_ID, same
+        // replay state); the CR-KT-022 file is excluded from backup and comes back EMPTY.
+        val cbFile = tmp.newFile("cb.preferences_pb").also { it.delete() }
+        val emptyBackfill = DataStoreCompletionBackfillStore(PreferenceDataStoreFactory.create(scope = scope, produceFile = { cbFile }))
+        assertFalse(runBlocking { emptyBackfill.hasRun() })
+        val restoredRepo = newRepository(store) // a fresh process: new repository, restored DB + prefs
+
+        assertEquals(RepsReplayReport(0, 0), runBlocking { restoredRepo.backfillRepsHistory() })
+        assertEquals("no double count after restore", repaired, stored("h5"))
+        assertEquals(listOf(9), stored("h5").history.map { it.reps })
+    }
+
+    @Test
+    fun `two concurrent runs (boot + Diagnostics) replay once`() {
+        runBlocking { repository.insertTask(habit("h6", "Squats")) }
+        buggyRow(nowMs - day, "h6", 10)
+        buggyRow(nowMs - 2 * day, "h6", 5)
+        val reports = runBlocking {
+            listOf(
+                async(Dispatchers.IO) { repository.backfillRepsHistory() },
+                async(Dispatchers.IO) { repository.backfillRepsHistory() },
+            ).awaitAll()
+        }
+        assertEquals(2, reports.sumOf { it.replayed })
+        assertEquals(1, reports.count { it.replayed > 0 })
+        assertEquals("total reps counted once", 15, stored("h6").history.sumOf { it.reps ?: 0 })
+    }
+
+    @Test
+    fun `two repositories on the same prefs (no shared Mutex) still replay once`() {
+        runBlocking { repository.insertTask(habit("h8", "Lunges")) }
+        buggyRow(nowMs - day, "h8", 7)
+        val other = newRepository(store)
+        val reports = runBlocking {
+            listOf(
+                async(Dispatchers.IO) { repository.backfillRepsHistory() },
+                async(Dispatchers.IO) { other.backfillRepsHistory() },
+            ).awaitAll()
+        }
+        assertEquals(1, reports.sumOf { it.replayed })
+        assertEquals(7, stored("h8").history.sumOf { it.reps ?: 0 })
+    }
+
+    @Test
+    fun `claimReplay is an atomic test-and-set - exactly one of many concurrent claims wins`() = runBlocking {
+        val s = newSyncStore()
+        val claims = (1..40).map { i -> async(Dispatchers.IO) { s.claimReplay(i.toLong()) } }.awaitAll()
+        assertEquals(1, claims.count { it != null })
+        val won = claims.single { it != null }
+        assertNull(s.claimReplay(99L))
+        s.releaseReplay()
+        assertEquals("a release lets the next run retry with the SAME boundary", won, s.claimReplay(99L))
+        assertEquals("pin keeps the first boundary", won, s.pinBoundary(1234L))
+    }
+
+    @Test
+    fun `n = 0 writes direction 0, as the PWA's Math sign`() {
+        runBlocking { repository.insertTask(habit("h7", "Dips", cUp = 2)) }
+        runBlocking { repository.addHabitReps("h7", 0) }
+        val row = runBlocking { db.eventLogDao().getHabitRepsUpToSync(Long.MAX_VALUE) }.single()
+        assertEquals(0, row.direction)
+        assertEquals(0, row.reps)
+        assertEquals(2, stored("h7").cUp)
+        assertEquals(0, stored("h7").cDown)
     }
 
     private fun file(rel: String): File = listOf(File(rel), File("app/$rel")).first { it.exists() }
 
     @Test
-    fun `store file is excluded from backup and no sync code reads it`() {
-        val path = "datastore/${DataStoreCompletionBackfillStore.FILE_NAME}.preferences_pb"
-        assertTrue(file("src/main/res/xml/backup_rules.xml").readText().contains("<exclude domain=\"file\" path=\"$path\" />"))
-        assertEquals(2, Regex(Regex.escape("<exclude domain=\"file\" path=\"$path\" />"))
-            .findAll(file("src/main/res/xml/data_extraction_rules.xml").readText()).count())
-        val hits = file("src/main/java/com/example/data/sync").walkTopDown().filter { it.isFile && it.extension == "kt" }
-            .filter { f -> f.readText().let { it.contains("RepsReplayStore") || it.contains("reps_replay") } }
-            .map { it.name }.toList()
-        assertEquals(emptyList<String>(), hits)
+    fun `replay state lives in the sync prefs, which are backed up with the DB`() {
+        val sync = "questa_sync_preferences"
+        val excl = Regex("<exclude[^>]*$sync")
+        assertFalse(excl.containsMatchIn(file("src/main/res/xml/backup_rules.xml").readText()))
+        assertFalse(excl.containsMatchIn(file("src/main/res/xml/data_extraction_rules.xml").readText()))
+        val cb = file("src/main/java/com/example/data/local/CompletionBackfillStore.kt").readText()
+        assertFalse("not in the device-only CR-KT-022 file", cb.contains("reps_replay"))
+        assertTrue(file("src/main/java/com/example/data/sync/SyncDataStore.kt").readText().contains("\"reps_replay_done\""))
     }
 }

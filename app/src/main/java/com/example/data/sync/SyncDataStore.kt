@@ -14,7 +14,7 @@ val Context.syncDataStore: DataStore<Preferences> by preferencesDataStore(name =
 class SyncDataStore(
     private val context: Context,
     private val internalDataStore: DataStore<Preferences>? = null
-) {
+) : com.example.data.RepsReplayStore {
     private val dataStore: DataStore<Preferences>
         get() = internalDataStore ?: context.syncDataStore
 
@@ -58,7 +58,47 @@ class SyncDataStore(
         val EXPORT_INTERVAL_DAYS = intPreferencesKey("export_interval_days")
         val LAST_EXPORT_TS = longPreferencesKey("last_export_ts")
         val MONTHLY_BACKUPS = stringPreferencesKey("monthly_backups")
+
+        // CR-KT-023: the bulk-reps replay state. HERE on purpose (not in the device-only
+        // CR-KT-022 file): this file is backed up and restored together with the Room data, so a
+        // restored install keeps "already replayed" and never double counts.
+        val REPS_REPLAY_BOUNDARY = longPreferencesKey("reps_replay_boundary_id")
+        val REPS_REPLAY_DONE = booleanPreferencesKey("reps_replay_done")
     }
+
+    // ---- CR-KT-023 RepsReplayStore: each call is ONE DataStore edit (atomic read-modify-write).
+    override suspend fun pinBoundary(candidate: Long): Long {
+        var pinned = candidate
+        dataStore.edit { p ->
+            val cur = p[REPS_REPLAY_BOUNDARY]
+            if (cur == null) p[REPS_REPLAY_BOUNDARY] = candidate else pinned = cur
+        }
+        return pinned
+    }
+
+    override suspend fun claimReplay(candidate: Long): Long? {
+        var claimed: Long? = null
+        dataStore.edit { p ->
+            claimed = null
+            if (p[REPS_REPLAY_DONE] != true) {
+                val b = p[REPS_REPLAY_BOUNDARY] ?: candidate
+                p[REPS_REPLAY_BOUNDARY] = b
+                p[REPS_REPLAY_DONE] = true
+                claimed = b
+            }
+        }
+        return claimed
+    }
+
+    override suspend fun releaseReplay() {
+        dataStore.edit { it[REPS_REPLAY_DONE] = false }
+    }
+
+    /** CR-KT-023 (diagnostics/tests): the pinned boundary, or null. */
+    suspend fun repsReplayBoundary(): Long? = dataStore.data.first()[REPS_REPLAY_BOUNDARY]
+
+    /** CR-KT-023 (diagnostics/tests): whether the replay has run. */
+    suspend fun isRepsReplayDone(): Boolean = dataStore.data.first()[REPS_REPLAY_DONE] == true
 
     val isSaveButtonTop: Flow<Boolean> = dataStore.data.map { prefs ->
         prefs[SAVE_BUTTON_TOP] ?: false // WP-8.15 review 33: Opti freshState/migrate() saveBtnTop:false

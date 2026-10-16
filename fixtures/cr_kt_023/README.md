@@ -36,8 +36,13 @@ history points, so bulk reps logged on Android were invisible there (and never r
    `repCounted` true, `scored` = `last.scored || false`; `date`/`value` move to the row only when the row is not
    older than the point (the later tap that merged there keeps its own, as it would in the PWA).
 4. Otherwise a new point `{date, value, reps, repCounted:true, scored:false}` inserted in date order.
-5. Add-only; counters/value/`updatedAt`/`_gr`/done/streak untouched. Runs once (done flag): reps add up, so a
-   second fold would double count (`replay_rerun_noop` asserts that it would).
+5. Add-only; counters/value/`_gr`/done/streak untouched. A changed task gets a fresh HLC `updatedAt` (a real
+   local change: the sync's whole-task LWW would otherwise let a concurrently edited PWA copy drop the points).
+   Runs once: an atomic test-and-set done flag kept in the sync prefs (`questa_sync_preferences`, backed up and
+   restored together with the Room data, so a restored install never replays again). Reps add up, so a second
+   fold would double count (`replay_rerun_noop` asserts that it would). The fixture compares history only.
+6. [DEFERRED_OPEN_QUESTION] the merge key is the UTC day (as the PWA `logHistory`); Analytics and the snapshot
+   merge bucket by LOCAL day. Kept for parity.
 
 Each replay case runs one tap/reps tape twice: through the real PWA code (`pwa_history`, the reference) and as
 the buggy Kotlin wrote it (`task_before` + `events`). The generator asserts `expected_history` equals

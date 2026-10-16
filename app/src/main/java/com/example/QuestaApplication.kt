@@ -134,9 +134,7 @@ open class QuestaApplication : Application() { // open: TestQuestaApplication (8
             snapshotExtrasDao = database.snapshotExtrasDao(),
             metricsExtrasDao = database.metricsExtrasDao(),
             syncDataStore = syncDataStore,
-            database = database, // WP-8.6 patch 1: atomic rounds, pause sync
-            // CR-KT-023: device-only bulk-reps replay state (boundary pin + done flag).
-            repsReplayStore = com.example.data.local.DataStoreCompletionBackfillStore.forApp(applicationContext),
+            database = database // WP-8.6 patch 1: atomic rounds, pause sync
         )
         // WP-8.I (W4): 8.7 EventsStep + 8.9 AutoBackupStep replace both built-ins; 8.8 inbox steps.
         // SyncWorker builds the same list (AppSyncWiring), so no process runs the legacy engine.
@@ -305,7 +303,7 @@ open class QuestaApplication : Application() { // open: TestQuestaApplication (8
                     }
                     // CR-KT-023: one-shot replay of the bulk-reps history points the pre-fix
                     // addHabitReps never wrote (RepsReplay through backfillRepsHistory). Its own
-                    // done flag (same device-only file) makes it run once; only this device's own
+                    // done flag (in the sync prefs, restored with the DB) makes it run once; only this device's own
                     // habitReps rows up to the pinned boundary id are replayed (never pulled or
                     // imported rows). Same Robolectric skip and best-effort policy as above.
                     try {
