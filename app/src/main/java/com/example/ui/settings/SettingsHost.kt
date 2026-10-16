@@ -54,8 +54,12 @@ import java.io.File
  * Settings is closed (a Sync now from elsewhere, or the OAuth return).
  */
 @Composable
-/** [onForceCron] (CR-KT-012): the "Simulate midnight rollover" debug button, now in Diagnostics. */
-fun SettingsHost(vm: SettingsViewModel, route: SettingsRoute?, onClose: () -> Unit, onForceCron: () -> Unit = {}) {
+/**
+ * [onForceCron] (CR-KT-012): the "Simulate midnight rollover" debug button, now in Diagnostics.
+ * [onRepairHistory] (CR-KT-022): the "Restore completion history" button, the manual re-run of
+ * the one-shot event-log backfill.
+ */
+fun SettingsHost(vm: SettingsViewModel, route: SettingsRoute?, onClose: () -> Unit, onForceCron: () -> Unit = {}, onRepairHistory: () -> Unit = {}) {
     val state by vm.state.collectAsStateWithLifecycle()
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -168,7 +172,7 @@ fun SettingsHost(vm: SettingsViewModel, route: SettingsRoute?, onClose: () -> Un
             // decorFitsSystemWindows = false lets safeDrawing see the real bars (same fix as DiagnosticsScreen):
             // with the default, Android 15+ drew the window under the nav bar and hid the version.
             Column(Modifier.fillMaxWidth().safeDrawingPadding().padding(bottom = navBottom).padding(12.dp)) {
-                SettingsScreen(state, vm, route, onForceCron)
+                SettingsScreen(state, vm, route, onForceCron, onRepairHistory)
             }
         }
     } else {

@@ -25,6 +25,13 @@ interface EventLogDao {
     @Query("SELECT * FROM event_logs WHERE timestamp > :since ORDER BY timestamp ASC")
     suspend fun getLogsSinceSync(since: Long): List<EventLogEntity>
 
+    // CR-KT-022: every row the completion-history backfill replays (HistoryBackfill.repair).
+    // `ORDER BY timestamp ASC, id ASC` is the pairing order the fixture pins: LIFO complete/
+    // uncomplete pairing in time order, with the insert-order `id` breaking same-millisecond
+    // ties (an autoIncrement primary key, matching Opti's IDB equal-ts-behind-the-index rule).
+    @Query("SELECT * FROM event_logs WHERE kind IN ('complete', 'uncomplete') ORDER BY timestamp ASC, id ASC")
+    suspend fun getCompletionEventsSync(): List<EventLogEntity>
+
     // WP-8.22-B (review 44 item 2): Settings "Waiting to upload" -- how many rows
     // EvtUploadPolicy.uploadable(e, dev, since) would pick, as one COUNT (no rows loaded).
     // Must stay equal to EvtUploadPolicy.ownMonthRecord + `ts > since` (UploadBacklogCountTest).

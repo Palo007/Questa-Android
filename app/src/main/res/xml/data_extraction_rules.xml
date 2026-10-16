@@ -9,6 +9,8 @@
         <exclude domain="sharedpref" path="questa_secure_tokens.xml" />
         <!-- CR-KT-014: device-only prune-warning state (pruneWarnedAt) never leaves the device. -->
         <exclude domain="file" path="datastore/questa_device_maintenance.preferences_pb" />
+        <!-- CR-KT-022: device-only completion-backfill flag never leaves the device. -->
+        <exclude domain="file" path="datastore/questa_completion_backfill.preferences_pb" />
         <!-- WP-8.1 review: the DataStore file questa_sync_preferences is NOT excluded on purpose.
              It holds non-secret sync state that a restore must keep (device id, base, local
              deletions, HLC, APP_KEY_OF_DATA, UI prefs). TokenMigration (WP-8.21) runs at cold
@@ -19,5 +21,7 @@
         <exclude domain="sharedpref" path="questa_secure_tokens.xml" />
         <!-- CR-KT-014: device-only prune-warning state (pruneWarnedAt) never leaves the device. -->
         <exclude domain="file" path="datastore/questa_device_maintenance.preferences_pb" />
+        <!-- CR-KT-022: device-only completion-backfill flag never leaves the device. -->
+        <exclude domain="file" path="datastore/questa_completion_backfill.preferences_pb" />
     </device-transfer>
 </data-extraction-rules>

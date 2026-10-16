@@ -53,7 +53,7 @@ private val DiagLine = Color(0xFF444444)
  * with the default, Android 15+ drew the window under the navigation bar and cut off the bottom.
  */
 @Composable
-internal fun DiagnosticsDialog(v: DiagnosticsView, actions: SettingsActions, onForceCron: () -> Unit = {}) {
+internal fun DiagnosticsDialog(v: DiagnosticsView, actions: SettingsActions, onForceCron: () -> Unit = {}, onRepairHistory: () -> Unit = {}) {
     val context = LocalContext.current
     Dialog(onDismissRequest = { actions.closeDiagnostics() }, properties = DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = false)) {
         Column(
@@ -69,6 +69,9 @@ internal fun DiagnosticsDialog(v: DiagnosticsView, actions: SettingsActions, onF
             }
             // CR-KT-012: moved here from the old Logs tab (debug only: runs the midnight rollover now).
             OptiButton("Simulate midnight rollover", Kind.GHOST, Modifier.testTag("force_cron_button")) { onForceCron() }
+            // CR-KT-022: manual re-run of the one-shot completion-history backfill (idempotent;
+            // the boot hook normally has it covered -- this is the "after a sync" fallback path).
+            OptiButton("Restore completion history", Kind.GHOST, Modifier.testTag("restore_history_button")) { onRepairHistory() }
             SelectionContainer(Modifier.weight(1f).fillMaxWidth()) {
                 Column(
                     Modifier.fillMaxSize().background(DiagPanel).border(BorderStroke(1.dp, DiagLine))

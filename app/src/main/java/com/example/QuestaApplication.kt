@@ -265,6 +265,43 @@ open class QuestaApplication : Application() { // open: TestQuestaApplication (8
                 } catch (e: Exception) {
                     // Best effort, as Opti's boot repair.
                 }
+                // CR-KT-022: one-shot repair of the completion history points pre-1.3 never
+                // wrote -- replay the local complete/uncomplete event rows
+                // (HistoryBackfill through RpgRepository.backfillCompletionHistory), behind a
+                // device-only flag so the scan runs once per install. It runs INLINE on this
+                // launch, LAST in the `ok` block, so it starts only after the barrier work above
+                // and the watermark self-heal -- a long scan delays nothing but this job's own
+                // completion, which nothing on the boot path awaits.
+                //
+                // The flag is stamped only when the scan SAW completion rows (report.hadEvents):
+                // an empty log means nothing pre-1.3 can exist to repair, and re-checking an
+                // empty table on later boots is free -- the flag's saving (stop re-reading a log
+                // that only grows) starts to matter exactly once the log has content. The repair
+                // is idempotent (UTC-day dedup, add-only), so a lost flag or the Diagnostics
+                // re-run is harmless; a failure leaves the flag unset and retries on the next
+                // boot.
+                //
+                // Test-suite safety (the guard at the end of this method): Robolectric runs this
+                // onCreate for every test, and the repair's extra background DataStore + Room
+                // work perturbs the boot window of unrelated composition tests on the dev host
+                // (DataStore 1.1's file store commits with Files.move, which the host file
+                // system can fail when read and write handles overlap -- extra activity widens
+                // that window). The repair itself is fully driven by CrKt022RunnerTest, so the
+                // boot trigger is skipped there; on device this is a trivial string compare.
+                if (android.os.Build.FINGERPRINT != "robolectric") {
+                    try {
+                        val flag = com.example.data.local.DataStoreCompletionBackfillStore.forApp(applicationContext)
+                        if (!flag.hasRun()) {
+                            val report = repository.backfillCompletionHistory()
+                            if (report.hadEvents) flag.markRun()
+                            if (report.restored > 0) android.util.Log.i("Questa.rpg", "CR-KT-022 backfill restored ${report.restored} completion day(s)")
+                        }
+                    } catch (e: CancellationException) {
+                        throw e
+                    } catch (e: Exception) {
+                        // Best effort, as the prune above; retried on the next boot.
+                    }
+                }
             }
         }
 

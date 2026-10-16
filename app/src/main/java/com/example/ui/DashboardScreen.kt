@@ -1133,7 +1133,7 @@ fun DashboardScreen(
             // WP-8.14: Settings (Opti openSettings) replaces the old character customizer dialog;
             // the first-connect dialog can also open here while Settings is closed.
             val settingsRoute by viewModel.settingsRoute.collectAsStateWithLifecycle()
-            SettingsHost(settingsViewModel, settingsRoute, onClose = { viewModel.closeSettings() }, onForceCron = { viewModel.forceCron() })
+            SettingsHost(settingsViewModel, settingsRoute, onClose = { viewModel.closeSettings() }, onForceCron = { viewModel.forceCron() }, onRepairHistory = { viewModel.repairCompletionHistory() })
 
             // CUSTOM REWARD CREATOR DIALOG
             if (showRewardCreator) {

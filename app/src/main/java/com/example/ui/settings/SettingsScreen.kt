@@ -155,7 +155,7 @@ internal fun localDateTime(ms: Long): String =
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun SettingsScreen(state: SettingsUiState, actions: SettingsActions, section: SettingsRoute = SettingsRoute.Root, onForceCron: () -> Unit = {}) {
+fun SettingsScreen(state: SettingsUiState, actions: SettingsActions, section: SettingsRoute = SettingsRoute.Root, onForceCron: () -> Unit = {}, onRepairHistory: () -> Unit = {}) {
     val scroll = rememberScrollState()
     val syncBlock = remember { BringIntoViewRequester() }
     val backupBlock = remember { BringIntoViewRequester() }
@@ -255,7 +255,7 @@ fun SettingsScreen(state: SettingsUiState, actions: SettingsActions, section: Se
     state.category?.let { CategorySheet(it, state, actions) }
     state.option?.let { OptionMenu(it, state, actions) }
     state.picker?.let { SectionPickerDialog(it, actions) }
-    state.diagnostics?.let { DiagnosticsDialog(it, actions, onForceCron) }
+    state.diagnostics?.let { DiagnosticsDialog(it, actions, onForceCron, onRepairHistory) }
     SettingsModalDialogs(state, actions)
     if (state.appKeyDialog) {
         AppKeyDialog(

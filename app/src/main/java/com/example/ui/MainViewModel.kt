@@ -1195,6 +1195,21 @@ class MainViewModel(
         }
     }
 
+    /**
+     * CR-KT-022: the Diagnostics manual re-run of the one-shot completion-history backfill
+     * (the boot hook normally covers it). Idempotent -- a second run restores nothing -- and
+     * reports the result as a toast.
+     */
+    fun repairCompletionHistory() {
+        viewModelScope.launch {
+            val report = repository.backfillCompletionHistory()
+            _toasts.tryEmit(
+                if (report.restored == 0) "History repair: nothing to restore"
+                else "History repair: ${report.restored} day(s) restored"
+            )
+        }
+    }
+
     // Class factory
     class Factory(
         private val repository: RpgRepository,

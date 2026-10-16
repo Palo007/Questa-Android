@@ -42,6 +42,17 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 
+/**
+ * CR-KT-022: the outcome of one [RpgRepository.backfillCompletionHistory] run.
+ *
+ * [restored] counts the completed day-records added to task histories (0 = nothing to do).
+ * [hadEvents] says whether the local completion log had any rows at all. The boot hook's
+ * one-shot stamp keys on it: an empty log means nothing pre-1.3 can exist to repair, so the
+ * flag stays unset and later boots re-check (free on an empty table) until the log has
+ * content -- from then on the flag stops the re-read of a growing log.
+ */
+data class CompletionBackfillReport(val restored: Int, val hadEvents: Boolean)
+
 class RpgRepository(
     private val characterDao: CharacterDao,
     private val taskDao: TaskDao,
@@ -450,6 +461,36 @@ class RpgRepository(
             value = updatedTask.value
         ))
         return true
+    }
+
+    // CR-KT-022: one-shot repair of the completion history points pre-1.3 never wrote (the
+    // repository logged the events but no point; see CR-KT-020). Replays every local
+    // complete/uncomplete row through HistoryBackfill into the per-task history, add-only: a UTC
+    // day that already carries a completed:true point is never modified, nothing is deleted, and
+    // `updatedAt`/`_gr`/`completedAt`/`_histCreated`/done/streak/value are not touched -- the task
+    // changes without an edit stamp, exactly what the CR's idempotent re-run fallback needs (the
+    // PWA merge side is asked in the CR; a re-run after sync is always harmless).
+    // Returns a [CompletionBackfillReport]; the boot hook's one-shot stamp policy reads its
+    // `hadEvents` (see the type's KDoc).
+    suspend fun backfillCompletionHistory(): CompletionBackfillReport {
+        val events = eventLogDao.getCompletionEventsSync()
+        if (events.isEmpty()) return CompletionBackfillReport(restored = 0, hadEvents = false)
+        val byTask = events.groupBy { it.taskId }
+        var restored = 0
+        inTransaction {
+            taskDao.getAllTasksSync().forEach { task ->
+                val rows = byTask[task.id] ?: return@forEach
+                val repaired = HistoryBackfill.repair(task, rows)
+                if (repaired != task.history) {
+                    restored += repaired.count { it.completed == true } - task.history.count { it.completed == true }
+                    taskDao.updateTask(task.copy(history = repaired))
+                }
+            }
+        }
+        // A repaired history must reach the PWA: signal one local save (the sync debounce reads
+        // this) if anything changed. No write -> no signal, so a no-op re-run stays silent.
+        if (restored > 0) markLocalSaved()
+        return CompletionBackfillReport(restored = restored, hadEvents = true)
     }
 
     suspend fun scoreHabitUp(taskId: String): Boolean {
